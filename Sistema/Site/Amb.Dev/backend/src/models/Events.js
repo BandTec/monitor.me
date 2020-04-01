@@ -1,19 +1,20 @@
 const { Model, DataTypes } = require('sequelize')
 
-class monitor_users extends Model{
+class event_hardwares extends Model{
 	static init(sequelize){
 		super.init({
-			name: DataTypes.STRING,
-			email: DataTypes.STRING,
-			whatsapp: DataTypes.STRING,
-			password: DataTypes.STRING
+			modelo: DataTypes.STRING,
+			memoryRam: DataTypes.STRING,
+			GPU: DataTypes.STRING,
+			hardDisk: DataTypes.STRING,
+			UserId: DataTypes.INTEGER,
 		}, {
 			sequelize
 		})
 	}
 }
 
-module.exports = monitor_users;
+module.exports = event_hardwares;
 
 
 // module.exports = (sequelize, DataTypes) => {

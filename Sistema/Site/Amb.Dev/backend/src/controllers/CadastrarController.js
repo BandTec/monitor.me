@@ -2,9 +2,9 @@ const User = require('../models/Users')
 
 module.exports = {
     async cadastrar(req, res){
-        const {name, email} = req.body
+        const {name, email, whatsapp, password} = req.body
 
-        const user = await User.create({name, email})
+        const user = await User.create({name, email, whatsapp, password})
         
         return res.json(user)
     }

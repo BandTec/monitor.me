@@ -7,7 +7,6 @@ module.exports={
     database: 'monitorMe',
     define: {
         timestamps: true,
-        underscored: true,
     },
     xuse_env_variable: 'DATABASE_URL',
     dialectOptions: {
