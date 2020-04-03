@@ -2,26 +2,32 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('monitor_users', {
+    return queryInterface.createTable('event_hardwares_histories', {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false,
       },
-      name: {
+      hardId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'event_hardwares',
+          key: 'id'
+        } ,
+        onUpdate: 'cascade',
+        onDelete: 'cascade',
+        allowNull: false,
+      },
+      memoryRamReg: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      email: {
+      GPUReg: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      whatsapp:{
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      password:{
+      hardDiskReg: {
         type: Sequelize.STRING,
         allowNull: false,
       },
@@ -37,6 +43,6 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-      return queryInterface.dropTable('monitor_users');
+      return queryInterface.dropTable('event_hardwares_histories');
     }
   };

@@ -1,34 +1,69 @@
-const Event = require('../models/Events')
+const Hardwares = require('../models/EventsHardware')
+const EventHistory = require('../models/EventsHistory')
+const User = require('../models/Users')
 const moment = require('moment')
 
 module.exports = {
-    async listEvents(req, res){
-
-        const AllEvents = await Event.findAll()
-
+    async myHardware(req, res){
+        // const usuarioLogado = req.headers.authorization;
+        const {UserId} = req.params;
+        const user = await User.findByPk(UserId, {
+            include: { association : 'hardwares'}
+        })
+        res.json(user)
+        const AllHardwares = await Hardwares.findAll({
+            where:{
+                UserId: UserId
+            }
+        })
+        return res.json(
+            AllHardwares
+        )
+    },
+    async consultHardHistory(req,res){
+        // Consulta Hardwares do User
+        const {hardId} = req.params;
+        const AllHardwares = await Hardwares.findByPk(hardId,{
+            include: { association : 'histories'}
+        })
+        console.log('AllHard',JSON.stringify(AllHardwares))
+        res.json(
+            AllHardwares
+        )
+        // Consulta Histórico de Eventos referente ao Hardware   
+        const AllEvents = await EventHistory.findAll({
+            where:{
+                hardId: hardId
+            }
+        })
         return res.json(
             AllEvents
         )
     },
-
-    async create(req, res){
-
+    async createHardUser(req, res){
         const {modelo, memoryRam, GPU, hardDisk } = req.body;
-
-        const UserId = req.headers.authorization;
-
-        console.log('>>>>>>>>>>>>>>',UserId)
-
-        const dadosHardware = await Event.create({modelo, memoryRam, GPU, hardDisk, UserId})
-
+        const {UserId} = req.params;
+        console.log(UserId)
+        const consult = await User.findByPk(UserId)
+        console.log(consult)
+        if(!consult){
+            return res.status(400).json({error: 'Usuário não encontrado'})
+        }
+        const dadosHardware = await Hardwares.create({modelo, memoryRam, GPU, hardDisk, UserId})
         console.log(JSON.stringify(dadosHardware))
-
         return res.json(
             dadosHardware
         )
+    },
+    async createEvent(req, res){
+        const {hardId, memoryRamReg, GPUReg, hardDiskReg} = req.body
+        const createHistory = await EventHistory.create({hardId, memoryRamReg, GPUReg, hardDiskReg})
+        // console.log(JSON.stringify(createHistory))
+        return res.json(
+            createHistory
+        )
     }
 }
-
 // user.forEach(o => {
         //     // console.log(JSON.stringify(o))   
 

@@ -8,12 +8,14 @@ const SessionController = require('./controllers/SessionController')
 //Gerencia Rotas
 const routes = express.Router();
 // ------------------------------------------------------------>
-routes.get('/list', EventController.listEvents)//Lista todos os eventos de um design especifico
+routes.get('/:UserId/eventMyHardware', EventController.myHardware)//Lista todos os eventos de um design especifico
+routes.get('/:UserId/eventMyHardware/:hardId/eventHistory', EventController.consultHardHistory)//Cadastra novo Hardware de Usuário
+routes.post('/eventHistory1', EventController.createEvent)//Cadastra novo EventHardware de Usuário
 // routes.get('/profile', ProfileController.ListProfile)// Executa Perfil do usuário
 
 //Criação de Conteudo
-routes.post('/event', EventController.create)//Cadastra novo evento
-routes.post('/cadastrar', CadastrarController.cadastrar);//Cadastra nova Ong
+routes.post('/cadastrar/:UserId/novoHardware', EventController.createHardUser)//Cadastra novo Hardware de Usuário
+routes.post('/cadastrar', CadastrarController.cadastrar);//Cadastra Novo usuario
 routes.post('/sessions', SessionController.create);
 
 //Deleção de Conteudo

@@ -7,10 +7,17 @@ class event_hardwares extends Model{
 			memoryRam: DataTypes.STRING,
 			GPU: DataTypes.STRING,
 			hardDisk: DataTypes.STRING,
-			UserId: DataTypes.INTEGER,
 		}, {
 			sequelize
 		})
+	}
+
+	static associate(models){
+		this.belongsTo(models.monitor_users, { foreignKey: 'UserId', as: 'Users'})
+	}
+
+	static associate(models){
+		this.hasMany(models.event_hardwares_histories, { foreignKey: 'hardId', as: 'histories'})
 	}
 }
 

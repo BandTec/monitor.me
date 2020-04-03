@@ -1,22 +1,21 @@
 const { Model, DataTypes } = require('sequelize')
 
-class monitor_users extends Model{
+class event_hardwares_histories extends Model{
 	static init(sequelize){
 		super.init({
-			name: DataTypes.STRING,
-			email: DataTypes.STRING,
-			whatsapp: DataTypes.STRING,
-			password: DataTypes.STRING
+			memoryRamReg: DataTypes.STRING,
+			GPUReg: DataTypes.STRING,
+			hardDiskReg: DataTypes.STRING,
 		}, {
 			sequelize
 		})
 	}
 	static associate(models){
-		this.hasMany(models.event_hardwares, { foreignKey: 'UserId', as: 'hardwares'})
+		this.belongsTo(models.event_hardwares, { foreignKey: 'hardId', as: 'IdHardware'})
 	}
 }
 
-module.exports = monitor_users;
+module.exports = event_hardwares_histories;
 
 
 // module.exports = (sequelize, DataTypes) => {
