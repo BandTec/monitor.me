@@ -1,6 +1,8 @@
-com\mycompany\monitor\me\Monitoracao.class
-com\mycompany\monitor\me\TelaMonitor$1.class
-com\mycompany\monitor\me\TelaMonitor$3.class
-com\mycompany\monitor\me\TelaMonitor$4.class
-com\mycompany\monitor\me\TelaMonitor$2.class
-com\mycompany\monitor\me\TelaMonitor.class
+com\monitorme\tela\TelaMonitor.class
+com\monitorme\tela\TelaMonitor$4.class
+com\monitorme\tela\TelaMonitor$3.class
+com\monitorme\tela\TelaMonitor$1.class
+com\monitorme\tela\TelaMonitor$2.class
+com\monitorme\tela\TelaMonitor$5.class
+com\monitorme\hardware\ColetaDados.class
+com\monitorme\hardware\Monitoracao.class
