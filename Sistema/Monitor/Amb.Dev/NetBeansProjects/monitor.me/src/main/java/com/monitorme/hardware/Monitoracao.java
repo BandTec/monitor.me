@@ -3,6 +3,7 @@ package com.monitorme.hardware;
 
 public class Monitoracao {
     
+    // Atributos
     private Double utilizacaoCpu,
             velocCpu,
             processoCpu,
@@ -11,11 +12,39 @@ public class Monitoracao {
             cacheMemor,
             atvDisco,
             velocDisco,
-            respoDisco;
+            respoDisco,
+            gpu;
     
-    public Monitoracao () {
-        System.out.println("");
+    //Construtor
+    public Monitoracao(){
+        
     }
+    public Monitoracao(Double utilizacaoCpu,
+           Double velocCpu,
+           Double processoCpu,
+           Double dispoMemor,
+           Double usoMemor,
+           Double cacheMemor,
+           Double atvDisco,
+           Double velocDisco,
+           Double respoDisco,
+           Double gpu) {
+        this.utilizacaoCpu = utilizacaoCpu;
+        this.velocCpu = velocCpu;
+        this.processoCpu = processoCpu;
+        this.dispoMemor = dispoMemor;
+        this.usoMemor = usoMemor;
+        this.cacheMemor = cacheMemor;
+        this.atvDisco = atvDisco;
+        this.velocDisco = velocDisco;
+        this.respoDisco = respoDisco;
+        this.gpu = gpu;
+    }
+    
+    //Métodos
+//    public Monitoracao () {
+//        System.out.println("");
+//    }
         
     private void getCpu() {
          this.processoCpu = 0.0;
@@ -104,6 +133,13 @@ public class Monitoracao {
     public void setRespoDisco(Double respoDisco) {
         this.respoDisco = respoDisco;
     }
-    
+
+    public Double getGpu() {
+        return gpu;
+    }
+
+    public void setGpu(Double gpu) {
+        this.gpu = gpu;
+    }
     
 }
