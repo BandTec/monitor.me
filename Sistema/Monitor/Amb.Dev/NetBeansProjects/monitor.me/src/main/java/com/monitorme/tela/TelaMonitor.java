@@ -2,11 +2,13 @@
 package com.monitorme.tela;
 
 import com.monitorme.hardware.Monitoracao;
+import com.monitorme.hardware.Oshi;
 import java.util.Random;
 
 public class TelaMonitor extends javax.swing.JFrame {
 
     Monitoracao monitor = new Monitoracao();
+    Oshi oshi = new Oshi();
     
     public TelaMonitor() {
         initComponents();
@@ -20,9 +22,9 @@ public class TelaMonitor extends javax.swing.JFrame {
         painelMemo = new javax.swing.JPanel();
         painelDisc = new javax.swing.JPanel();
         painelCentral = new javax.swing.JPanel();
-        lblText1 = new javax.swing.JLabel();
-        lblText2 = new javax.swing.JLabel();
-        lblText3 = new javax.swing.JLabel();
+        lblTextUtil = new javax.swing.JLabel();
+        lblTextVel = new javax.swing.JLabel();
+        lblTextProcesso = new javax.swing.JLabel();
         lblTitulo = new javax.swing.JLabel();
         btCPU = new javax.swing.JButton();
         btnMemo = new javax.swing.JButton();
@@ -100,14 +102,14 @@ public class TelaMonitor extends javax.swing.JFrame {
             .addGap(0, 288, Short.MAX_VALUE)
         );
 
-        lblText1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lblText1.setText("Utilização:");
+        lblTextUtil.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblTextUtil.setText("Utilização:");
 
-        lblText2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lblText2.setText("Velocidade:");
+        lblTextVel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblTextVel.setText("Velocidade:");
 
-        lblText3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lblText3.setText("Processo:");
+        lblTextProcesso.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblTextProcesso.setText("Processo:");
 
         lblTitulo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lblTitulo.setText("CPU");
@@ -221,7 +223,7 @@ public class TelaMonitor extends javax.swing.JFrame {
                             .addComponent(btnDisc))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblText3)
+                            .addComponent(lblTextProcesso)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(10, 10, 10)
                                 .addComponent(lblProcesso))
@@ -231,13 +233,13 @@ public class TelaMonitor extends javax.swing.JFrame {
                                 .addComponent(lblTitulo))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblText1)
+                                    .addComponent(lblTextUtil)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(10, 10, 10)
                                         .addComponent(lblUtil)))
                                 .addGap(84, 84, 84)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblText2)
+                                    .addComponent(lblTextVel)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addComponent(lblVelocidade)
                                         .addGap(12, 12, 12)))))))
@@ -274,14 +276,14 @@ public class TelaMonitor extends javax.swing.JFrame {
                         .addComponent(painelCentral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblText1)
-                            .addComponent(lblText2))
+                            .addComponent(lblTextUtil)
+                            .addComponent(lblTextVel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblUtil)
                             .addComponent(lblVelocidade))
                         .addGap(18, 18, 18)))
-                .addComponent(lblText3)
+                .addComponent(lblTextProcesso)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblProcesso)
                 .addGap(16, 16, 16))
@@ -301,9 +303,9 @@ public class TelaMonitor extends javax.swing.JFrame {
          lblUtil.setText(String.format("%d%%", cpu));
          lblVelocidade.setText(String.format("%.2f/3,2GHz", ghz));
          lblProcesso.setText(String.format("%d", processo));
-         lblText1.setText(String.format("Utilização:"));
-         lblText2.setText(String.format("Velocidade:"));
-         lblText3.setText(String.format("Processo:"));
+         lblTextUtil.setText(String.format("Utilização:"));
+         lblTextVel.setText(String.format("Velocidade:"));
+         lblTextProcesso.setText(String.format("Processo:"));
          lblTitulo.setText(String.format("CPU"));
         // TODO add your handling code here:
     }//GEN-LAST:event_btCPUActionPerformed
@@ -325,9 +327,9 @@ public class TelaMonitor extends javax.swing.JFrame {
          lblUtil.setText(String.format("%d  GB", memoria));
          lblVelocidade.setText(String.format("%.2f GB", memoDisp));
          lblProcesso.setText(String.format("%.2f GB", cache));
-         lblText1.setText(String.format("Disponivel:"));
-         lblText2.setText(String.format("Em uso:"));
-         lblText3.setText(String.format("Cache:"));
+         lblTextUtil.setText(String.format("Disponivel:"));
+         lblTextVel.setText(String.format("Em uso:"));
+         lblTextProcesso.setText(String.format("Cache:"));
          lblTitulo.setText(String.format("MEMÓRIA"));
     }//GEN-LAST:event_btnMemoActionPerformed
 
@@ -341,12 +343,14 @@ public class TelaMonitor extends javax.swing.JFrame {
          lblUtil.setText(String.format("%d%%", disco));
          lblVelocidade.setText(String.format("%.2f/ms", tempDis));
          lblProcesso.setText(String.format("%.2f KB/s", velocDisc));
-         lblText1.setText(String.format("Tempo de atividade:"));
-         lblText2.setText(String.format("Valocidade de leitura:"));
-         lblText3.setText(String.format("Tempo de resposta:"));
+         lblTextUtil.setText(String.format("Tempo de atividade:"));
+         lblTextVel.setText(String.format("Valocidade de leitura:"));
+         lblTextProcesso.setText(String.format("Tempo de resposta:"));
          lblTitulo.setText(String.format("DISCO"));
-        
-
+         
+         
+         //Oshi Funcionando
+         lblTeste.setText(oshi.getOperatingSystem().toString());
     }//GEN-LAST:event_btnDiscActionPerformed
 
     private void jRadioButtonMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem1ActionPerformed
@@ -376,9 +380,9 @@ public class TelaMonitor extends javax.swing.JFrame {
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JLabel lblProcesso;
     private javax.swing.JLabel lblTeste;
-    private javax.swing.JLabel lblText1;
-    private javax.swing.JLabel lblText2;
-    private javax.swing.JLabel lblText3;
+    private javax.swing.JLabel lblTextProcesso;
+    private javax.swing.JLabel lblTextUtil;
+    private javax.swing.JLabel lblTextVel;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JLabel lblUtil;
     private javax.swing.JLabel lblVelocidade;

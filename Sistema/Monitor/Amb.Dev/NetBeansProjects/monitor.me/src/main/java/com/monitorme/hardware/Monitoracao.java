@@ -1,8 +1,9 @@
 
 package com.monitorme.hardware;
 
+
 public class Monitoracao {
-    
+        
     // Atributos
     private Double utilizacaoCpu,
             velocCpu,
@@ -61,7 +62,8 @@ public class Monitoracao {
          this.atvDisco = 0.0;
          this.respoDisco = 0.0;
     }
-
+    
+    // Getter & Setters //
     public Double getUtilizacaoCpu() {
         return utilizacaoCpu;
     }
