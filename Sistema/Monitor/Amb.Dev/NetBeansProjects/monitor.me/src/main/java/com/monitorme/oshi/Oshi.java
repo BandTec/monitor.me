@@ -1,4 +1,4 @@
-package com.monitorme.hardware;
+package com.monitorme.oshi;
 
 import com.sun.jna.Platform;
 import java.io.Serializable;

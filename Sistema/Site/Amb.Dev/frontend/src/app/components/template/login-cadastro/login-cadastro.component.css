@@ -1,0 +1,12 @@
+.mat-card {
+    /* display: flex; */
+    justify-content: center;
+    margin: 50px 0px;  
+    background-color: #2d2c2c;;
+}
+.contentMain{
+    display: flex;
+    background-color: #212121;
+    min-width: 300px;
+    min-height: 200px;
+}

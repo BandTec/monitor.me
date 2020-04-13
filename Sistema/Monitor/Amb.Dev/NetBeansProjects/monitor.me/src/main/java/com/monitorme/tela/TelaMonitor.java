@@ -2,7 +2,7 @@
 package com.monitorme.tela;
 
 import com.monitorme.hardware.Monitoracao;
-import com.monitorme.hardware.Oshi;
+import com.monitorme.oshi.Oshi;
 import java.util.Random;
 
 public class TelaMonitor extends javax.swing.JFrame {
