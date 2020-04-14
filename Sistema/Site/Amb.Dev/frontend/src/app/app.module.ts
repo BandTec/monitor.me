@@ -67,6 +67,7 @@ import { NavegatorComponent } from './navegator/navegator.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { DashComponent } from './components/dash/dash.component';
 import { CardSmallComponent } from './components/template/cards/card-small/card-small.component';
+import { ProfileReadComponent } from './components/profile/profile-read/profile-read.component';
 
 // import '@angular'
 
@@ -88,6 +89,7 @@ import { CardSmallComponent } from './components/template/cards/card-small/card-
     NavegatorComponent,
     DashComponent,
     CardSmallComponent,
+    ProfileReadComponent,
   ],
   imports: [
     BrowserModule,
@@ -150,6 +152,7 @@ import { CardSmallComponent } from './components/template/cards/card-small/card-
     FormsModule,
     MatInputModule,
     LayoutModule,
+    MatGridListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

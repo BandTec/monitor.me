@@ -1,3 +1,7 @@
+.hardReadContent{
+    margin: 15px;
+    background-color: transparent;
+}
 table{
     width: 100%;
 }
