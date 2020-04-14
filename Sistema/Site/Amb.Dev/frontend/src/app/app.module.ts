@@ -55,7 +55,6 @@ import { LoginComponent } from './components/login/login.component';
 import { HardwareComponent } from './views/main/hardware/hardware.component';
 import { DashboardComponent } from './views/main/dashboard/dashboard.component';
 import { FooterComponent } from './components/template/footer/footer.component';
-import { NavComponent } from './components/template/nav/nav.component';
 import { HeaderComponent } from './components/template/header/header.component';
 import { InstitucionalComponent } from './institucional/institucional.component';
 import { PerfilComponent } from './views/main/perfil/perfil.component';
@@ -64,6 +63,10 @@ import { HardwareCreateComponent } from './components/hardware/hardware-create/h
 import { HttpClientModule } from '@angular/common/http';
 import { HardwareReadComponent } from './components/hardware/hardware-read/hardware-read.component';
 import { HardwareUpdateComponent } from './components/hardware/hardware-update/hardware-update.component';
+import { NavegatorComponent } from './navegator/navegator.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { DashComponent } from './components/dash/dash.component';
+import { CardSmallComponent } from './components/template/cards/card-small/card-small.component';
 
 // import '@angular'
 
@@ -72,7 +75,6 @@ import { HardwareUpdateComponent } from './components/hardware/hardware-update/h
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    NavComponent,
     CadastrarComponent,
     LoginComponent,
     HardwareComponent,
@@ -83,6 +85,9 @@ import { HardwareUpdateComponent } from './components/hardware/hardware-update/h
     HardwareCreateComponent,
     HardwareReadComponent,
     HardwareUpdateComponent,
+    NavegatorComponent,
+    DashComponent,
+    CardSmallComponent,
   ],
   imports: [
     BrowserModule,
@@ -143,7 +148,8 @@ import { HardwareUpdateComponent } from './components/hardware/hardware-update/h
     HttpClientModule,
     MatFormFieldModule,
     FormsModule,
-    MatInputModule
+    MatInputModule,
+    LayoutModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

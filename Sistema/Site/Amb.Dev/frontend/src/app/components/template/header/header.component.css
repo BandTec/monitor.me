@@ -10,17 +10,19 @@
     align-items: center;
     text-decoration: none;
 }
-
+.hlogo-middle{
+    padding-left: 50%;
+}
 .header .logo{
     max-height: 80px;
     max-width: 142px;
 }
 .title-group{
-    background-color: rgb(173, 165, 165);
+    background-color: rgb(206, 206, 206);
     transition: 0.3s;
 }
 .title-group:hover{
-    background-color: rgb(156, 17, 17);
+    background-color: rgb(161, 43, 43);
     transition: 0.3s;
-    transform: scale(1.1);
+    transform: scale(1.03);
 }
