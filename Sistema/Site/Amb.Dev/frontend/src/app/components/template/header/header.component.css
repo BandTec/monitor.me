@@ -1,6 +1,8 @@
 .header{
     display: flex;
     align-items: center;
+    min-height: 90px;
+    background-color: #7b1fa2;
 }
 
 .header a {
@@ -10,13 +12,15 @@
 }
 
 .header .logo{
-    max-height: 120px;
+    max-height: 80px;
     max-width: 142px;
 }
-
-.header .title-group{
-    padding-left: 30px;
+.title-group{
+    background-color: rgb(173, 165, 165);
+    transition: 0.3s;
 }
-.header .title-group i{
-    padding-right: 7px;
+.title-group:hover{
+    background-color: rgb(156, 17, 17);
+    transition: 0.3s;
+    transform: scale(1.1);
 }

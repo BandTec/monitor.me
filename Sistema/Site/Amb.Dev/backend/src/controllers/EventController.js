@@ -62,8 +62,71 @@ module.exports = {
         return res.json(
             createHistory
         )
+    },
+    async consultAllH(req,res){
+        const {modelo, memoryRam, GPU, hardDisk } = req.body;
+        const {UserId} = req.params;
+
+        const createAllH = await Hardwares.findAll(modelo, memoryRam, GPU, hardDisk, {
+            where:{
+                UserId: UserId
+            }
+        })
+
+        return res.json(
+            createAllH
+        )
+    },
+    async consultHbyId(req,res){
+        // const {modelo, memoryRam, GPU, hardDisk } = req.body;
+        const {id} = req.params;
+
+        const createAllH = await Hardwares.findByPk(id)
+
+        return res.json(
+            createAllH
+        )
+    },
+    async atualizaHardware(req,res){
+        console.log('Entrei')
+        const {modelo, memoryRam, GPU, hardDisk } = req.body;
+        const {id} = req.params;
+
+        console.log(modelo, memoryRam, GPU, hardDisk, id)
+
+        const updateById = await Hardwares.update({modelo, memoryRam, GPU, hardDisk} , {
+            where: {
+                id: id
+            }
+        })
+
+        console.log(JSON.stringify(updateById))
+
+        return res.json(
+            updateById
+        )
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // user.forEach(o => {
         //     // console.log(JSON.stringify(o))   
 

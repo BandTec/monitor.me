@@ -1,16 +1,8 @@
 .mat-card {
   /* display: flex; */
   justify-content: center;
-  margin: 50px 0px;
-  background-color: #2d2c2c;
-  ;
-}
-
-.all {
-  display: flex;
-  background-color: #212121;
-  min-width: 300px;
-  min-height: 200px;
+  margin: 10px auto;
+  min-height: 330px;
 }
 
 .mat-form-field {
@@ -24,12 +16,12 @@
 }
 
 .mat-card-title {
-  justify-content: flex-end;
+  justify-content: flex-start;
   font-size: 1.1rem;
 }
 
 .mat-card-subtitle {
-  justify-content: flex-end;
+  justify-content: flex-start;
   font-size: 1rem;
 }
 

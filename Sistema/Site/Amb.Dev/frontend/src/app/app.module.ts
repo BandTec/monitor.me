@@ -3,19 +3,16 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HeaderComponent } from './components/template/header/header.component';
+import { AppRoutingModule } from './app-routing.module';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { FooterComponent } from './components/template/footer/footer.component';
-import { NavComponent } from './components/template/nav/nav.component';
-
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
 import {MatInputModule} from '@angular/material/input'; 
 import {MatCardModule} from '@angular/material/card'; 
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatButtonModule} from '@angular/material/button'; 
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import {A11yModule} from '@angular/cdk/a11y';
 import {ClipboardModule} from '@angular/cdk/clipboard';
 import {DragDropModule} from '@angular/cdk/drag-drop';
@@ -52,10 +49,21 @@ import {MatTableModule} from '@angular/material/table';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
-import { CadastrarComponent } from './components/template/login-cadastro/cadastrar/cadastrar.component';
-import { LoginComponent } from './components/template/login-cadastro/login/login.component';
-import { LoginCadastroComponent } from './components/template/login-cadastro/login-cadastro.component';
 
+import { CadastrarComponent } from './components/cadastrar/cadastrar.component';
+import { LoginComponent } from './components/login/login.component';
+import { HardwareComponent } from './views/main/hardware/hardware.component';
+import { DashboardComponent } from './views/main/dashboard/dashboard.component';
+import { FooterComponent } from './components/template/footer/footer.component';
+import { NavComponent } from './components/template/nav/nav.component';
+import { HeaderComponent } from './components/template/header/header.component';
+import { InstitucionalComponent } from './institucional/institucional.component';
+import { PerfilComponent } from './views/main/perfil/perfil.component';
+import { RedDirective } from './directives/red.directive';
+import { HardwareCreateComponent } from './components/hardware/hardware-create/hardware-create.component';
+import { HttpClientModule } from '@angular/common/http';
+import { HardwareReadComponent } from './components/hardware/hardware-read/hardware-read.component';
+import { HardwareUpdateComponent } from './components/hardware/hardware-update/hardware-update.component';
 
 // import '@angular'
 
@@ -67,7 +75,14 @@ import { LoginCadastroComponent } from './components/template/login-cadastro/log
     NavComponent,
     CadastrarComponent,
     LoginComponent,
-    LoginCadastroComponent    
+    HardwareComponent,
+    DashboardComponent,
+    InstitucionalComponent,
+    PerfilComponent,
+    RedDirective,
+    HardwareCreateComponent,
+    HardwareReadComponent,
+    HardwareUpdateComponent,
   ],
   imports: [
     BrowserModule,
@@ -123,6 +138,12 @@ import { LoginCadastroComponent } from './components/template/login-cadastro/log
     MatTreeModule,
     PortalModule,
     ScrollingModule,
+    AppRoutingModule,
+    MatSnackBarModule,
+    HttpClientModule,
+    MatFormFieldModule,
+    FormsModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]
