@@ -1,10 +1,13 @@
-
 package com.monitorme.tela;
 
+import com.formdev.flatlaf.FlatLightLaf;
 import com.monitorme.hardware.GPUStats;
 import com.monitorme.hardware.Monitoracao;
 import com.monitorme.oshi.Oshi;
 import java.util.Random;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.plaf.basic.BasicLookAndFeel;
 
 public class TelaMonitor extends javax.swing.JFrame {
     
@@ -15,7 +18,7 @@ public class TelaMonitor extends javax.swing.JFrame {
     
     public TelaMonitor() {
         initComponents();
-        sensor.show();
+//        sensor.show();
     }
 
     @SuppressWarnings("unchecked")
@@ -297,71 +300,78 @@ public class TelaMonitor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btCPUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCPUActionPerformed
-         Random aleatorio = new Random();
-         Integer cpu = aleatorio.nextInt(101);
-         Random aleatorio2 = new Random();
-         Integer processo = aleatorio2.nextInt(301);
-         
-         Double ghz = (3.2 * cpu) / 100;
-         
-         lblUtil.setText(String.format("%d%%", cpu));
-         lblVelocidade.setText(String.format("%.2f/3,2GHz", ghz));
-         lblProcesso.setText(String.format("%d", processo));
-         lblTextUtil.setText(String.format("Utilização:"));
-         lblTextVel.setText(String.format("Velocidade:"));
-         lblTextProcesso.setText(String.format("Processo:"));
-         lblTitulo.setText(String.format("CPU"));
+        Random aleatorio = new Random();
+        Integer cpu = aleatorio.nextInt(101);
+        Random aleatorio2 = new Random();
+        Integer processo = aleatorio2.nextInt(301);
+
+        Double ghz = (3.2 * cpu) / 100;
+
+        lblUtil.setText(String.format("%d%%", cpu));
+        lblVelocidade.setText(String.format("%.2f/3,2GHz", ghz));
+        lblProcesso.setText(String.format("%d", processo));
+        lblTextUtil.setText(String.format("Utilização:"));
+        lblTextVel.setText(String.format("Velocidade:"));
+        lblTextProcesso.setText(String.format("Processo:"));
+        lblTitulo.setText(String.format("CPU"));
         // TODO add your handling code here:
     }//GEN-LAST:event_btCPUActionPerformed
 
     private void btnMemoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMemoActionPerformed
-         Random aleatorioM = new Random();
-         Integer memoria = aleatorioM.nextInt(200);
-         Random aleaCache = new Random();
-         Double memoDisp = (200.0 / memoria);
-         Double cache = aleaCache.nextDouble();
-         
-         //Exemplo de Chamada usando Get e Set
-         monitor.getUsoMemor();
-         monitor.setUsoMemor(memoDisp);
-         System.out.println(monitor.getUsoMemor());
-         lblTeste.setText(monitor.getUsoMemor().toString());
-         // 
-         
-         lblUtil.setText(String.format("%d  GB", memoria));
-         lblVelocidade.setText(String.format("%.2f GB", memoDisp));
-         lblProcesso.setText(String.format("%.2f GB", cache));
-         lblTextUtil.setText(String.format("Disponivel:"));
-         lblTextVel.setText(String.format("Em uso:"));
-         lblTextProcesso.setText(String.format("Cache:"));
-         lblTitulo.setText(String.format("MEMÓRIA"));
+        Random aleatorioM = new Random();
+        Integer memoria = aleatorioM.nextInt(200);
+        Random aleaCache = new Random();
+        Double memoDisp = (200.0 / memoria);
+        Double cache = aleaCache.nextDouble();
+
+        //Exemplo de Chamada usando Get e Set
+        monitor.getUsoMemor();
+        monitor.setUsoMemor(memoDisp);
+        System.out.println(monitor.getUsoMemor());
+        lblTeste.setText(monitor.getUsoMemor().toString());
+        // 
+
+        lblUtil.setText(String.format("%d  GB", memoria));
+        lblVelocidade.setText(String.format("%.2f GB", memoDisp));
+        lblProcesso.setText(String.format("%.2f GB", cache));
+        lblTextUtil.setText(String.format("Disponivel:"));
+        lblTextVel.setText(String.format("Em uso:"));
+        lblTextProcesso.setText(String.format("Cache:"));
+        lblTitulo.setText(String.format("MEMÓRIA"));
     }//GEN-LAST:event_btnMemoActionPerformed
 
     private void btnDiscActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDiscActionPerformed
-         Random aleatorioDisc = new Random();
-         Integer disco = aleatorioDisc.nextInt(201);
-         Random aleatorioTemp = new Random();
-         Double tempDis = (200.0 / disco);
-         Double velocDisc = aleatorioTemp.nextDouble();
-         
-         lblUtil.setText(String.format("%d%%", disco));
-         lblVelocidade.setText(String.format("%.2f/ms", tempDis));
-         lblProcesso.setText(String.format("%.2f KB/s", velocDisc));
-         lblTextUtil.setText(String.format("Tempo de atividade:"));
-         lblTextVel.setText(String.format("Valocidade de leitura:"));
-         lblTextProcesso.setText(String.format("Tempo de resposta:"));
-         lblTitulo.setText(String.format("DISCO"));
-         
-         
-         //Oshi Funcionando
-         lblTeste.setText(oshi.getOperatingSystem().toString());
+        Random aleatorioDisc = new Random();
+        Integer disco = aleatorioDisc.nextInt(201);
+        Random aleatorioTemp = new Random();
+        Double tempDis = (200.0 / disco);
+        Double velocDisc = aleatorioTemp.nextDouble();
+
+        lblUtil.setText(String.format("%d%%", disco));
+        lblVelocidade.setText(String.format("%.2f/ms", tempDis));
+        lblProcesso.setText(String.format("%.2f KB/s", velocDisc));
+        lblTextUtil.setText(String.format("Tempo de atividade:"));
+        lblTextVel.setText(String.format("Valocidade de leitura:"));
+        lblTextProcesso.setText(String.format("Tempo de resposta:"));
+        lblTitulo.setText(String.format("DISCO"));
+
+        //Oshi Funcionando
+        lblTeste.setText(oshi.getOperatingSystem().toString());
     }//GEN-LAST:event_btnDiscActionPerformed
 
     private void jRadioButtonMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem1ActionPerformed
-        
+
     }//GEN-LAST:event_jRadioButtonMenuItem1ActionPerformed
 
-    public static void main(String args[]) {
+    public static void main(String args[]) throws UnsupportedLookAndFeelException {
+        // o Try Abaixo muda o Estilo da Tela, deve ser Salvo no MAIN
+        try {
+            UIManager.setLookAndFeel("com.formdev.flatlaf.FlatDarkLaf"); //Flat Darcula
+//            UIManager.setLookAndFeel("com.formdev.flatlaf.FlatDarculaLaf"); // Darcula
+//            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel"); //Windows
+        } catch (Exception ex) {
+            System.err.println( "Failed to initialize LaF" + ex );
+        }
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new TelaMonitor().setVisible(true);
