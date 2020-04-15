@@ -1,17 +1,21 @@
 
 package com.monitorme.tela;
 
+import com.monitorme.hardware.GPUStats;
 import com.monitorme.hardware.Monitoracao;
 import com.monitorme.oshi.Oshi;
 import java.util.Random;
 
 public class TelaMonitor extends javax.swing.JFrame {
-
+    
+//    Components components = JSensors.get.components();
     Monitoracao monitor = new Monitoracao();
     Oshi oshi = new Oshi();
+    GPUStats sensor = new GPUStats();
     
     public TelaMonitor() {
         initComponents();
+        sensor.show();
     }
 
     @SuppressWarnings("unchecked")
