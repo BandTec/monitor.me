@@ -1,24 +1,31 @@
 package com.monitorme.tela;
 
-import com.formdev.flatlaf.FlatLightLaf;
-import com.monitorme.hardware.GPUStats;
-import com.monitorme.hardware.Monitoracao;
+
+import com.monitorme.jsensor.MonitorCPU;
+import com.monitorme.jsensor.MonitorGPU;
+import com.monitorme.jsensor.MonitorHDISK;
+import com.monitorme.jsensor.MonitorMOBO;
+import com.monitorme.monitorMain.Monitoracao;
 import com.monitorme.oshi.Oshi;
 import java.util.Random;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.plaf.basic.BasicLookAndFeel;
 
 public class TelaMonitor extends javax.swing.JFrame {
     
-//    Components components = JSensors.get.components();
     Monitoracao monitor = new Monitoracao();
     Oshi oshi = new Oshi();
-    GPUStats sensor = new GPUStats();
+    MonitorCPU sensorCPU = new MonitorCPU();
+    MonitorGPU sensorGPU = new MonitorGPU();
+    MonitorHDISK sensorHDISK = new MonitorHDISK();
+    MonitorMOBO sensorMOBO = new MonitorMOBO();
     
     public TelaMonitor() {
         initComponents();
-//        sensor.show();
+        sensorCPU.showCPU();
+        sensorGPU.showGPU();
+        sensorHDISK.showHDISK();
+        sensorMOBO.showMOBO();
     }
 
     @SuppressWarnings("unchecked")
@@ -355,8 +362,7 @@ public class TelaMonitor extends javax.swing.JFrame {
         lblTextProcesso.setText(String.format("Tempo de resposta:"));
         lblTitulo.setText(String.format("DISCO"));
 
-        //Oshi Funcionando
-        lblTeste.setText(oshi.getOperatingSystem().toString());
+        
     }//GEN-LAST:event_btnDiscActionPerformed
 
     private void jRadioButtonMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem1ActionPerformed
