@@ -4,7 +4,8 @@ import com.monitorme.jsensor.MonitorCPU;
 import com.monitorme.jsensor.MonitorGPU;
 import com.monitorme.jsensor.MonitorHDISK;
 import com.monitorme.jsensor.MonitorMOBO;
-import com.monitorme.oshi.Oshi;
+import com.monitorme.oshi.HWDiskStore;
+import com.monitorme.oshi.OshiOS;
 import javax.swing.UIManager;
 
 
@@ -15,8 +16,9 @@ public class TelaTeste extends javax.swing.JFrame {
     MonitorHDISK sensorHDISK = new MonitorHDISK();
     MonitorMOBO sensorMOBO = new MonitorMOBO();
     //Oshi
-    Oshi oshi = new Oshi();
-    
+    OshiOS oshi = new OshiOS();
+    HWDiskStore oshiHD = new HWDiskStore();
+     
     //MainMonitorMe
     
     public TelaTeste() {
@@ -39,9 +41,10 @@ public class TelaTeste extends javax.swing.JFrame {
         lblTesteHDisk = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        lblTesteOshiOs = new javax.swing.JLabel();
+        lblTesteOshiHD = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         lstCPU = new javax.swing.JList<>();
+        lblTesteOshiOs = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -73,7 +76,7 @@ public class TelaTeste extends javax.swing.JFrame {
 
         jLabel6.setText("OSHI - API");
 
-        lblTesteOshiOs.setText("lblTesteOshiOs");
+        lblTesteOshiHD.setText("lblTesteOshiHD");
 
         lstCPU.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -81,6 +84,8 @@ public class TelaTeste extends javax.swing.JFrame {
             public String getElementAt(int i) { return strings[i]; }
         });
         jScrollPane1.setViewportView(lstCPU);
+
+        lblTesteOshiOs.setText("lblTesteOshiOs");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -94,38 +99,46 @@ public class TelaTeste extends javax.swing.JFrame {
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addGap(6, 6, 6)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblTesteOshiOs)
-                            .addComponent(jLabel6))
+                        .addComponent(jLabel6)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(350, 350, 350)
-                        .addComponent(btnTeste))
+                        .addGap(30, 30, 30)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(350, 350, 350)
+                                .addComponent(btnTeste))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jLabel2)
+                                            .addGap(63, 63, 63)))
+                                    .addComponent(lblTesteCpu))
+                                .addGap(65, 65, 65)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(lblTesteGPU))
+                                .addGap(73, 73, 73)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(lblTesteHDisk))
+                                .addGap(62, 62, 62)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(lblTesteMobo)))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel2)
-                                    .addGap(63, 63, 63)))
-                            .addComponent(lblTesteCpu))
-                        .addGap(65, 65, 65)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(lblTesteGPU))
-                        .addGap(73, 73, 73)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(lblTesteHDisk))
-                        .addGap(62, 62, 62)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(lblTesteMobo))))
+                        .addGap(22, 22, 22)
+                        .addComponent(lblTesteOshiHD)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(22, 22, 22)
+                    .addComponent(lblTesteOshiOs)
+                    .addContainerGap(612, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -152,9 +165,14 @@ public class TelaTeste extends javax.swing.JFrame {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblTesteOshiOs)
-                .addGap(168, 168, 168))
+                .addGap(56, 56, 56)
+                .addComponent(lblTesteOshiHD)
+                .addGap(124, 124, 124))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(341, Short.MAX_VALUE)
+                    .addComponent(lblTesteOshiOs)
+                    .addGap(158, 158, 158)))
         );
 
         pack();
@@ -168,6 +186,7 @@ public class TelaTeste extends javax.swing.JFrame {
         
         //Oshi Funcionando
         lblTesteOshiOs.setText(oshi.getOperatingSystem().toString());
+        lblTesteOshiHD.setText(oshiHD.getName());
     }//GEN-LAST:event_btnTesteActionPerformed
 
     public static void main(String args[]) {
@@ -202,6 +221,7 @@ public class TelaTeste extends javax.swing.JFrame {
     private javax.swing.JLabel lblTesteGPU;
     private javax.swing.JLabel lblTesteHDisk;
     private javax.swing.JLabel lblTesteMobo;
+    private javax.swing.JLabel lblTesteOshiHD;
     private javax.swing.JLabel lblTesteOshiOs;
     private javax.swing.JList<String> lstCPU;
     // End of variables declaration//GEN-END:variables

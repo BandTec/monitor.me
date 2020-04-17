@@ -1,12 +1,6 @@
 package com.monitorme.tela;
 
-
-import com.monitorme.jsensor.MonitorCPU;
-import com.monitorme.jsensor.MonitorGPU;
-import com.monitorme.jsensor.MonitorHDISK;
-import com.monitorme.jsensor.MonitorMOBO;
 import com.monitorme.monitorMain.Monitoracao;
-import com.monitorme.oshi.Oshi;
 import java.util.Random;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -14,18 +8,10 @@ import javax.swing.UnsupportedLookAndFeelException;
 public class TelaMonitor extends javax.swing.JFrame {
     
     Monitoracao monitor = new Monitoracao();
-    Oshi oshi = new Oshi();
-    MonitorCPU sensorCPU = new MonitorCPU();
-    MonitorGPU sensorGPU = new MonitorGPU();
-    MonitorHDISK sensorHDISK = new MonitorHDISK();
-    MonitorMOBO sensorMOBO = new MonitorMOBO();
+//    Monitoracao run = new Monitoracao();
     
     public TelaMonitor() {
         initComponents();
-        sensorCPU.showCPU();
-        sensorGPU.showGPU();
-        sensorHDISK.showHDISK();
-        sensorMOBO.showMOBO();
     }
 
     @SuppressWarnings("unchecked")
@@ -332,10 +318,10 @@ public class TelaMonitor extends javax.swing.JFrame {
         Double cache = aleaCache.nextDouble();
 
         //Exemplo de Chamada usando Get e Set
-        monitor.getUsoMemor();
-        monitor.setUsoMemor(memoDisp);
-        System.out.println(monitor.getUsoMemor());
-        lblTeste.setText(monitor.getUsoMemor().toString());
+//        monitor.getUsoMemor();
+//        monitor.setUsoMemor(memoDisp);
+//        System.out.println(monitor.getUsoMemor());
+//        lblTeste.setText(monitor.getUsoMemor().toString());
         // 
 
         lblUtil.setText(String.format("%d  GB", memoria));

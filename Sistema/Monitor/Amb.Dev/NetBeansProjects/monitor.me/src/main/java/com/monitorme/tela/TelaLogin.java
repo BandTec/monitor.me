@@ -74,7 +74,7 @@ public class TelaLogin extends javax.swing.JFrame {
 
         jButton1.setBackground(new java.awt.Color(51, 51, 51));
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Sing in");
+        jButton1.setText("Sign In");
 
         jLabel1.setText("Ainda não possui cadastro?");
 
@@ -139,8 +139,6 @@ public class TelaLogin extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Monitor.me");
-
-        jLabel8.setIcon(new javax.swing.ImageIcon("C:\\Users\\Aluno\\Desktop\\monitor.me\\Sistema\\Monitor\\Amb.Dev\\NetBeansProjects\\monitor.me\\src\\main\\java\\com\\monitorme\\tela\\icon (1).png")); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
