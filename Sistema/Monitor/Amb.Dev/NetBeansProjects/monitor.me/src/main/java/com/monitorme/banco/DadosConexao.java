@@ -1,4 +1,4 @@
-package banco;
+package com.monitorme.banco;
 import org.apache.commons.dbcp2.BasicDataSource;
 
 public class DadosConexao {
