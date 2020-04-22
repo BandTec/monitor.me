@@ -1,5 +1,6 @@
 package com.monitorme.tela;
 
+import com.monitorme.monitorMain.GeraAleatorio;
 import com.monitorme.monitorMain.Monitoracao;
 import java.util.Random;
 import javax.swing.UIManager;
@@ -9,6 +10,7 @@ public class TelaMonitor extends javax.swing.JFrame {
     
     Monitoracao monitor = new Monitoracao();
 //    Monitoracao run = new Monitoracao();
+    GeraAleatorio aleatorio = new GeraAleatorio();
     
     public TelaMonitor() {
         initComponents();
@@ -293,16 +295,17 @@ public class TelaMonitor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btCPUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCPUActionPerformed
-        Random aleatorio = new Random();
-        Integer cpu = aleatorio.nextInt(101);
-        Random aleatorio2 = new Random();
-        Integer processo = aleatorio2.nextInt(301);
+//        Random aleatorio = new Random();
+//        Integer cpu = aleatorio.nextInt(101);
+//        Random aleatorio2 = new Random();
+//        Integer processo = aleatorio2.nextInt(301);
+//        Double ghz = (3.2 * cpu) / 100;
+//        Código Chumbado
+        aleatorio.aleatorioCpu();
 
-        Double ghz = (3.2 * cpu) / 100;
-
-        lblUtil.setText(String.format("%d%%", cpu));
-        lblVelocidade.setText(String.format("%.2f/3,2GHz", ghz));
-        lblProcesso.setText(String.format("%d", processo));
+        lblUtil.setText(String.format("%d%%", aleatorio.getCpu()));
+        lblVelocidade.setText(String.format("%.2f/3,2GHz", aleatorio.getGhz()));
+        lblProcesso.setText(String.format("%d", aleatorio.getProcesso()));
         lblTextUtil.setText(String.format("Utilização:"));
         lblTextVel.setText(String.format("Velocidade:"));
         lblTextProcesso.setText(String.format("Processo:"));
@@ -311,11 +314,12 @@ public class TelaMonitor extends javax.swing.JFrame {
     }//GEN-LAST:event_btCPUActionPerformed
 
     private void btnMemoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMemoActionPerformed
-        Random aleatorioM = new Random();
-        Integer memoria = aleatorioM.nextInt(200);
-        Random aleaCache = new Random();
-        Double memoDisp = (200.0 / memoria);
-        Double cache = aleaCache.nextDouble();
+//        Random aleatorioM = new Random();
+//        Integer memoria = aleatorioM.nextInt(200);
+//        Random aleaCache = new Random();
+//        Double memoDisp = (200.0 / memoria);
+//        Double cache = aleaCache.nextDouble();
+//        Código Chumbado
 
         //Exemplo de Chamada usando Get e Set
 //        monitor.getUsoMemor();
@@ -323,10 +327,11 @@ public class TelaMonitor extends javax.swing.JFrame {
 //        System.out.println(monitor.getUsoMemor());
 //        lblTeste.setText(monitor.getUsoMemor().toString());
         // 
-
-        lblUtil.setText(String.format("%d  GB", memoria));
-        lblVelocidade.setText(String.format("%.2f GB", memoDisp));
-        lblProcesso.setText(String.format("%.2f GB", cache));
+        aleatorio.aleatorioMemoria();
+        
+        lblUtil.setText(String.format("%d  GB", aleatorio.getMemoria()));
+        lblVelocidade.setText(String.format("%.2f GB", aleatorio.getMemoDisp()));
+        lblProcesso.setText(String.format("%.2f GB", aleatorio.getCache()));
         lblTextUtil.setText(String.format("Disponivel:"));
         lblTextVel.setText(String.format("Em uso:"));
         lblTextProcesso.setText(String.format("Cache:"));
@@ -334,15 +339,17 @@ public class TelaMonitor extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMemoActionPerformed
 
     private void btnDiscActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDiscActionPerformed
-        Random aleatorioDisc = new Random();
-        Integer disco = aleatorioDisc.nextInt(201);
-        Random aleatorioTemp = new Random();
-        Double tempDis = (200.0 / disco);
-        Double velocDisc = aleatorioTemp.nextDouble();
-
-        lblUtil.setText(String.format("%d%%", disco));
-        lblVelocidade.setText(String.format("%.2f/ms", tempDis));
-        lblProcesso.setText(String.format("%.2f KB/s", velocDisc));
+//        Random aleatorioDisc = new Random();
+//        Integer disco = aleatorioDisc.nextInt(201);
+//        Random aleatorioTemp = new Random();
+//        Double tempDis = (200.0 / disco);
+//        Double velocDisc = aleatorioTemp.nextDouble();
+//        Código Chumbado
+        aleatorio.aleatorioDisco();
+        
+        lblUtil.setText(String.format("%d%%", aleatorio.getDisco()));
+        lblVelocidade.setText(String.format("%.2f/ms", aleatorio.getTempDis()));
+        lblProcesso.setText(String.format("%.2f KB/s", aleatorio.getVelocDisc()));
         lblTextUtil.setText(String.format("Tempo de atividade:"));
         lblTextVel.setText(String.format("Valocidade de leitura:"));
         lblTextProcesso.setText(String.format("Tempo de resposta:"));
