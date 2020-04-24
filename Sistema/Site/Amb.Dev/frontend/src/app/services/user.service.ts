@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Usuario } from '../components/institucional/login/usuario.model';
+import { Usuario } from '../institucional/login/usuario.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { EventEmitter } from 'events';
@@ -43,7 +43,6 @@ export class UserService {
       verticalPosition: "bottom"
     })
   }
-
   createSession(usuario: Usuario ): Observable<Usuario>{
     return this.http.post<Usuario>(this.baseConsultaLogin, usuario)
   }

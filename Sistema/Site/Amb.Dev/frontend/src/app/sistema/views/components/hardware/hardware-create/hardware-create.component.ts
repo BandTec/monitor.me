@@ -26,11 +26,11 @@ export class HardwareCreateComponent implements OnInit {
   createHardware(): void{
     this.hardwareService.createHardware(this.hardware).subscribe(()=>{
       this.hardwareService.show('Hardware Inserido com sucesso!')
-      this.router.navigate(['/hardware'])
+      this.router.navigate(['sistema/hardware'])
     });
   }
 
   cancel():void {
-    this.router.navigate(['/hardware'])
+    this.router.navigate(['sistema/hardware'])
   }
 }
