@@ -15,6 +15,6 @@ export class HardwareComponent implements OnInit {
   }
 
   navTo():void {
-    this.router.navigate(['hardware/hardware-create'])
+    this.router.navigate(['sistema/hardware/hardware-create'])
   }
 }

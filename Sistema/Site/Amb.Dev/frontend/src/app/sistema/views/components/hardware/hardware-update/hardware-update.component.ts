@@ -26,12 +26,12 @@ export class HardwareUpdateComponent implements OnInit {
   updateHardware(): void {
     this.hardwareService.update(this.hardware).subscribe(() => {
       this.hardwareService.show('Produto Atualizado!')
-      this.router.navigate(['/hardware'])
+      this.router.navigate(['sistema/hardware'])
     })
   }
 
   cancel(): void {
-    this.router.navigate(['/hardware'])
+    this.router.navigate(['sistema/hardware'])
   }
 
 }

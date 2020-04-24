@@ -1,0 +1,31 @@
+<mat-card class="AllCad mat-elevation-z8">
+  <mat-card class="mainCadLeft">
+    <mat-card class="mainCadRight mat-elevation-z8">
+      <mat-card-title class="h-middle">Controle o uso da sua máquina...</mat-card-title>
+      <mat-card-subtitle class="h-middle">Cadastre-se</mat-card-subtitle>
+      <mat-card-content>
+        <form>
+          <mat-form-field class="field">
+            <input matInput placeholder="Email" name="email">
+          </mat-form-field>
+          <mat-form-field class="field">
+            <input matInput placeholder="Celular" name="celular">
+          </mat-form-field>
+          <mat-form-field class="field">
+            <input matInput placeholder="Senha" name="password">
+          </mat-form-field>
+          <mat-form-field class="field">
+            <input matInput placeholder="Confirme sua Senha" name="confirmpassword">
+          </mat-form-field>
+          <button mat-raised-button color="primary" class="btnCad">Cadastrar</button>
+        </form>
+      </mat-card-content>
+      <a class="cad" routerLink="/home/login" >
+        <i class="material-icons v-middle">
+          undo
+        </i>
+        <span style="color: white;">Voltar para Login</span>
+      </a>
+    </mat-card>
+  </mat-card>
+</mat-card>

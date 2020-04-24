@@ -1,19 +1,13 @@
-import { SistemaRoutingModule } from './sistema-routing.module';
+// import { InstiRoutingModule } from './institucional.routing.module';
+import { InstitucionalComponent } from './institucional.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { HardwareComponent } from './views/main/hardware/hardware.component';
-import { DashboardComponent } from './views/main/dashboard/dashboard.component';
-import { PerfilComponent } from './views/main/perfil/perfil.component';
-import { ProfileReadComponent } from './views/components/profile/profile-read/profile-read.component';
-import { HardwareReadComponent } from './views/components/hardware/hardware-read/hardware-read.component';
-import { HardwareUpdateComponent } from './views/components/hardware/hardware-update/hardware-update.component';
-import { HardwareCreateComponent } from './views/components/hardware/hardware-create/hardware-create.component';
-import { DashComponent } from './views/components/dash/dash.component';
-import { SistemaComponent } from './sistema.component';
+
+import { LoginComponent } from './login/login.component';
+import { CadastroComponent } from './cadastro/cadastro.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatInputModule } from '@angular/material/input';
@@ -57,36 +51,32 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTreeModule } from '@angular/material/tree';
 import { PortalModule } from '@angular/cdk/portal';
 import { ScrollingModule } from '@angular/cdk/scrolling';
-import { AppRoutingModule } from '../app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { LayoutModule } from '@angular/cdk/layout';
-import { NavegatorComponent } from './template/navegator/navegator.component';
-import { CardSmallComponent } from './template/cards/card-small/card-small.component';
-import { HeaderComponent } from './template/header/header.component';
-import { FooterComponent } from './template/footer/footer.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+
+
+import { NgMatSearchBarModule } from 'ng-mat-search-bar';
+
+import {InstiRoutingModule} from './institucional.routing.module';
+import { FooterMainComponent } from './footer-main/footer-main.component';
+import { SiteMainComponent } from './site-main/site-main.component';
 
 @NgModule({
     declarations: [
-        HardwareComponent,
-        DashComponent,
-        DashboardComponent,
-        PerfilComponent,
-        ProfileReadComponent,
-        HardwareReadComponent,
-        HardwareUpdateComponent,
-        HardwareCreateComponent,
-        SistemaComponent,
-        NavegatorComponent,
-        CardSmallComponent,
-        HeaderComponent,
-        FooterComponent,
+        InstitucionalComponent,
+        LoginComponent,
+        CadastroComponent,
+        FooterMainComponent,
+        SiteMainComponent
     ],
     imports: [
-        SistemaRoutingModule,
         CommonModule,
-        BrowserModule,
-        BrowserAnimationsModule,
+        InstiRoutingModule,
         MatToolbarModule,
+        BrowserModule,
+        NgMatSearchBarModule,
+        BrowserAnimationsModule,
         MatSidenavModule,
         MatListModule,
         MatInputModule,
@@ -132,7 +122,6 @@ import { FooterComponent } from './template/footer/footer.component';
         MatSortModule,
         MatTableModule,
         MatTabsModule,
-        MatToolbarModule,
         MatTooltipModule,
         MatTreeModule,
         PortalModule,
@@ -148,4 +137,4 @@ import { FooterComponent } from './template/footer/footer.component';
     exports: [],
     providers: [],
 })
-export class SistemaModule { }
+export class InstitucionalModule { }
