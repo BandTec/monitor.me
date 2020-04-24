@@ -1,8 +1,1 @@
-com\monitorme\tela\TelaMonitor.class
-com\monitorme\tela\TelaMonitor$1.class
-com\monitorme\tela\TelaMonitor$5.class
-com\monitorme\tela\TelaMonitor$4.class
-com\monitorme\tela\TelaMonitor$3.class
-com\monitorme\tela\TelaMonitor$2.class
-com\monitorme\hardware\ColetaDados.class
-com\monitorme\hardware\Monitoracao.class
+com\monitorme\banco\DadosConexao.class

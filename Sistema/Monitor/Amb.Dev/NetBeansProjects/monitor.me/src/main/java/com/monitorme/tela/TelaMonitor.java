@@ -1,5 +1,6 @@
 package com.monitorme.tela;
 
+import com.monitorme.monitorMain.GeraAleatorio;
 import com.monitorme.monitorMain.Monitoracao;
 import java.util.Random;
 import javax.swing.UIManager;
@@ -9,6 +10,7 @@ public class TelaMonitor extends javax.swing.JFrame {
     
     Monitoracao monitor = new Monitoracao();
 //    Monitoracao run = new Monitoracao();
+    GeraAleatorio aleatorio = new GeraAleatorio();
     
     public TelaMonitor() {
         initComponents();
@@ -35,12 +37,16 @@ public class TelaMonitor extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         lblTeste = new javax.swing.JLabel();
+        lblCpuUtilizacao = new javax.swing.JLabel();
+        lblCpuVelocidade = new javax.swing.JLabel();
+        lblMemoriaUso = new javax.swing.JLabel();
+        lblDiscoTempo = new javax.swing.JLabel();
+        painelGpu = new javax.swing.JPanel();
+        btnGpu = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
-        jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
         jMenu6 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -170,29 +176,40 @@ public class TelaMonitor extends javax.swing.JFrame {
 
         lblTeste.setText("Teste");
 
+        lblCpuUtilizacao.setText("Utilização");
+
+        lblCpuVelocidade.setText("velocidade");
+
+        lblMemoriaUso.setText("Em uso");
+
+        lblDiscoTempo.setText("Tempo de uso");
+
+        painelGpu.setBackground(new java.awt.Color(255, 255, 255));
+        painelGpu.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 153)));
+
+        javax.swing.GroupLayout painelGpuLayout = new javax.swing.GroupLayout(painelGpu);
+        painelGpu.setLayout(painelGpuLayout);
+        painelGpuLayout.setHorizontalGroup(
+            painelGpuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        painelGpuLayout.setVerticalGroup(
+            painelGpuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 80, Short.MAX_VALUE)
+        );
+
+        btnGpu.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnGpu.setText("GPU");
+
         jMenuBar1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jMenu1.setText("Home");
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Propriedades");
-
-        jMenu3.setText("teste");
-        jMenu2.add(jMenu3);
-
         jMenuBar1.add(jMenu2);
 
         jMenu5.setText("Help");
-
-        jRadioButtonMenuItem1.setSelected(true);
-        jRadioButtonMenuItem1.setText("Sobre");
-        jRadioButtonMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButtonMenuItem1ActionPerformed(evt);
-            }
-        });
-        jMenu5.add(jRadioButtonMenuItem1);
-
         jMenuBar1.add(jMenu5);
 
         jMenu6.setText("Exit");
@@ -215,13 +232,22 @@ public class TelaMonitor extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(painelCpu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(painelMemo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(painelDisc, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(painelDisc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(painelGpu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btCPU)
-                            .addComponent(btnMemo)
-                            .addComponent(btnDisc))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblCpuUtilizacao)
+                                .addGap(18, 18, 18)
+                                .addComponent(lblCpuVelocidade))
+                            .addComponent(lblMemoriaUso)
+                            .addComponent(lblDiscoTempo)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(btnGpu, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnMemo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btCPU, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnDisc, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblTextProcesso)
                             .addGroup(layout.createSequentialGroup()
@@ -254,23 +280,7 @@ public class TelaMonitor extends javax.swing.JFrame {
                 .addGap(7, 7, 7)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(painelCpu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(58, 58, 58)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnMemo)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(painelMemo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(55, 55, 55)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(btnDisc)
-                                            .addComponent(painelDisc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                            .addComponent(btCPU))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 19, Short.MAX_VALUE)
+                        .addGap(18, 32, Short.MAX_VALUE)
                         .addComponent(lblTitulo)
                         .addGap(18, 18, 18)
                         .addComponent(painelCentral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -278,31 +288,68 @@ public class TelaMonitor extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblTextUtil)
                             .addComponent(lblTextVel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(painelCpu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(58, 58, 58)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(btnMemo)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(lblMemoriaUso))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(painelMemo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(55, 55, 55)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(btnDisc)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(lblDiscoTempo))
+                                            .addComponent(painelDisc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btCPU)
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(lblCpuUtilizacao, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblCpuVelocidade))))
+                        .addGap(19, 19, 19)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(painelGpu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblUtil)
                             .addComponent(lblVelocidade))
-                        .addGap(18, 18, 18)))
-                .addComponent(lblTextProcesso)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblProcesso)
-                .addGap(16, 16, 16))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(lblTextProcesso))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(4, 4, 4)
+                                .addComponent(btnGpu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblProcesso)
+                        .addGap(42, 42, 42))))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btCPUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCPUActionPerformed
-        Random aleatorio = new Random();
-        Integer cpu = aleatorio.nextInt(101);
-        Random aleatorio2 = new Random();
-        Integer processo = aleatorio2.nextInt(301);
+//        Random aleatorio = new Random();
+//        Integer cpu = aleatorio.nextInt(101);
+//        Random aleatorio2 = new Random();
+//        Integer processo = aleatorio2.nextInt(301);
+//        Double ghz = (3.2 * cpu) / 100;
+//        Código Chumbado
+        aleatorio.aleatorioCpu();
 
-        Double ghz = (3.2 * cpu) / 100;
-
-        lblUtil.setText(String.format("%d%%", cpu));
-        lblVelocidade.setText(String.format("%.2f/3,2GHz", ghz));
-        lblProcesso.setText(String.format("%d", processo));
+        lblUtil.setText(String.format("%d%%", aleatorio.getCpu()));
+        lblVelocidade.setText(String.format("%.2f/3,2GHz", aleatorio.getGhz()));
+        lblProcesso.setText(String.format("%d", aleatorio.getProcesso()));
         lblTextUtil.setText(String.format("Utilização:"));
         lblTextVel.setText(String.format("Velocidade:"));
         lblTextProcesso.setText(String.format("Processo:"));
@@ -311,11 +358,12 @@ public class TelaMonitor extends javax.swing.JFrame {
     }//GEN-LAST:event_btCPUActionPerformed
 
     private void btnMemoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMemoActionPerformed
-        Random aleatorioM = new Random();
-        Integer memoria = aleatorioM.nextInt(200);
-        Random aleaCache = new Random();
-        Double memoDisp = (200.0 / memoria);
-        Double cache = aleaCache.nextDouble();
+//        Random aleatorioM = new Random();
+//        Integer memoria = aleatorioM.nextInt(200);
+//        Random aleaCache = new Random();
+//        Double memoDisp = (200.0 / memoria);
+//        Double cache = aleaCache.nextDouble();
+//        Código Chumbado
 
         //Exemplo de Chamada usando Get e Set
 //        monitor.getUsoMemor();
@@ -323,10 +371,11 @@ public class TelaMonitor extends javax.swing.JFrame {
 //        System.out.println(monitor.getUsoMemor());
 //        lblTeste.setText(monitor.getUsoMemor().toString());
         // 
-
-        lblUtil.setText(String.format("%d  GB", memoria));
-        lblVelocidade.setText(String.format("%.2f GB", memoDisp));
-        lblProcesso.setText(String.format("%.2f GB", cache));
+        aleatorio.aleatorioMemoria();
+        
+        lblUtil.setText(String.format("%d  GB", aleatorio.getMemoria()));
+        lblVelocidade.setText(String.format("%.2f GB", aleatorio.getMemoDisp()));
+        lblProcesso.setText(String.format("%.2f GB", aleatorio.getCache()));
         lblTextUtil.setText(String.format("Disponivel:"));
         lblTextVel.setText(String.format("Em uso:"));
         lblTextProcesso.setText(String.format("Cache:"));
@@ -334,15 +383,17 @@ public class TelaMonitor extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMemoActionPerformed
 
     private void btnDiscActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDiscActionPerformed
-        Random aleatorioDisc = new Random();
-        Integer disco = aleatorioDisc.nextInt(201);
-        Random aleatorioTemp = new Random();
-        Double tempDis = (200.0 / disco);
-        Double velocDisc = aleatorioTemp.nextDouble();
-
-        lblUtil.setText(String.format("%d%%", disco));
-        lblVelocidade.setText(String.format("%.2f/ms", tempDis));
-        lblProcesso.setText(String.format("%.2f KB/s", velocDisc));
+//        Random aleatorioDisc = new Random();
+//        Integer disco = aleatorioDisc.nextInt(201);
+//        Random aleatorioTemp = new Random();
+//        Double tempDis = (200.0 / disco);
+//        Double velocDisc = aleatorioTemp.nextDouble();
+//        Código Chumbado
+        aleatorio.aleatorioDisco();
+        
+        lblUtil.setText(String.format("%d%%", aleatorio.getDisco()));
+        lblVelocidade.setText(String.format("%.2f/ms", aleatorio.getTempDis()));
+        lblProcesso.setText(String.format("%.2f KB/s", aleatorio.getVelocDisc()));
         lblTextUtil.setText(String.format("Tempo de atividade:"));
         lblTextVel.setText(String.format("Valocidade de leitura:"));
         lblTextProcesso.setText(String.format("Tempo de resposta:"));
@@ -350,10 +401,6 @@ public class TelaMonitor extends javax.swing.JFrame {
 
         
     }//GEN-LAST:event_btnDiscActionPerformed
-
-    private void jRadioButtonMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem1ActionPerformed
-
-    }//GEN-LAST:event_jRadioButtonMenuItem1ActionPerformed
 
     public static void main(String args[]) throws UnsupportedLookAndFeelException {
         // o Try Abaixo muda o Estilo da Tela, deve ser Salvo no MAIN
@@ -374,16 +421,19 @@ public class TelaMonitor extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btCPU;
     private javax.swing.JButton btnDisc;
+    private javax.swing.JButton btnGpu;
     private javax.swing.JButton btnMemo;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
+    private javax.swing.JLabel lblCpuUtilizacao;
+    private javax.swing.JLabel lblCpuVelocidade;
+    private javax.swing.JLabel lblDiscoTempo;
+    private javax.swing.JLabel lblMemoriaUso;
     private javax.swing.JLabel lblProcesso;
     private javax.swing.JLabel lblTeste;
     private javax.swing.JLabel lblTextProcesso;
@@ -395,6 +445,7 @@ public class TelaMonitor extends javax.swing.JFrame {
     private javax.swing.JPanel painelCentral;
     private javax.swing.JPanel painelCpu;
     private javax.swing.JPanel painelDisc;
+    private javax.swing.JPanel painelGpu;
     private javax.swing.JPanel painelMemo;
     // End of variables declaration//GEN-END:variables
 }
