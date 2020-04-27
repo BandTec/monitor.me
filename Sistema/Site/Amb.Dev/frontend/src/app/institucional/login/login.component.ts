@@ -12,6 +12,8 @@ import { UserService } from '../../services/user.service';
 })
 export class LoginComponent implements OnInit {
 
+  public user: any = {};
+
   usuario : Usuario = {
     email: '',
     password: ''
@@ -20,6 +22,18 @@ export class LoginComponent implements OnInit {
   constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit(): void {
+    this.user ={
+      email: '',
+      password: ''
+    }
+  }
+
+  async signin(form){
+    console.log(`entrei na função`)
+    console.log(`${JSON.stringify(form.value)}`)
+
+    const response = await this.userService.login(this.user).toPromise();
+    console.log(response)
   }
 
   createSession(): void{

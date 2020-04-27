@@ -19,7 +19,8 @@ routes.post('/eventHistory1', EventController.createEvent)//Cadastra novo EventH
 //Criação de Conteudo
 routes.post('/cadastrar/:UserId/novoHardware', EventController.createHardUser)//Cadastra novo Hardware de Usuário
 routes.post('/cadastrar', CadastrarController.cadastrar);//Cadastra Novo usuario
-routes.post('/sessions', SessionController.create);
+routes.post('/sessions', SessionController.createLogin);
+routes.post('/all', SessionController.authenticate);
 
 //Deleção de Conteudo
 // routes.delete('/events/:id', EventController.delete);

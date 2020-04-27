@@ -1,18 +1,31 @@
-const { Model, DataTypes } = require('sequelize')
+const {
+	Model,
+	DataTypes
+} = require('sequelize')
+const bcrypt = require("bcryptjs");
 
-class monitor_users extends Model{
-	static init(sequelize){
+class monitor_users extends Model {
+	static init(sequelize) {
 		super.init({
 			name: DataTypes.STRING,
 			email: DataTypes.STRING,
 			whatsapp: DataTypes.STRING,
 			password: DataTypes.STRING
-		}, {
-			sequelize
+		},{
+			hooks: {
+				beforeCreate: async users => {
+					const hashedPassword = await bcrypt.hash(users.password, 10);
+					users.password = hashedPassword;
+				}
+			}
+			,sequelize: sequelize
 		})
 	}
-	static associate(models){
-		this.hasMany(models.event_hardwares, { foreignKey: 'UserId', as: 'hardwares'})
+	static associate(models) {
+		this.hasMany(models.event_hardwares, {
+			foreignKey: 'UserId',
+			as: 'hardwares'
+		})
 	}
 }
 

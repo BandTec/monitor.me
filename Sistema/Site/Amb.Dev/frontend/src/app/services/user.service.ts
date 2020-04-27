@@ -6,7 +6,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { EventEmitter } from 'events';
 
 const ApiRoutes = {
-  login: 'login',
+  login: 'sessions',
   signup: 'signup',
   users: 'users'
 };
@@ -31,6 +31,7 @@ export class UserService {
     let headers = new HttpHeaders({
       'Content-type': 'application/json',
       'Authorization': `${token}`
+      //poderia usar o id do user 
     });
 
     return { headers };

@@ -4,17 +4,17 @@
   </mat-card>
   <mat-card class="mainLoginRight mat-elevation-z8">
 
-    <mat-card-title class="h-middle">Sentimos sua falta Designer...</mat-card-title>
+    <mat-card-title class="h-middle">Sentimos sua falta...</mat-card-title>
     <mat-card-subtitle class="h-middle">Login</mat-card-subtitle>
     <mat-card-content>
-      <form>
+      <form method="post" #form="ngForm" novalidate (ngSubmit)="signin(form)">
         <mat-form-field class="field">
-          <input matInput placeholder="Email" [(ngModel)]="usuario.email" name="email">
+          <input matInput type="email" placeholder="Email" [(ngModel)]="user.email" name="email">
         </mat-form-field>
         <mat-form-field class="field">
-          <input matInput placeholder="Senha" [(ngModel)]="usuario.password" name="password">
+          <input matInput type="password" placeholder="Senha" [(ngModel)]="user.password" name="password">
         </mat-form-field>
-        <button mat-raised-button color="primary" class="btnLogin" (click)="createSession()">Logar</button>
+        <button mat-raised-button color="primary" class="btnLogin" type="submit"> (click)="createSession()" Logar</button>
       </form>
     </mat-card-content>
 

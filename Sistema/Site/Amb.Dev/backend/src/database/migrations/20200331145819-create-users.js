@@ -1,5 +1,7 @@
 'use strict';
 
+const bcrypt = require('bcrypt');
+
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('monitor_users', {
@@ -34,6 +36,8 @@ module.exports = {
         allowNull: false,
       }
     });
+
+    
   },
 
   down: (queryInterface, Sequelize) => {
