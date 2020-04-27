@@ -53,14 +53,30 @@
 
 .large-box {
   display: flex;
-  align-items: center;
+  align-items: left;
   width: 100%;
-  justify-content: center;
+  justify-content: left;
   margin: 16px;
   padding: 16px;
   border-radius: 8px;
   height: 500px;
   background-color: rgb(0, 0, 0);
   width: 90vw;
+  color: white;
 }
 
+.mainInstLeft {
+  width: 40vw;
+  background-size: cover;
+  background-repeat: no-repeat;
+  font-size: large;
+  text-justify: initial;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.mainInstRight {
+  width: 60vw;
+  background-size: cover;
+  background-repeat: no-repeat;  
+  background-image: url('https://cdn.pixabay.com/photo/2016/01/15/12/02/editing-1141505_960_720.jpg');
+}
