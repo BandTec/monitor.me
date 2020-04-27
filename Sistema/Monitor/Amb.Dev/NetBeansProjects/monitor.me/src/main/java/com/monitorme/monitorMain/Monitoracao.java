@@ -1,8 +1,7 @@
 package com.monitorme.monitorMain;
 
-
 public class Monitoracao {
-        
+       
     // Atributos
     private Double utilizacaoCpu,
             velocCpu,
@@ -141,6 +140,11 @@ public class Monitoracao {
 
     public void setGpu(Double gpu) {
         this.gpu = gpu;
+    }
+    
+//    OSHI
+    
+    public void hardInfo(){
     }
     
 }

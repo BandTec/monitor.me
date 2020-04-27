@@ -2,6 +2,7 @@ package com.monitorme.oshi;
 
 import com.sun.jna.Platform;
 import java.io.Serializable;
+import java.util.Arrays;
 import oshi.PlatformEnum;
 import oshi.SystemInfo;
 import oshi.hardware.CentralProcessor;
@@ -65,5 +66,9 @@ public class OshiOS implements Serializable {
             }
         }
         return this.os;
+    }
+    
+    public void hardInfo(){
+        System.out.println(hal.getClass());
     }
 }

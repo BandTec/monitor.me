@@ -4,8 +4,10 @@ import com.monitorme.jsensor.MonitorCPU;
 import com.monitorme.jsensor.MonitorGPU;
 import com.monitorme.jsensor.MonitorHDISK;
 import com.monitorme.jsensor.MonitorMOBO;
-import com.monitorme.oshi.HWDiskStore;
+import com.monitorme.monitorMain.Monitoracao;
+import com.monitorme.oshi.OshiGPU;
 import com.monitorme.oshi.OshiOS;
+import com.monitorme.oshi.SystemInfoTest;
 import javax.swing.UIManager;
 
 
@@ -16,8 +18,14 @@ public class TelaTeste extends javax.swing.JFrame {
     MonitorHDISK sensorHDISK = new MonitorHDISK();
     MonitorMOBO sensorMOBO = new MonitorMOBO();
     //Oshi
-    OshiOS oshi = new OshiOS();
-    HWDiskStore oshiHD = new HWDiskStore();
+    OshiOS oshiOs = new OshiOS();
+    OshiGPU oshiGpu = new OshiGPU();
+    
+    SystemInfoTest oshi = new SystemInfoTest();
+    
+    //MonitorMain
+    Monitoracao monitorMain = new Monitoracao();
+    
      
     //MainMonitorMe
     
@@ -132,13 +140,10 @@ public class TelaTeste extends javax.swing.JFrame {
                                     .addComponent(lblTesteMobo)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(22, 22, 22)
-                        .addComponent(lblTesteOshiHD)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblTesteOshiOs)
+                            .addComponent(lblTesteOshiHD))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(22, 22, 22)
-                    .addComponent(lblTesteOshiOs)
-                    .addContainerGap(612, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -165,28 +170,18 @@ public class TelaTeste extends javax.swing.JFrame {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6)
-                .addGap(56, 56, 56)
+                .addGap(22, 22, 22)
+                .addComponent(lblTesteOshiOs)
+                .addGap(18, 18, 18)
                 .addComponent(lblTesteOshiHD)
                 .addGap(124, 124, 124))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(341, Short.MAX_VALUE)
-                    .addComponent(lblTesteOshiOs)
-                    .addGap(158, 158, 158)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnTesteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTesteActionPerformed
-//        sensorGPU.showGPU();
-        sensorHDISK.showHDISK();
-//        sensorMOBO.showMOBO();
-        sensorCPU.showCPU();
-        
-        //Oshi Funcionando
-        lblTesteOshiOs.setText(oshi.getOperatingSystem().toString());
-        lblTesteOshiHD.setText(oshiHD.getName());
+        oshiGpu.printGPU();
     }//GEN-LAST:event_btnTesteActionPerformed
 
     public static void main(String args[]) {
