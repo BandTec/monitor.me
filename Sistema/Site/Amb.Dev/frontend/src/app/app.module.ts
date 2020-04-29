@@ -7,14 +7,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { RedDirective } from './directives/red.directive';
 import { SistemaModule } from './sistema/sistema.module';
 import { InstitucionalModule } from './institucional/institucional.module';
-
+import { AuthGuardService } from './auth/auth-guard.service';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    RedDirective,    
+    RedDirective,   
   ],
   imports: [
     AppRoutingModule,
@@ -23,7 +23,7 @@ import { InstitucionalModule } from './institucional/institucional.module';
     BrowserModule,
     BrowserAnimationsModule,
   ],
-  providers: [],
+  providers: [AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
