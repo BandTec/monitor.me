@@ -58,8 +58,8 @@
   align-items: left;
   width: 100%;
   justify-content: left;
-  margin: 16px;
-  padding: 16px;
+  margin: 30px;
+  padding: 20px;
   border-radius: 8px;
   height: 500px;
   background-color: rgb(0, 0, 0);
@@ -68,17 +68,21 @@
 }
 
 .mainInstLeft {
-  width: 40vw;
+  width: 55vw;
+  margin-right: 5vw;
   background-size: cover;
   background-repeat: no-repeat;
   font-size: large;
-  text-justify: initial;
-  font-family: Arial, Helvetica, sans-serif;
+  font-weight: normal;
+  font-style: italic;
+  font-stretch: expanded;
+  line-height: 120%;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .mainInstRight {
-  width: 60vw;
+  width: 55vw;
   background-size: cover;
   background-repeat: no-repeat;  
-  background-image: url('https://cdn.pixabay.com/photo/2016/01/15/12/02/editing-1141505_960_720.jpg');
+  background-image: url(../../assets/img/imgeditor.jpg);
 }
