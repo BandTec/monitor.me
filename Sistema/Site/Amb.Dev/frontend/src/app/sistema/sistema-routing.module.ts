@@ -18,6 +18,11 @@ const sistemaRoutes: Routes = [
         component: SistemaComponent,
         children: [
             {
+                path: 'sistema',
+                pathMatch: 'prefix',
+                redirectTo: 'dashboard'
+            },
+            {
                 path: "dashboard",
                 component: DashboardComponent
             },

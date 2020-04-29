@@ -6,7 +6,11 @@ const moment = require('moment')
 module.exports = {
     async myHardware(req, res){
         // const usuarioLogado = req.headers.authorization;
+        // console.log('teste>',usuarioLogado)
         const {UserId} = req.params;
+        // const UserId = req.headers.authorization;
+
+        console.log(UserId)
         const user = await User.findByPk(UserId, {
             include: { association : 'hardwares'}
         })

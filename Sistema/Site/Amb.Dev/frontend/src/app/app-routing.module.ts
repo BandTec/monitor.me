@@ -1,3 +1,4 @@
+import { DashboardComponent } from './sistema/views/main/dashboard/dashboard.component';
 import { SiteMainComponent } from './institucional/site-main/site-main.component';
 import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -13,6 +14,11 @@ const routes: Routes = [
         component: InstitucionalComponent,
         children: [
             {
+                path: '',
+                pathMatch: 'full',
+                redirectTo: 'home'
+            },
+            {
                 path: "home",
                 component: SiteMainComponent,
             }
@@ -21,7 +27,18 @@ const routes: Routes = [
     // Rotas do Sistema abaixo
     {
         path: "sistema",
-        component: SistemaComponent
+        component: SistemaComponent,
+        children: [
+            {
+                path: '',
+                pathMatch: 'full',
+                redirectTo: 'dashboard'
+            },
+            {
+                path: "dashboard",
+                component: DashboardComponent,
+            }
+        ]
     }
 ];
 
