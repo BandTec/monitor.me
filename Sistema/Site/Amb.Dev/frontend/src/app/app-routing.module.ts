@@ -5,6 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { SistemaComponent } from './sistema/sistema.component';
 import { InstitucionalComponent } from './institucional/institucional.component';
+import { AuthGuardService } from './auth/auth-guard.service';
 
 
 const routes: Routes = [
@@ -27,6 +28,7 @@ const routes: Routes = [
     // Rotas do Sistema abaixo
     {
         path: "sistema",
+        canActivate: [AuthGuardService],
         component: SistemaComponent,
         children: [
             {

@@ -10,8 +10,8 @@ import { Observable } from 'rxjs';
 })
 export class HardwareService {
 
-  baseCadastro = "http://localhost:3333/cadastrar/1/novoHardware"
-  baseConsulta = "http://localhost:3333/1/eventMyHardware/1/AllH"
+  baseCadastro = "http://localhost:3333/sistema/cadastrar/1/novoHardware"
+  baseConsulta = "http://localhost:3333/sistema/1/eventMyHardware/1/AllH"
 
   constructor(private snackBar: MatSnackBar, private http: HttpClient) { }
 
