@@ -51,6 +51,7 @@
   margin: 5px auto;
   background-color: transparent;
   background-color: rgb(200, 200, 200);
+  font-family: 'Courier New', Courier, monospace;
 }
 
 .large-box {
@@ -60,7 +61,7 @@
   justify-content: left;
   margin: 30px;
   padding: 20px;
-  border-radius: 8px;
+  border-radius:15px;
   height: 500px;
   background-color: rgb(0, 0, 0);
   width: 90vw;
@@ -68,21 +69,65 @@
 }
 
 .mainInstLeft {
-  width: 55vw;
+  width: 50vw;
+  height: 100vw;
   margin-right: 5vw;
+  margin-top: 1vw;
   background-size: cover;
   background-repeat: no-repeat;
+  font-size: large;
+  font-weight: lighter;
+  font-style: italic;
+  font-stretch: expanded;
+  line-height: 120%;
+  font-family: Arial, Helvetica, sans-serif;
+  border-radius: 25px;
+  padding: 15px;
+}
+
+.mainInstRight {
+  width: 50vw;
+  border-radius: 15px;
+  background-size: cover;
+  background-repeat: no-repeat;  
+  background-image: url(../../assets/img/imgeditor.jpg);
+  padding: 15px;
+  margin-right: 1vw;
+}
+
+.scndInstRight {
+  width: 50vw;
+  margin-left: 3vw;
+  margin-top: 1vw;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: black;
   font-size: large;
   font-weight: normal;
   font-style: italic;
   font-stretch: expanded;
   line-height: 120%;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-.mainInstRight {
-  width: 55vw;
+.scndInstLeft {
+  width: 50vw;
+  border-radius: 15px;
   background-size: cover;
   background-repeat: no-repeat;  
-  background-image: url(../../assets/img/imgeditor.jpg);
+  background-image: url();
+}
+
+.headerInst {
+  font-style: normal;
+  font-size: xx-large;
+  font-weight: bold;
+  background-color: rgba(123, 31, 163, 0.5);
+  border-radius: 15px;
+  padding: 1vw;
+}
+
+.mat-tab-label {
+  font-family: 'Courier New', Courier, monospace;
+  color: black;
 }
