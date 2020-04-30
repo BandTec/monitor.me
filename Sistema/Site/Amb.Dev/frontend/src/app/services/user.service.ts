@@ -8,7 +8,7 @@ import { EventEmitter } from 'events';
 const ApiRoutes = {
   login: 'sessions',
   signup: 'signup',
-  users: 'users'
+  user: 'user'
 };
 
 @Injectable({
@@ -27,25 +27,27 @@ export class UserService {
     return this.http.post(url, JSON.stringify(user), this.loadHeaders())
   }
 
-  private loadHeaders (token: string = ''){
+  public loadHeaders (token: string = ''){
+    console.log(token)
     let headers = new HttpHeaders({
       'Content-type': 'application/json',
       'Authorization': `${token}`
-      //poderia usar o id do user 
     });
 
     return { headers };
   }
 
+  public getUser(token: string = ''){
+    let url = `${this.UrlApi}/${ApiRoutes.user}`;
+    return this.http.get<Array<any>>(url, this.loadHeaders(token))
+  }
+
   show(msg: string){
     this.snackBar.open(msg, 'X', {
-      duration: 2000,
+      duration: 4000,
       horizontalPosition: "right",
       verticalPosition: "bottom"
     })
-  }
-  createSession(usuario: Usuario ): Observable<Usuario>{
-    return this.http.post<Usuario>(this.baseConsultaLogin, usuario)
   }
 
 }

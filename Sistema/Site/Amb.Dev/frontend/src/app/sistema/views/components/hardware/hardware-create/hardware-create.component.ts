@@ -10,6 +10,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HardwareCreateComponent implements OnInit {
 
+  private token = `bearer ${localStorage.getItem('token')}`;
+
   hardware: Hardware = {
     modelo: '',
     GPU: '',
@@ -24,7 +26,7 @@ export class HardwareCreateComponent implements OnInit {
   }
 
   createHardware(): void{
-    this.hardwareService.createHardware(this.hardware).subscribe(()=>{
+    this.hardwareService.createHardware(this.hardware, this.token).subscribe(()=>{
       this.hardwareService.show('Hardware Inserido com sucesso!')
       this.router.navigate(['sistema/hardware'])
     });

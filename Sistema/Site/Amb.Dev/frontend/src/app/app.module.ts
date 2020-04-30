@@ -1,3 +1,4 @@
+import { TokenInterceptor } from './interceptors/token.interceptos';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -8,13 +9,14 @@ import { RedDirective } from './directives/red.directive';
 import { SistemaModule } from './sistema/sistema.module';
 import { InstitucionalModule } from './institucional/institucional.module';
 import { AuthGuardService } from './auth/auth-guard.service';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    RedDirective,   
+    RedDirective,  
   ],
   imports: [
     AppRoutingModule,
@@ -23,7 +25,7 @@ import { AuthGuardService } from './auth/auth-guard.service';
     BrowserModule,
     BrowserAnimationsModule,
   ],
-  providers: [AuthGuardService],
+  providers: [AuthGuardService, { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

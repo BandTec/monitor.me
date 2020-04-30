@@ -49,7 +49,7 @@ module.exports = {
         const {UserId} = req.params;
         console.log(UserId)
         const consult = await User.findByPk(UserId)
-        console.log(consult)
+        // console.log(consult)
         if(!consult){
             return res.status(400).json({error: 'Usuário não encontrado'})
         }
@@ -92,7 +92,7 @@ module.exports = {
         )
     },
     async atualizaHardware(req,res){
-        console.log('Entrei')
+        
         const {modelo, memoryRam, GPU, hardDisk } = req.body;
         const {id} = req.params;
 
@@ -104,7 +104,7 @@ module.exports = {
             }
         })
 
-        console.log(JSON.stringify(updateById))
+        // console.log(JSON.stringify(updateById))
 
         return res.json(
             updateById

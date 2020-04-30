@@ -11,20 +11,24 @@ import { Component, OnInit } from '@angular/core';
 export class HardwareUpdateComponent implements OnInit {
 
   hardware: Hardware;
+  
+  private token = `bearer ${localStorage.getItem('token')}`;
 
   constructor(private hardwareService: HardwareService,
     private router: Router,
     private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+
+    
     const id = this.route.snapshot.paramMap.get('id')
-    this.hardwareService.readById(id).subscribe(hardware => {
+    this.hardwareService.readById(id, this.token).subscribe(hardware => {
       this.hardware = hardware;
     })
   }
 
   updateHardware(): void {
-    this.hardwareService.update(this.hardware).subscribe(() => {
+    this.hardwareService.update(this.hardware, this.token).subscribe(() => {
       this.hardwareService.show('Produto Atualizado!')
       this.router.navigate(['sistema/hardware'])
     })

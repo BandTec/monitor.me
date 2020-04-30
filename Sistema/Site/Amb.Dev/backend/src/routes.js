@@ -13,6 +13,6 @@ routes.post('/cadastrar', CadastrarController.cadastrar);//Cadastra Novo usuario
 routes.post('/sessions', SessionController.createLogin);
 
 //Consulta Dev
-routes.post('/all', SessionController.authenticate);
+routes.get('/user', SessionController.authenticate);
 
 module.exports = routes;

@@ -9,13 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HardwareReadComponent implements OnInit {
 
+  
+  private token = `bearer ${localStorage.getItem('token')}`;
+
   hardwares: Hardware[]
   displayedColumns = ['modelo', 'memoryRam', 'GPU', "hardDisk", "action"];
 
   constructor(private hardwareService: HardwareService) { }
 
   ngOnInit(): void {
-    this.hardwareService.readHardware().subscribe(hardwares =>{
+    this.hardwareService.readHardware(this.token).subscribe(hardwares =>{
       this.hardwares = hardwares
       console.log(hardwares)
     })
