@@ -6,7 +6,7 @@
   min-height: 80%;
   margin: 20px auto;
   padding: 16px;
-  border-radius: 8px;
+  border-radius: 15px;
 }
 
 .mainLoginLeft {
@@ -14,6 +14,7 @@
   background-image: url(../../../assets/img/conect.jpg);
   background-size: cover;
   background-repeat: no-repeat;
+  border-radius: 15px;
 }
 
 .mainLoginRight {
@@ -22,6 +23,7 @@
   width: 25%;
   background-color: rgba(14, 14, 14, 0.5);
   min-height: 80%;
+  border-radius: 15px;
 }
 
 .mat-card-title {
@@ -42,13 +44,14 @@
 
 .field {
   width: 100%;
-  margin-top: 20px;
+  margin-top: 25px;
 }
 
 .btnLogin {
-  margin-top: 150px;
+  margin-top: 30px;
   width: 100%;
   transition: 0.4s;
+  margin-bottom: 75px;
 }
 
 .btnLogin:hover {
@@ -69,4 +72,16 @@
     text-decoration: none;
     font-size: 0.8rem;
     color: white;
+}
+
+.h-middle {
+  width: 70%;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  font-style: normal;
+  font-weight: 500;
+  background-color: rgba(55, 48, 61);
+  border-radius: 5px;
+  padding: 0.5vw;
+  text-align: center;
 }
