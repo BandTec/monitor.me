@@ -1,14 +1,14 @@
 const express = require("express");
 const app = express();
-const TelegramBot = require("node-telegram-bot-api");
-const TOKEN = "1127314189:AAHcH7b9CmwknOeiCJLXN3kayd_-77LLFj4";
-const bot = new TelegramBot(TOKEN, {polling: true});
+const routes = require("./routes/routes");
+const bodyParser = require("body-parser");
+const cors = require("cors");
 
-//bot.sendMessage(957999937,"kjdkenfj");
-
-bot.on('message',(msg)=> {
-     console.log(msg);
-});
+app.use(cors());
+app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.json());
+app.use(bodyParser);
+app.use(routes);
 
 app.listen(8080,()=>{
     console.log("servidor rodando");
