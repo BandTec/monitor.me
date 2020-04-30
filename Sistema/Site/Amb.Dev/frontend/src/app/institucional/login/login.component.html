@@ -4,8 +4,9 @@
   </mat-card>
   <mat-card class="mainLoginRight mat-elevation-z8">
 
-    <mat-card-title class="h-middle">Sentimos sua falta...</mat-card-title>
-    <mat-card-subtitle class="h-middle">Login</mat-card-subtitle>
+    <span>Sentimos sua falta...</span>
+    <br><br>
+    <div class="h-middle">INICIE SUA SESSÃO</div>
     <mat-card-content>
       <form method="post" #form="ngForm" novalidate (ngSubmit)="signin(form)">
         <mat-form-field class="field">
@@ -14,7 +15,7 @@
         <mat-form-field class="field">
           <input matInput type="password" placeholder="Senha" [(ngModel)]="user.password" name="password">
         </mat-form-field>
-        <button mat-raised-button color="primary" class="btnLogin" type="submit"> (click)="createSession()" Logar</button>
+        <button mat-raised-button color="primary" class="btnLogin" type="submit">ENTRAR</button>
       </form>
     </mat-card-content>
 
