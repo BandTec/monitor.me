@@ -11,8 +11,10 @@ import { Observable } from 'rxjs';
 })
 export class HardwareService {
 
-  baseCadastro = "http://localhost:3333/sistema/cadastrar/1/novoHardware"
-  baseConsulta = "http://localhost:3333/sistema/1/eventMyHardware/1/AllH"
+  private UserId = `${localStorage.getItem('id')}`;
+
+  baseCadastro = `http://localhost:3333/sistema/cadastrar/${this.UserId}/novoHardware`
+  baseConsulta = `http://localhost:3333/sistema/${this.UserId}/eventMyHardware`
 
   urlApiSistema = "http://localhost:3333/sistema"
 
@@ -27,7 +29,6 @@ export class HardwareService {
   }
 
   public loadHeaders (token: string = ''){
-    console.log(token)
     let headers = new HttpHeaders({
       'Content-type': 'application/json',
       'Authorization': `${token}`
@@ -41,6 +42,7 @@ export class HardwareService {
   }
 
   readHardware(token: string = ''): Observable<Hardware[]>{
+    console.log('>>>>>>>>',this.baseConsulta);
     return this.http.get<Hardware[]>(this.baseConsulta, this.loadHeaders(token))
   }
 

@@ -28,7 +28,7 @@ export class UserService {
   }
 
   public loadHeaders (token: string = ''){
-    console.log(token)
+    // console.log(token)
     let headers = new HttpHeaders({
       'Content-type': 'application/json',
       'Authorization': `${token}`

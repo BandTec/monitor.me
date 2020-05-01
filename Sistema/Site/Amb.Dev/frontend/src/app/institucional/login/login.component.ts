@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { UserService } from '../../services/user.service';
+import { error } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-login',
@@ -14,16 +15,10 @@ export class LoginComponent implements OnInit {
 
   public user: any = {};
 
-  // usuario : Usuario = {
-  //   email: '',
-  //   password: ''
-  // };
-
   constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit(): void {
     this.user = {
-      name: '',
       email: '',
       password: ''
     }
@@ -33,22 +28,29 @@ export class LoginComponent implements OnInit {
 
     try {
       console.log(`${JSON.stringify(form.value)}`)
-
-
-
       const response = await this.userService.login(this.user).toPromise();
-      console.log(response)
 
       if (response['token']) {
         const token = response['token'];
+        const id = response['userAtivo']['id'];
+        const contato = response['userAtivo']['whatsapp']
+        const name = response['userAtivo']['name']
+        const email = response['userAtivo']['email']
+
+        // console.log('><>>>',response)
 
         localStorage.setItem('token', token);
-
-        this.userService.show('token: ' + token)
-        // console.log('token: ' + token)
+        localStorage.setItem('id', id);
+        localStorage.setItem('name', name);
+        localStorage.setItem('contato', contato);
+        localStorage.setItem('contato', email);
+        
 
         this.userService.show(`Bem vindo, Logado com sucesso!`)
+
         this.router.navigate(['/sistema/dashboard'])
+
+        this.userService.show('Bem vindo ' + name)
 
         return
       }
@@ -58,13 +60,4 @@ export class LoginComponent implements OnInit {
 
     return this.userService.show(`Login Inválido!`);
   }
-
-  // createSession(): void{
-  //   console.log(this.usuario)
-  //   this.userService.createSession(this.usuario).subscribe(()=>{
-  //     this.userService.show(`Bem vindo ${this.usuario}, Logado com sucesso!`)
-  //     this.router.navigate(['/dashboard'])
-  //   })
-  // }
-
 }
