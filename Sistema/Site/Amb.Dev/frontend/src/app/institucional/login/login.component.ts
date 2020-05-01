@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
 
         this.router.navigate(['/sistema/dashboard'])
 
-        this.userService.show('Bem vindo ' + name)
+        this.userService.show('Bem vindo, é bom te ter aqui... ' + name)
 
         return
       }

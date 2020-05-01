@@ -61,6 +61,9 @@ import { NgMatSearchBarModule } from 'ng-mat-search-bar';
 import {InstiRoutingModule} from './institucional.routing.module';
 import { FooterMainComponent } from './footer-main/footer-main.component';
 import { SiteMainComponent } from './site-main/site-main.component';
+import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
+
+import { faGithub, faFacebook } from '@fortawesome/free-brands-svg-icons';
 
 @NgModule({
     declarations: [
@@ -132,9 +135,12 @@ import { SiteMainComponent } from './site-main/site-main.component';
         FormsModule,
         MatInputModule,
         LayoutModule,
-        MatGridListModule
+        MatGridListModule,
+        FontAwesomeModule
     ],
     exports: [],
     providers: [],
 })
-export class InstitucionalModule { }
+export class InstitucionalModule { 
+    constructor(private library: FaIconLibrary){library.addIcons(faGithub, faFacebook)}
+}

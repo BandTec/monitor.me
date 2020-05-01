@@ -30,8 +30,17 @@
     </ul>
   </mat-toolbar>
 </mat-toolbar>
-<mat-toolbar style="justify-content: center;" color="raised">
-  <span>My Application</span>
+<mat-toolbar class="subnav v-middle" color="raised">
+  <a style="margin-right: 5px; font-size: smaller; font-weight: 1rem;" href="https://github.com/BandTec/monitor.me">
+    <fa-icon [icon]="['fab', 'github']" style="margin-right: 2px;"></fa-icon> Join us on Github
+  </a>
+  <ul>
+    <li>
+      <a href="http://dontpad.com/monitorme" style="margin-right: 5px; font-size: smaller; font-weight: 1rem;">
+        <fa-icon [icon]="['fab', 'facebook']" style="margin-right: 2px;"></fa-icon> facebook
+      </a>
+    </li>
+  </ul>
 </mat-toolbar>
 
 <mat-card-content class="mainContent">
@@ -39,8 +48,8 @@
 </mat-card-content>
 
 <mat-card-content class="mainContent">
-  <mat-tab-group dynamicHeight>
-    <mat-tab label="Conheça a MonitorMe">
+  <mat-tab-group dynamicHeight class="tabMain">
+    <mat-tab label="Conheça a MonitorMe" color="primary">
       <div class="large-box mat-elevation-z4">
         <mat-card-content class="mainInstLeft">
           <span class="headerInst">MonitorMe</span>
@@ -51,14 +60,14 @@
           <p>Maior performance e segurança em sua rotina de trabalho!</p>
         </mat-card-content>
         <mat-card class="mainInstRight">
-          
+
         </mat-card>
       </div>
     </mat-tab>
     <mat-tab label="Como Usar?">
       <div class="large-box mat-elevation-z4">
         <mat-card-content class="scndInstLeft">
-          
+
         </mat-card-content>
         <mat-card class="scndInstRight">
           <span class="headerInst">Join Us</span>
@@ -68,6 +77,90 @@
           <p>Faça o download do MonitorMe em seu computador</p><br><br>
           <p>Realize o Login com o usuário e senha cadastrados</p>
         </mat-card>
+      </div>
+    </mat-tab>
+    <mat-tab label="O Time!">
+      <div class="large-box v-middle" style="background-color: rgba(0, 0, 0, 0.301);">
+        <div class="mainDevs">
+          <mat-card class="profileCard">
+            <mat-card-header>
+              <mat-card-title>Pessoa x</mat-card-title>
+              <mat-card-subtitle>Developer</mat-card-subtitle>
+            </mat-card-header>
+            <img mat-card-image src="../../assets/img/devP.png" alt="Profissional">
+            <mat-card-content class="profileData">
+              <a style="margin-right: 5px; font-size: medium; font-weight: 1rem;"
+                href="https://github.com/BandTec/monitor.me">
+                <fa-icon [icon]="['fab', 'github']" size="lg" style="margin-right: 2px;"></fa-icon>
+                Pessoa x
+              </a>
+            </mat-card-content>
+          </mat-card>
+
+          <mat-card class="profileCard">
+            <mat-card-header>
+              <mat-card-title>Pessoa x</mat-card-title>
+              <mat-card-subtitle>Developer</mat-card-subtitle>
+            </mat-card-header>
+            <img mat-card-image src="../../assets/img/devP.png" alt="Profissional">
+            <mat-card-content class="profileData">
+              <a style="margin-right: 5px; font-size: medium; font-weight: 1rem;"
+                href="https://github.com/BandTec/monitor.me">
+                <fa-icon [icon]="['fab', 'github']" size="lg" style="margin-right: 2px;"></fa-icon>
+                Pessoa x
+              </a>
+            </mat-card-content>
+          </mat-card>
+
+          <mat-card class="profileCard">
+            <mat-card-header>
+              <mat-card-title>Pessoa x</mat-card-title>
+              <mat-card-subtitle>Developer</mat-card-subtitle>
+            </mat-card-header>
+            <img mat-card-image src="../../assets/img/devP.png" alt="Profissional">
+            <mat-card-content class="profileData">
+              <a style="margin-right: 5px; font-size: medium; font-weight: 1rem;"
+                href="https://github.com/BandTec/monitor.me">
+                <fa-icon [icon]="['fab', 'github']" size="lg" style="margin-right: 2px;"></fa-icon>
+                Pessoa x
+              </a>
+            </mat-card-content>
+          </mat-card>
+
+          <mat-card class="profileCard">
+            <mat-card-header>
+              <mat-card-title>Pessoa x</mat-card-title>
+              <mat-card-subtitle>Developer</mat-card-subtitle>
+            </mat-card-header>
+            <img mat-card-image src="../../assets/img/devP.png" alt="Profissional">
+            <mat-card-content class="profileData">
+              <a style="margin-right: 5px; font-size: medium; font-weight: 1rem;"
+                href="https://github.com/BandTec/monitor.me">
+                <fa-icon [icon]="['fab', 'github']" size="lg" style="margin-right: 2px;"></fa-icon>
+                Pessoa x
+              </a>
+            </mat-card-content>
+          </mat-card>
+
+          <mat-card class="profileCard">
+            <mat-card-header>
+              <mat-card-title>Pessoa x</mat-card-title>
+              <mat-card-subtitle>Developer</mat-card-subtitle>
+            </mat-card-header>
+            <img mat-card-image src="../../assets/img/devP.png" alt="Profissional">
+            <mat-card-content class="profileData">
+              <a style="margin-right: 5px; font-size: medium; font-weight: 1rem;"
+                href="https://github.com/BandTec/monitor.me">
+                <fa-icon [icon]="['fab', 'github']" size="lg" style="margin-right: 2px;"></fa-icon>
+                Pessoa x
+              </a>
+            </mat-card-content>
+          </mat-card>
+
+        </div>
+        <mat-card-content class="scndInstLeft">
+
+        </mat-card-content>
       </div>
     </mat-tab>
   </mat-tab-group>

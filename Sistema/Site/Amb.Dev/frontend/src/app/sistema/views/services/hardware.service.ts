@@ -42,7 +42,6 @@ export class HardwareService {
   }
 
   readHardware(token: string = ''): Observable<Hardware[]>{
-    console.log('>>>>>>>>',this.baseConsulta);
     return this.http.get<Hardware[]>(this.baseConsulta, this.loadHeaders(token))
   }
 

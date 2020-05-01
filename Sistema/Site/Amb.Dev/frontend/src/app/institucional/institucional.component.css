@@ -39,18 +39,25 @@
   max-height: 225px;
   max-width: 355px;
 }
+.subnav{
+  justify-content: center;
+  height: 30px;
+  border-bottom: 1px solid darkmagenta;
+  background-color: rgba(113, 32, 116, 0.5);
+}
+ul, a{
+  text-decoration: none;
+  list-style: none;
+  color: white;
+}
 
 .mainContent {
   display: flex;
   justify-content: center;
-  /* background-image: url(../../assets/img/stressed.jpg); */
-  background-size: cover;
-  background-repeat: no-repeat;
   min-width: 300px;
   min-height: 40vw;
   margin: 5px auto;
-  background-color: transparent;
-  background-color: rgb(200, 200, 200);
+  background-color: rgba(255, 255, 255, 0);
   font-family: 'Courier New', Courier, monospace;
 }
 
@@ -67,7 +74,29 @@
   width: 90vw;
   color: white;
 }
-
+.mainDevs{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+}
+.profileCard{
+  justify-content: flex-end;
+  align-items: center;
+  margin-right: 30px;
+  max-width: 400px;
+  height: 50%;
+  background-color: rgba(139, 0, 139, 0.466);
+}
+.profileCard img{
+  height: 150px;
+  width: 250px;
+  background-size: cover;
+}
+.profileData{
+  text-align: center;
+}
 .mainInstLeft {
   width: 50vw;
   height: 100vw;
@@ -94,7 +123,10 @@
   padding: 15px;
   margin-right: 1vw;
 }
-
+.tabMain{
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 15px;
+}
 .scndInstRight {
   width: 50vw;
   margin-left: 3vw;
@@ -109,6 +141,7 @@
   line-height: 120%;
   font-family: Arial, Helvetica, sans-serif;
 }
+
 
 .scndInstLeft {
   width: 50vw;

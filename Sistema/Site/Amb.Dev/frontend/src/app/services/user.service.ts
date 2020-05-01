@@ -7,7 +7,7 @@ import { EventEmitter } from 'events';
 
 const ApiRoutes = {
   login: 'sessions',
-  signup: 'signup',
+  cadastrar: 'cadastrar',
   user: 'user'
 };
 
@@ -21,9 +21,13 @@ export class UserService {
 
   constructor(private snackBar: MatSnackBar, private http: HttpClient) { }
 
+  public cadastrar(user: any){
+    let url = `${this.UrlApi}/${ApiRoutes.cadastrar}`;
+    return this.http.post(url, JSON.stringify(user), this.loadHeaders())
+  }
+
   public login(user : any){
     let url = `${this.UrlApi}/${ApiRoutes.login}`;
-
     return this.http.post(url, JSON.stringify(user), this.loadHeaders())
   }
 
