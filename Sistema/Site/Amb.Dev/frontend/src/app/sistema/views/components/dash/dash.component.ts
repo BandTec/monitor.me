@@ -1,19 +1,41 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
+import { Chart } from 'chart.js';
 
 @Component({
   selector: 'app-dash',
   templateUrl: './dash.component.html',
   styleUrls: ['./dash.component.css']
 })
-export class DashComponent {
+export class DashComponent implements OnInit {
+
+  @ViewChild("dashGPU", { static: true }) elemento: ElementRef;
+
+  ngOnInit() {
+    new Chart(this.elemento.nativeElement, {
+      type: "line",
+      data: {
+        labels: ["11-10-2019", "11-10-2019", "11-10-2019", "11-10-2019", "11-10-2019", "11-10-2019"],
+        datasets: [
+          {
+            label: 'Alerta em Graus ºC',
+            data: [12, 34, 55, 66, 13, 100],
+            borderColor: '#7b1fa2',
+            fill: false
+          }
+        ],
+      }
+    });
+  }
+
+
   /** Based on the screen size, switch from standard to one column per row */
   cards = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
     map(({ matches }) => {
       if (matches) {
         return [
-          { title: 'Card 1', cols: 1, rows: 1 },
+          { title: 'Sua GPU', cols: 1, rows: 1 },
           { title: 'Card 2', cols: 1, rows: 1 },
           { title: 'Card 3', cols: 1, rows: 1 },
           { title: 'Card 4', cols: 1, rows: 1 }
@@ -21,7 +43,7 @@ export class DashComponent {
       }
 
       return [
-        { title: 'Card 1', cols: 2, rows: 1 },
+        { title: 'Sua GPU', cols: 2, rows: 1 },
         { title: 'Card 2', cols: 1, rows: 1 },
         { title: 'Card 3', cols: 1, rows: 2 },
         { title: 'Card 4', cols: 1, rows: 1 }
@@ -29,5 +51,5 @@ export class DashComponent {
     })
   );
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  constructor(private breakpointObserver: BreakpointObserver) { }
 }
