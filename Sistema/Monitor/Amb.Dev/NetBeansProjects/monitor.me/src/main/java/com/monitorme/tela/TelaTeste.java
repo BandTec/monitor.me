@@ -181,7 +181,9 @@ public class TelaTeste extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnTesteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTesteActionPerformed
-        oshiGpu.printGPU();
+//        oshiGpu.printGPU();
+        sensorGPU.showGPU();
+        System.out.println(sensorGPU.toString());
     }//GEN-LAST:event_btnTesteActionPerformed
 
     public static void main(String args[]) {
