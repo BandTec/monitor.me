@@ -20,6 +20,8 @@ export class CadastroComponent implements OnInit {
       whatsapp: '',
       password: '',
     }
+
+
   }
 
   async signup(form) {
