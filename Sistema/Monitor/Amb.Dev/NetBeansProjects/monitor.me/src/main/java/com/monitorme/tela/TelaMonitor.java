@@ -171,7 +171,7 @@ public class TelaMonitor extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3)
-                .addGap(132, 132, 132)
+                .addGap(128, 128, 128)
                 .addComponent(jLabel2)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -185,7 +185,7 @@ public class TelaMonitor extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jLabel2)
-                .addGap(25, 25, 25))
+                .addGap(26, 26, 26))
         );
 
         lblTeste.setText("Teste");

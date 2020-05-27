@@ -85,7 +85,7 @@ public class TelaDetalhamento extends javax.swing.JFrame {
                 "Nome", "PID", "Status", "Descrição"
             }
         ));
-        jTable1.setGridColor(new java.awt.Color(0, 0, 0));
+        jTable1.setGridColor(new java.awt.Color(153, 153, 153));
         jTable1.setRowHeight(30);
         jTable1.setShowGrid(true);
         jScrollPane1.setViewportView(jTable1);
