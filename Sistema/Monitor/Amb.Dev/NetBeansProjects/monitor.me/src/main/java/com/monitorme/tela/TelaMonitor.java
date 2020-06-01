@@ -1,5 +1,6 @@
 package com.monitorme.tela;
 
+import com.monitorme.chart.ChartTeste;
 import com.monitorme.monitorMain.GeraAleatorio;
 import com.monitorme.monitorMain.Monitoracao;
 import java.util.Random;
@@ -365,6 +366,9 @@ public class TelaMonitor extends javax.swing.JFrame {
         lblTextProcesso.setText(String.format("Processo:"));
         lblTitulo.setText(String.format("CPU"));
         // TODO add your handling code here:
+        
+        ChartTeste graf1 = new ChartTeste();
+        painelCentral.add(graf1);
     }//GEN-LAST:event_btCPUActionPerformed
 
     private void btnMemoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMemoActionPerformed
