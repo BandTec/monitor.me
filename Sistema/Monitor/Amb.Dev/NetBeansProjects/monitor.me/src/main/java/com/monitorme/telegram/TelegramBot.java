@@ -13,7 +13,7 @@ public class TelegramBot {
     private final String token;
 
     public TelegramBot(String token) {
-        this.token = "1127314189:AAHcH7b9CmwknOeiCJLXN3kayd_-77LLFj4";
+        this.token = token;
 
     }
 
@@ -29,4 +29,12 @@ public class TelegramBot {
                 .field("offset", offset)
                 .asJson();
     }
+  
+    
+    
+  //   public void run() throws UnirestException {
+  //     int last_update_id = 0; 
+  //     HttpResponse response;}
+    
+    
 }
