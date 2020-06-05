@@ -29,12 +29,40 @@ public class TelegramBot {
                 .field("offset", offset)
                 .asJson();
     }
-  
-    
-    
-  //   public void run() throws UnirestException {
-  //     int last_update_id = 0; 
-  //     HttpResponse response;}
-    
-    
-}
+
+//    public void run() throws UnirestException {
+//        int last_update_id = 0;
+//        HttpResponse response;
+//        while (true) {
+//            response = getUpdates(last_update_id++);
+//            if (response.getStatus() == 200) {
+//               JSONArray responses = response.getBody().getObject().getJSONArray("result");
+//                if (responses.isNull(0)) {
+//                    continue;
+//                } else {
+//                    last_update_id = responses
+//                            .getJSONObject(responses.length() - 1)
+//                            .getInt("update_id") + 1;
+//                }
+//
+//                for (int i = 0; i < responses.length(); i++) {
+//                    JSONObject message = responses
+//                            .getJSONObject(i)
+//                            .getJSONObject("message");
+//                    int chat_id = message
+//                            .getJSONObject("chat")
+//                            .getInt("id");
+//                    String usuario = message
+//                            .getJSONObject("chat")
+//                            .getString("username");
+//                    String texto = message
+//                            .getString("text");
+//                    String textoPadrao = "Olá! Bem vindo ao MonitorMe.";
+//
+//                    sendMessage(chat_id, textoPadrao);
+//                }
+//            }
+//        }
+
+    }
+
