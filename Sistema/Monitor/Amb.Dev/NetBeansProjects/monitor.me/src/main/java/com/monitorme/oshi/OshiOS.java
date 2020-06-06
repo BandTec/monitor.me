@@ -19,6 +19,7 @@ public class OshiOS implements Serializable {
     HardwareAbstractionLayer hal = si.getHardware();
     CentralProcessor cpu = hal.getProcessor();
     
+    
     private static final PlatformEnum currentPlatformEnum;
     private OperatingSystem os = null;
     

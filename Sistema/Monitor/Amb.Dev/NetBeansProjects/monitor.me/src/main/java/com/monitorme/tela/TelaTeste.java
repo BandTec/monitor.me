@@ -13,7 +13,7 @@ public class TelaTeste extends javax.swing.JFrame {
         initComponents();
 
         lblTempMediaGpu.setText(dGpu.getMediaTemperatura().toString());
-        
+        System.out.println(dGpu.toString());
         long TEMPO = (5000 * 1);
         
         Timer timer = null;
@@ -24,7 +24,7 @@ public class TelaTeste extends javax.swing.JFrame {
             TimerTask tarefa = new TimerTask() {
                 public void run() {
                     // o código que precisa ser repetido deve ser inserido aqui
-                    System.out.println(dGpu.getMediaTemperatura());
+                    lblTempMediaGpu.setText(dGpu.getMediaTemperatura().toString());
                 }
             };
             timer.scheduleAtFixedRate(tarefa, TEMPO, TEMPO);
