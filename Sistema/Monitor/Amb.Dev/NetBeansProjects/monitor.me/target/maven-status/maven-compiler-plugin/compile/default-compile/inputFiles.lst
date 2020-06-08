@@ -1,3 +1,23 @@
+<<<<<<< HEAD
+C:\Users\bruno\Desktop\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\jsensor\MonitorGPU.java
+C:\Users\bruno\Desktop\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\oshi\OshiGPU.java
+C:\Users\bruno\Desktop\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\tela\TelaDetalhamento.java
+C:\Users\bruno\Desktop\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\oshi\OshiOS.java
+C:\Users\bruno\Desktop\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\banco\ConexaoBanco.java
+C:\Users\bruno\Desktop\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\jsensor\MonitorHDISK.java
+C:\Users\bruno\Desktop\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\telegram\TelegramBot.java
+C:\Users\bruno\Desktop\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\tela\TelaTeste.java
+C:\Users\bruno\Desktop\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\monitorMain\Monitoracao.java
+C:\Users\bruno\Desktop\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\jsensor\MonitorMOBO.java
+C:\Users\bruno\Desktop\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\tela\TelaLogin.java
+C:\Users\bruno\Desktop\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\monitorMain\GeraAleatorio.java
+C:\Users\bruno\Desktop\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\telegram\AppTelegram.java
+C:\Users\bruno\Desktop\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\jsensor\MonitorCPU.java
+C:\Users\bruno\Desktop\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\banco\LeituraDados.java
+C:\Users\bruno\Desktop\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\chart\ChartTeste.java
+C:\Users\bruno\Desktop\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\oshi\SystemInfoTest.java
+C:\Users\bruno\Desktop\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\tela\TelaMonitor.java
+=======
 C:\Users\gabri\OneDrive\Documentos\DeV\ADS2BTEC\Projeto2Sem\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\jsensor\MonitorCPU.java
 C:\Users\gabri\OneDrive\Documentos\DeV\ADS2BTEC\Projeto2Sem\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\oshi\OshiOS.java
 C:\Users\gabri\OneDrive\Documentos\DeV\ADS2BTEC\Projeto2Sem\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\telegram\TelegramBot.java
@@ -16,3 +36,4 @@ C:\Users\gabri\OneDrive\Documentos\DeV\ADS2BTEC\Projeto2Sem\monitor.me\Sistema\M
 C:\Users\gabri\OneDrive\Documentos\DeV\ADS2BTEC\Projeto2Sem\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\monitorMain\GeraAleatorio.java
 C:\Users\gabri\OneDrive\Documentos\DeV\ADS2BTEC\Projeto2Sem\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\monitorMain\Monitoracao.java
 C:\Users\gabri\OneDrive\Documentos\DeV\ADS2BTEC\Projeto2Sem\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\tela\TelaLogin.java
+>>>>>>> a13a3b030d23730b30cf4a1b98ccb2a66be339cb

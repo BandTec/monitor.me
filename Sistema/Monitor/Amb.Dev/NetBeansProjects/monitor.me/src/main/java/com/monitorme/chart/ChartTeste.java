@@ -10,6 +10,7 @@ package com.monitorme.chart;
  * @author bruno
  */
 import java.awt.BorderLayout;
+import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
@@ -32,7 +33,7 @@ public class ChartTeste extends javax.swing.JPanel {
         JPanel chartPanel = createChartPanel();
         add(chartPanel, BorderLayout.CENTER);
  
-        setSize(351, 295);
+        setSize(350, 280);
         
     }
  
@@ -51,24 +52,17 @@ public class ChartTeste extends javax.swing.JPanel {
     }
  
     public XYDataset createDataset() {
+        
+        XYSeries dados = new XYSeries("");
         XYSeriesCollection dataset = new XYSeriesCollection();
-        XYSeries series3 = new XYSeries("Object 1");
-
-        series3.add(1, 30.0);
-        series3.add(2, 40.4);
-        series3.add(3, 50.6);
-        series3.add(4, 62);
-        series3.add(5, 75.4);
         
-        XYSeries series2 = new XYSeries("Object 2");
-
-        series2.add(6, 30.0);
-        series2.add(7, 40.4);
-        series2.add(8, 50.6);
-        series2.add(9, 62);
+        dados.add(1, 30.0);
+        dados.add(2, 40.4);
+        dados.add(3, 50.6);
+        dados.add(4, 62);
+        dados.add(5, 75.4);
         
-        dataset.addSeries(series2);
-        dataset.addSeries(series3);
+        dataset.addSeries(dados);
 
         return dataset;
     }
