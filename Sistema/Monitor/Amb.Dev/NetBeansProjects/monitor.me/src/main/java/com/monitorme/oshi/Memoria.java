@@ -8,6 +8,8 @@ import oshi.hardware.GlobalMemory;
 import oshi.hardware.HWDiskStore;
 import oshi.hardware.HWPartition;
 import oshi.hardware.HardwareAbstractionLayer;
+import oshi.hardware.PhysicalMemory;
+import oshi.hardware.Sensors;
 
 public class Memoria {
 
@@ -15,7 +17,9 @@ public class Memoria {
     HardwareAbstractionLayer hal = si.getHardware();
     CentralProcessor cpu = hal.getProcessor();
 
-    private GlobalMemory ramDisponivel;
+    
+    private Double porcentagemMemoria;
+    private List<String> ramDisponivel = new ArrayList<>();
     private List<String> discosRigidos = new ArrayList<>();
     private List<String> dadosColetados = new ArrayList<>();
     //Atributos
@@ -31,11 +35,38 @@ public class Memoria {
     }
 
     //Metodos
-    private GlobalMemory coletaMemoriaRam() {
-        this.ramDisponivel = hal.getMemory();
+    
+    //Memoria Ram
+    public List<String> coletaMemoriaRam() {
+//        long ram = (hal.getMemory().getAvailable() / 1024)/ 1024;
+        
+        ramDisponivel.add("Avaiable: " + (hal.getMemory().getAvailable() / 1024)/ 1024);
+        ramDisponivel.add("Page Size: " + hal.getMemory().getPageSize());
+//        ramDisponivel.add("Memory Phisical: " + hal.getMemory().getPhysicalMemory());
+        
+        PhysicalMemory[] pmArray = hal.getMemory().getPhysicalMemory();
+        if (pmArray.length > 0) {
+            ramDisponivel.add("\n Physical Memory: ");
+            for (PhysicalMemory pm : pmArray) {
+                ramDisponivel.add("Bank Label: " + pm.getBankLabel());
+                ramDisponivel.add("Manufacturer : " + pm.getManufacturer());
+                ramDisponivel.add("Memory Type: " + pm.getMemoryType());
+                ramDisponivel.add("Capacidade: " + ((pm.getCapacity()/1024)/1024));
+                ramDisponivel.add("\n Velocidade de Clock: " + ((pm.getClockSpeed()/1024)/1024));
+            }
+        }
+        ramDisponivel.add("Memoria Virtual: " + hal.getMemory().getVirtualMemory());
+        ramDisponivel.add("Memoria Total: " + (hal.getMemory().getTotal()/ 1024)/ 1024);
         return ramDisponivel;
     }
-
+    
+    public Double memoriaRamPorcentagem(){
+        long usadoMem = hal.getMemory().getTotal() - hal.getMemory().getAvailable();
+        System.out.println(this.porcentagemMemoria = (100d * usadoMem) / hal.getMemory().getTotal());
+        return this.porcentagemMemoria = (100d * usadoMem) / hal.getMemory().getTotal();
+    }
+    
+    //Disco Rigido
     public List<String> coletaDiscosRigidos(HWDiskStore[] diskStores) {
         for (HWDiskStore disk : diskStores) {
             discosRigidos.add("\n\n Modelo: " + disk.getModel());
@@ -44,7 +75,7 @@ public class Memoria {
             
             HWPartition[] partitions = disk.getPartitions();
             for (HWPartition part : partitions) {
-                discosRigidos.add("\n\n | Identificacao " + part.getIdentification());
+                discosRigidos.add("\n | Identificacao " + part.getIdentification());
                 discosRigidos.add("\n | MountPoint: " + part.getMountPoint());
                 discosRigidos.add("\n | Name: " + part.getName());
                 discosRigidos.add("\n | Tipo: " + part.getType());
@@ -54,8 +85,12 @@ public class Memoria {
         return discosRigidos;
     }
 
+    public String teste(Sensors sensors){
+        return "Sensors: " + sensors.toString();
+    }
+    
     //Getters & Setters
-    public GlobalMemory getRamDisponivel() {
+    public List<String> getRamDisponivel() {
         return ramDisponivel;
     }
 
