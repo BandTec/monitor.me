@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 import org.json.JSONException;
 import org.json.JSONObject;
 import oshi.SystemInfo;
+import oshi.hardware.GraphicsCard;
 import oshi.hardware.HardwareAbstractionLayer;
 import oshi.software.os.OperatingSystem;
 
@@ -25,19 +26,64 @@ public class DadosGpu {
     SystemInfo si = new SystemInfo();
     HardwareAbstractionLayer hal = si.getHardware();
     OperatingSystem os = si.getOperatingSystem();
-    List<String> oshi = new ArrayList<>();
+    List<String> gpuOshi = new ArrayList<>();
 
     private Double fanRPM, memoryGpu, memoryControllerGpu, videoEngineGpu, coreGpu, media = 0.0;
     private String nomeGpu;
 
     private List<Double> temperaturaGpu = new ArrayList<>();
     private List<Double> loadGpu = new ArrayList<>();
+    List<String> gpuJSensor = new ArrayList<>();
 
     //constructor
     public DadosGpu() {
     }
 
     //Metodos
+    //Tentando capturar GPU com oshi
+    public List<String> capturaGpuOshi(GraphicsCard[] cards) {
+        gpuOshi.add("Graphics Cards:");
+        if (cards.length == 0) {
+            gpuOshi.add(" None detected.");
+        } else {
+            for (GraphicsCard card : cards) {
+                gpuOshi.add("\nName: " + card.getName());
+                gpuOshi.add("\nId: " + card.getDeviceId());
+                gpuOshi.add("\nFabricante: " + card.getVendor());
+                gpuOshi.add("\nInformações de fábricação: " + card.getVersionInfo());
+                gpuOshi.add("\nVRam total: " + ((card.getVRam() / 1024) / 1024));
+            }
+        }
+
+        return gpuOshi;
+    }
+
+    public List<String> capturaGpuJsensor() {
+        for (final Gpu g : gpus) {
+            nomeGpu = g.name;
+            List<Load> loads = g.sensors.loads;
+            for (final Load loadGpu : loads) {
+                System.out.println("\n " +loadGpu.name + ": " + loadGpu.value);
+                gpuJSensor.add(loadGpu.name + ": " + loadGpu.value);
+            }
+
+            List<Fan> fans = g.sensors.fans;
+            for (final Fan fansGpu : fans) {
+                System.out.println(fansGpu.name + ": " + fansGpu.value);
+                gpuJSensor.add(fansGpu.name + ": " + fansGpu.value);
+            }
+
+            List<Temperature> temp = g.sensors.temperatures;
+            for (final Temperature tempGpu : temp) {
+                System.out.println(tempGpu.name + ": " + tempGpu.value);
+                gpuJSensor.add(tempGpu.name + ": " + tempGpu.value + "\n");
+            }
+        }
+        System.out.println(gpuJSensor.toString());
+        return gpuJSensor;
+    }
+
+    //Metodo Main, deve ser chamado primeiro
     public List getLoadInfo() {
         Integer i = 0;
         for (final Gpu c : gpus) {
@@ -82,7 +128,7 @@ public class DadosGpu {
                 }
             }
             media = soma / temperaturaGpu.size();
-        }catch (Exception e) {
+        } catch (Exception e) {
             System.out.println(e);
         }
         return media;
@@ -101,7 +147,6 @@ public class DadosGpu {
 
     public String saveDadosGpu() {
         getLoadInfo();
-
         JSONObject dadosGpuToJson = new JSONObject();
 
         try {

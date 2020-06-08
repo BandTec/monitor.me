@@ -60,6 +60,7 @@ public class Memoria {
         return ramDisponivel;
     }
     
+    //Porcetagem da memória que está sendo gasta
     public float memoriaRamPorcentagem(){
         long usadoMem = hal.getMemory().getTotal() - hal.getMemory().getAvailable();
         return this.porcentagemMemoria = (float) ((100d * usadoMem) / hal.getMemory().getTotal());
@@ -84,7 +85,7 @@ public class Memoria {
         return discosRigidos;
     }
 
-    public String teste(Sensors sensors){
+    public String sensoresHardware(Sensors sensors){
         return "Sensors: " + sensors.toString();
     }
     
