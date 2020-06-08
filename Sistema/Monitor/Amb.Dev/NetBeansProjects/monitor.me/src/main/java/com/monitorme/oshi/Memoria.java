@@ -18,7 +18,7 @@ public class Memoria {
     CentralProcessor cpu = hal.getProcessor();
 
     
-    private Double porcentagemMemoria;
+    private float porcentagemMemoria;
     private List<String> ramDisponivel = new ArrayList<>();
     private List<String> discosRigidos = new ArrayList<>();
     private List<String> dadosColetados = new ArrayList<>();
@@ -60,10 +60,9 @@ public class Memoria {
         return ramDisponivel;
     }
     
-    public Double memoriaRamPorcentagem(){
+    public float memoriaRamPorcentagem(){
         long usadoMem = hal.getMemory().getTotal() - hal.getMemory().getAvailable();
-        System.out.println(this.porcentagemMemoria = (100d * usadoMem) / hal.getMemory().getTotal());
-        return this.porcentagemMemoria = (100d * usadoMem) / hal.getMemory().getTotal();
+        return this.porcentagemMemoria = (float) ((100d * usadoMem) / hal.getMemory().getTotal());
     }
     
     //Disco Rigido

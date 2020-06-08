@@ -1,8 +1,10 @@
 package com.monitorme.tela;
 
 import com.monitorme.chart.ChartTeste;
+import com.monitorme.chart.DTSCTest;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import org.jfree.ui.RefineryUtilities;
 
 public class TelaMonitor extends javax.swing.JFrame {
     
@@ -359,8 +361,11 @@ public class TelaMonitor extends javax.swing.JFrame {
 //        lblTitulo.setText(String.format("CPU"));
         // TODO add your handling code here:
         
-        ChartTeste graf1 = new ChartTeste();
-        painelCentral.add(graf1);
+        DTSCTest demo = new DTSCTest("");
+                
+                demo.setVisible(true);
+                demo.start();
+        painelCentral.add(demo);
     }//GEN-LAST:event_btCPUActionPerformed
 
     private void btnMemoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMemoActionPerformed
