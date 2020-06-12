@@ -2,20 +2,54 @@ package com.monitorme.tela;
 
 import com.monitorme.chart.ChartTeste;
 import com.monitorme.chart.DTSCTest;
+import com.monitorme.jsensor.DadosGpu;
+import com.monitorme.oshi.Memoria;
+import com.monitorme.telegram.TelegramBot;
+import java.text.DecimalFormat;
+import java.util.Timer;
+import java.util.TimerTask;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import org.jfree.ui.RefineryUtilities;
 
 public class TelaMonitor extends javax.swing.JFrame {
-    
+
+    public Timer timerColeta = new Timer();
+
     public TelaMonitor() {
         initComponents();
-        
-        
-        
-        
-        
-        
+
+        final long time = 3000;
+
+        TimerTask timeTask = new TimerTask() {
+            DadosGpu DGpu = new DadosGpu();
+            Memoria MRam = new Memoria();
+//            Processos Proc = new Processos();
+//            CPU cpu = new CPU();         
+//            TelegramBot mensagem = new TelegramBot();
+            DecimalFormat df = new DecimalFormat();
+            
+            public void run() {
+
+                try {
+                    lblUtil.setText(String.valueOf(df.format(MRam.memoriaRamPorcentagem())));
+
+                    // <! -------------------------------------------------------------->
+                    if (MRam.memoriaRamPorcentagem() > 0) {
+                        System.out.println("Ram alta: " + MRam.memoriaRamPorcentagem());
+                        //Se cair no alerta acima mande a mensagem abaixo: 
+//                            TelegramBot.mensagem("");
+                    }
+                    // <! -------------------------------------------------------------->
+                    
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+        };
+        timerColeta.scheduleAtFixedRate(timeTask, 0, time);
+
     }
 
     @SuppressWarnings("unchecked")
@@ -220,6 +254,11 @@ public class TelaMonitor extends javax.swing.JFrame {
 
         btnGpu.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnGpu.setText("GPU");
+        btnGpu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGpuActionPerformed(evt);
+            }
+        });
 
         jMenuBar1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -363,16 +402,15 @@ public class TelaMonitor extends javax.swing.JFrame {
 //        lblTextProcesso.setText(String.format("Processo:"));
 //        lblTitulo.setText(String.format("CPU"));
         // TODO add your handling code here:
-        
         DTSCTest demo = new DTSCTest("");
-                
-                demo.setVisible(true);
-                demo.start();
+
+        demo.setVisible(true);
+        demo.start();
         painelCentral.add(demo);
     }//GEN-LAST:event_btCPUActionPerformed
 
     private void btnMemoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMemoActionPerformed
-        
+
 //        lblUtil.setText(String.format("%d  GB", aleatorio.getMemoria()));
 //        lblVelocidade.setText(String.format("%.2f GB", aleatorio.getMemoDisp()));
 //        lblProcesso.setText(String.format("%.2f GB", aleatorio.getCache()));
@@ -388,18 +426,25 @@ public class TelaMonitor extends javax.swing.JFrame {
 //        lblVelocidade.setText(String.format("%.2f/ms", aleatorio.getTempDis()));
 //        lblProcesso.setText(String.format("%.2f KB/s", aleatorio.getVelocDisc()));
         lblTextUtil.setText(String.format("Tempo de atividade:"));
+        lblTextVel.setText(String.format("VRam da GPU:"));
+        lblTextProcesso.setText(String.format("Core da GPU:"));
+        lblTitulo.setText(String.format("GPU"));
+
+
+    }//GEN-LAST:event_btnDiscActionPerformed
+
+    private void btnGpuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGpuActionPerformed
+        lblTextUtil.setText(String.format("Temperatura da GPU:"));
         lblTextVel.setText(String.format("Valocidade de leitura:"));
         lblTextProcesso.setText(String.format("Tempo de resposta:"));
         lblTitulo.setText(String.format("DISCO"));
-
-        
-    }//GEN-LAST:event_btnDiscActionPerformed
+    }//GEN-LAST:event_btnGpuActionPerformed
 
     public static void main(String args[]) throws UnsupportedLookAndFeelException {
         try {
             UIManager.setLookAndFeel("com.formdev.flatlaf.FlatDarkLaf"); //Flat Darcula
         } catch (Exception ex) {
-            System.err.println( "Failed to initialize LaF" + ex );
+            System.err.println("Failed to initialize LaF" + ex);
         }
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
