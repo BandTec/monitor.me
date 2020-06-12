@@ -3,6 +3,6 @@ IdUsers int primary key identity,
 Nome varchar(100),
 Email varchar(60),
 Senha varchar(20),
-Celular bigint
+Celular varchar(20)
 )
 
