@@ -50,7 +50,7 @@ public class GraficoLinha {
 
     }
     
-    public static void main(String[] args) {
-        GraficoLinha g1 = new GraficoLinha(dataset.read);
-    }
+//    public static void main(String[] args) {
+//        GraficoLinha g1 = new GraficoLinha(dataset.read);
+//    }
 }
