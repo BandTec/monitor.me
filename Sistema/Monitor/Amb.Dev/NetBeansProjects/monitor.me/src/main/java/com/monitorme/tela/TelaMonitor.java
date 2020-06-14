@@ -1,7 +1,6 @@
 package com.monitorme.tela;
 
-import com.monitorme.chart.ChartTeste;
-import com.monitorme.chart.DTSCTest;
+import com.monitorme.chart.Chart;
 import com.monitorme.jsensor.DadosGpu;
 import com.monitorme.oshi.Memoria;
 import com.monitorme.telegram.TelegramBot;
@@ -10,7 +9,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import org.jfree.ui.RefineryUtilities;
 
 public class TelaMonitor extends javax.swing.JFrame {
 
@@ -59,7 +57,6 @@ public class TelaMonitor extends javax.swing.JFrame {
         painelCpu = new javax.swing.JPanel();
         painelMemo = new javax.swing.JPanel();
         painelDisc = new javax.swing.JPanel();
-        painelCentral = new javax.swing.JPanel();
         lblTextUtil = new javax.swing.JLabel();
         lblTextVel = new javax.swing.JLabel();
         lblTextProcesso = new javax.swing.JLabel();
@@ -82,6 +79,7 @@ public class TelaMonitor extends javax.swing.JFrame {
         lblDiscoTempo = new javax.swing.JLabel();
         painelGpu = new javax.swing.JPanel();
         btnGpu = new javax.swing.JButton();
+        painelCentral = new javax.swing.JInternalFrame();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -132,20 +130,6 @@ public class TelaMonitor extends javax.swing.JFrame {
         painelDiscLayout.setVerticalGroup(
             painelDiscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 83, Short.MAX_VALUE)
-        );
-
-        painelCentral.setBackground(new java.awt.Color(255, 255, 255));
-        painelCentral.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        javax.swing.GroupLayout painelCentralLayout = new javax.swing.GroupLayout(painelCentral);
-        painelCentral.setLayout(painelCentralLayout);
-        painelCentralLayout.setHorizontalGroup(
-            painelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 349, Short.MAX_VALUE)
-        );
-        painelCentralLayout.setVerticalGroup(
-            painelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 288, Short.MAX_VALUE)
         );
 
         lblTextUtil.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -245,7 +229,7 @@ public class TelaMonitor extends javax.swing.JFrame {
         painelGpu.setLayout(painelGpuLayout);
         painelGpuLayout.setHorizontalGroup(
             painelGpuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 130, Short.MAX_VALUE)
         );
         painelGpuLayout.setVerticalGroup(
             painelGpuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -259,6 +243,37 @@ public class TelaMonitor extends javax.swing.JFrame {
                 btnGpuActionPerformed(evt);
             }
         });
+
+        painelCentral.setPreferredSize(new java.awt.Dimension(385, 336));
+        painelCentral.setVisible(true);
+        painelCentral.addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+                painelCentralInternalFrameDeactivated(evt);
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
+
+        javax.swing.GroupLayout painelCentralLayout = new javax.swing.GroupLayout(painelCentral.getContentPane());
+        painelCentral.getContentPane().setLayout(painelCentralLayout);
+        painelCentralLayout.setHorizontalGroup(
+            painelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 375, Short.MAX_VALUE)
+        );
+        painelCentralLayout.setVerticalGroup(
+            painelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 303, Short.MAX_VALUE)
+        );
 
         jMenuBar1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -283,47 +298,56 @@ public class TelaMonitor extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(painelCpu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(painelMemo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(painelDisc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(painelGpu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblCpuUtilizacao)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(painelCpu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(painelMemo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(painelDisc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
-                        .addComponent(lblCpuVelocidade))
-                    .addComponent(lblMemoriaUso)
-                    .addComponent(lblDiscoTempo)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(btnGpu, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnMemo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btCPU, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnDisc, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblTextProcesso)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(lblProcesso))
-                    .addComponent(painelCentral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(lblTitulo))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblTextUtil)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblCpuUtilizacao)
+                                .addGap(18, 18, 18)
+                                .addComponent(lblCpuVelocidade))
+                            .addComponent(lblMemoriaUso)
+                            .addComponent(lblDiscoTempo)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(btnMemo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btCPU, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnDisc, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(painelGpu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnGpu, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(93, 93, 93)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(lblTitulo)
+                        .addGap(335, 335, 335))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(painelCentral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblTextProcesso)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(10, 10, 10)
-                                .addComponent(lblUtil)))
-                        .addGap(84, 84, 84)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblTextVel)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(lblVelocidade)
-                                .addGap(12, 12, 12)))))
-                .addGap(40, 40, 40))
+                                .addComponent(lblProcesso))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblTextUtil)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(10, 10, 10)
+                                        .addComponent(lblUtil)))
+                                .addGap(84, 84, 84)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblTextVel)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(lblVelocidade)
+                                        .addGap(12, 12, 12)))))
+                        .addGap(117, 117, 117))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblTeste)
@@ -337,14 +361,6 @@ public class TelaMonitor extends javax.swing.JFrame {
                 .addComponent(lblTeste)
                 .addGap(9, 9, 9)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblTitulo)
-                        .addGap(18, 18, 18)
-                        .addComponent(painelCentral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblTextUtil)
-                            .addComponent(lblTextVel)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(painelCpu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(58, 58, 58)
@@ -363,30 +379,32 @@ public class TelaMonitor extends javax.swing.JFrame {
                                         .addComponent(lblDiscoTempo))
                                     .addComponent(painelDisc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btCPU)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btCPU)
+                            .addComponent(lblTitulo))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblCpuUtilizacao, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblCpuVelocidade))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(painelCentral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(lblCpuUtilizacao, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblCpuVelocidade)))))
+                .addGap(43, 43, 43)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(painelGpu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
+                    .addComponent(btnGpu)
                     .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblTextUtil)
+                            .addComponent(lblTextVel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblUtil)
                             .addComponent(lblVelocidade))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(lblTextProcesso))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(4, 4, 4)
-                                .addComponent(btnGpu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblProcesso)
-                        .addGap(42, 42, 42))))
+                        .addGap(18, 18, 18)
+                        .addComponent(lblTextProcesso)
+                        .addGap(7, 7, 7)
+                        .addComponent(lblProcesso))
+                    .addComponent(painelGpu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 38, Short.MAX_VALUE))
         );
 
         pack();
@@ -402,11 +420,6 @@ public class TelaMonitor extends javax.swing.JFrame {
 //        lblTextProcesso.setText(String.format("Processo:"));
 //        lblTitulo.setText(String.format("CPU"));
         // TODO add your handling code here:
-        DTSCTest demo = new DTSCTest("");
-
-        demo.setVisible(true);
-        demo.start();
-        painelCentral.add(demo);
     }//GEN-LAST:event_btCPUActionPerformed
 
     private void btnMemoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMemoActionPerformed
@@ -418,6 +431,12 @@ public class TelaMonitor extends javax.swing.JFrame {
         lblTextVel.setText(String.format("Em uso:"));
         lblTextProcesso.setText(String.format("Cache:"));
         lblTitulo.setText(String.format("MEMÓRIA"));
+        
+        Chart demo = new Chart("");
+                demo.pack();
+                demo.setVisible(true);
+                demo.start();
+                painelCentral.add(demo);
     }//GEN-LAST:event_btnMemoActionPerformed
 
     private void btnDiscActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDiscActionPerformed
@@ -439,6 +458,10 @@ public class TelaMonitor extends javax.swing.JFrame {
         lblTextProcesso.setText(String.format("Tempo de resposta:"));
         lblTitulo.setText(String.format("DISCO"));
     }//GEN-LAST:event_btnGpuActionPerformed
+
+    private void painelCentralInternalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_painelCentralInternalFrameDeactivated
+        // TODO add your handling code here:
+    }//GEN-LAST:event_painelCentralInternalFrameDeactivated
 
     public static void main(String args[]) throws UnsupportedLookAndFeelException {
         try {
@@ -480,7 +503,7 @@ public class TelaMonitor extends javax.swing.JFrame {
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JLabel lblUtil;
     private javax.swing.JLabel lblVelocidade;
-    private javax.swing.JPanel painelCentral;
+    private javax.swing.JInternalFrame painelCentral;
     private javax.swing.JPanel painelCpu;
     private javax.swing.JPanel painelDisc;
     private javax.swing.JPanel painelGpu;
