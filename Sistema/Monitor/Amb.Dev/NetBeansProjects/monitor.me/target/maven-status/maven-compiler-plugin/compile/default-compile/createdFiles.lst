@@ -1,10 +1,10 @@
-com\monitorme\oshi\OshiGPU.class
 com\monitorme\tela\TelaMonitor$6.class
 com\monitorme\tela\TelaLogin$3.class
 com\monitorme\tela\TelaMonitor$1.class
 com\monitorme\tela\TelaGpu$2.class
 com\monitorme\tela\TelaLogin$1.class
 com\monitorme\tela\TelaTeste$1.class
+com\monitorme\oshi\Cpu.class
 com\monitorme\oshi\SystemInfoTest.class
 com\monitorme\tela\TelaMonitor$4.class
 com\monitorme\tela\TelaTeste.class
@@ -16,6 +16,7 @@ com\monitorme\tela\TelaMonitor$2.class
 com\monitorme\tela\TelaGpu.class
 com\monitorme\tela\TelaLogin.class
 com\monitorme\telegram\TelegramBot.class
+com\monitorme\oshi\Gpu.class
 com\monitorme\tela\TelaMonitor.class
 com\monitorme\tela\TelaMonitor$7.class
 com\monitorme\oshi\Processos.class
@@ -27,7 +28,6 @@ com\monitorme\tela\TelaDetalhamento.class
 com\monitorme\tela\TelaGpu$1.class
 com\monitorme\tela\TelaMonitor$5.class
 com\monitorme\banco\User.class
-com\monitorme\oshi\OshiCpu.class
 com\monitorme\tela\TelaMonitor$3.class
 com\monitorme\tela\TelaTeste$2.class
 com\monitorme\chart\Chart.class
