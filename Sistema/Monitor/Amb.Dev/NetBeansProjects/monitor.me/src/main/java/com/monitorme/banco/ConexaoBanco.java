@@ -11,11 +11,11 @@ public class ConexaoBanco {
         
         dataSource​.setDriverClassName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
         
-        dataSource​.setUrl("jdbc:sqlserver://srvcowwellfare.database.windows.net:1433;database=bdcowwellfare;user=usercowwellfare;password=#Gfgrupo10b;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;");  
+        dataSource​.setUrl("jdbc:sqlserver://svrmonitorme.database.windows.net:1433;database=bdMonitoMe;user=localamin;password=#Gfgrupo7b;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;");  
         
-        dataSource​.setUsername("usercowwellfare");
+        dataSource​.setUsername("localamin");
         
-        dataSource​.setPassword("#Gfgrupo10b");
+        dataSource​.setPassword("#Gfgrupo7b");
     
     
     }
