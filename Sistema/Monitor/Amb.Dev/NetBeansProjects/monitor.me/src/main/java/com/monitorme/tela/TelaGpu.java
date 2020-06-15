@@ -28,7 +28,7 @@ public class TelaGpu extends javax.swing.JFrame {
     HardwareAbstractionLayer hal = si.getHardware();
     CentralProcessor cpu = hal.getProcessor();
     OperatingSystem os = si.getOperatingSystem();
-    DadosGpu g = new DadosGpu();
+    DadosGpu gpu1 = new DadosGpu();
     Processos proc = new Processos();
 
     public TelaGpu() {
@@ -207,9 +207,10 @@ public class TelaGpu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGpuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGpuActionPerformed
-    lblVram.setText(memoria1.sensoresHardware(hal.getSensors()));
-    //lblTemperatura.setText(hal.getSensors().getCpuTemperature());
-    lblCore.setText(hal.getGraphicsCards().getClass().toString());
+    lblModelo.setText(gpu1.getNomeGpu());
+    lblCore.setText(gpu1.getCoreGpu().toString());
+    lblVram.setText(gpu1.getMemoryGpu().toString());
+    lblTemperatura.setText(gpu1.getMediaTemperatura().toString());
     
         // TODO add your handling code here:
     }//GEN-LAST:event_btnGpuActionPerformed
