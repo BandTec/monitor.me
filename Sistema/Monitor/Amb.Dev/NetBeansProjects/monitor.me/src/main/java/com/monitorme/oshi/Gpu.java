@@ -11,9 +11,9 @@ import oshi.hardware.GraphicsCard;
 import oshi.hardware.HardwareAbstractionLayer;
 import oshi.software.os.OperatingSystem;
 
-public class OshiGPU implements Serializable {
+public class Gpu implements Serializable {
     
-    private static final Logger logger = LoggerFactory.getLogger(OshiGPU.class);
+    private static final Logger logger = LoggerFactory.getLogger(Gpu.class);
     SystemInfo si = new SystemInfo();
     HardwareAbstractionLayer hal = si.getHardware();
     OperatingSystem os = si.getOperatingSystem();

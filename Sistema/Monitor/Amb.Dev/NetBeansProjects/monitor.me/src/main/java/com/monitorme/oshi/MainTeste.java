@@ -38,8 +38,15 @@ public class MainTeste {
         //Processos
         System.out.println("\n\n");        
 //        System.out.println(proc.printProcesses(os, hal.getMemory()));
-        System.out.println("Processos: " + proc.retornaProcessos(hal.getMemory()));        
+        System.out.println("Processos: " + proc.retornaProcessos());        
         
         //Por algum motivo os processos não encerram, entao se testar lembre de encerrar aqui no canto >>> clicando no x
+        
+        //Dados Cpu vindos do Oshi
+        Cpu cpux = new Cpu();
+        System.out.println(cpux.printProcessor());
+        System.out.println(cpux.getClock());
+        System.out.println(String.format("%.2fºC", cpux.getTemperature()));
+        System.out.println(cpux.getUso());
     }
 }

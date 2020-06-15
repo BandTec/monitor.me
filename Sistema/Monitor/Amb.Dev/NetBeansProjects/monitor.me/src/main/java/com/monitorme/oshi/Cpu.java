@@ -19,11 +19,7 @@ import oshi.software.os.OperatingSystem;
 import oshi.util.FormatUtil;
 import oshi.util.Util;
 
-/**
- *
- * @author bruno
- */
-public class OshiCpu {
+public class Cpu {
     
     private SystemInfo si = new SystemInfo();
     private HardwareAbstractionLayer hal = si.getHardware();
@@ -76,14 +72,5 @@ public class OshiCpu {
         long totalCpu = user + nice + sys + idle + iowait + irq + softirq + steal;
 
         return String.format("CPU load: %.1f%%", cpu.getSystemCpuLoadBetweenTicks(prevTicks) * 100);
-    }
-    
-    
-    public static void main(String[] args) {
-        OshiCpu cpu = new OshiCpu();
-        System.out.println(cpu.printProcessor());
-        System.out.println(cpu.getClock());
-        System.out.println(String.format("%.2fºC", cpu.getTemperature()));
-        System.out.println(cpu.getUso());
     }
 }
