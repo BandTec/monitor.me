@@ -7,7 +7,7 @@ package com.monitorme.tela;
 
 import com.monitorme.jsensor.DadosGpu;
 import com.monitorme.oshi.Memoria;
-import com.monitorme.oshi.OshiGPU;
+import com.monitorme.oshi.Gpu;
 import com.monitorme.oshi.Processos;
 import oshi.SystemInfo;
 import oshi.hardware.CentralProcessor;
@@ -23,7 +23,7 @@ public class TelaGpu extends javax.swing.JFrame {
     //Criação de objetos
     Memoria memoria1 = new Memoria();
     Processos processos1 = new Processos();
-    OshiGPU oshi1 = new OshiGPU();
+    Gpu oshi1 = new Gpu();
     SystemInfo si = new SystemInfo();
     HardwareAbstractionLayer hal = si.getHardware();
     CentralProcessor cpu = hal.getProcessor();
