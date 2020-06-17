@@ -51,7 +51,7 @@ public class Chart extends JInternalFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("----------");
-                newData[0] = cpu.getUso();
+                newData[0] = m1.memoriaRamPorcentagem();
                 
                 dataset.advanceTime();
                 dataset.appendData(newData);
@@ -62,7 +62,7 @@ public class Chart extends JInternalFrame {
     public float[] chartData() {
         float[] a = new float[COUNT];
         for (int i = 0; i < a.length; i++) {
-            a[i] = cpu.getUso();
+            a[i] = m1.memoriaRamPorcentagem();
 //            a[i] = gpu.getMediaTemperatura().floatValue();
         }
         return a;

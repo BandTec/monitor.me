@@ -3,6 +3,7 @@ package com.monitorme.tela;
 import com.monitorme.banco.InserirBanco;
 import com.monitorme.chart.Chart;
 import com.monitorme.jsensor.DadosGpu;
+import com.monitorme.oshi.Cpu;
 import com.monitorme.oshi.Memoria;
 import com.monitorme.telegram.TelegramBot;
 import java.text.DecimalFormat;
@@ -23,6 +24,7 @@ public class TelaMonitor extends javax.swing.JFrame {
         TimerTask timeTask = new TimerTask() {
 //            DadosGpu DGpu = new DadosGpu();
             Memoria MRam = new Memoria();
+            Cpu cpu = new Cpu();
 //            Processos Proc = new Processos();
 //            CPU cpu = new CPU();         
 //            TelegramBot mensagem = new TelegramBot();
@@ -33,7 +35,7 @@ public class TelaMonitor extends javax.swing.JFrame {
 
                 try {
                     lblUtil.setText(String.valueOf(df.format(MRam.memoriaRamPorcentagem())));
-
+                    System.out.println("Cpu uso: " + cpu.getUso());
                     // <! -------------------------------------------------------------->
                     if (MRam.memoriaRamPorcentagem() > 1000) {
                         // Inserir no banco informações

@@ -79,7 +79,6 @@ public class DadosGpu {
                 gpuJSensor.add(tempGpu.name + ": " + tempGpu.value + "\n");
             }
         }
-        System.out.println(gpuJSensor.toString());
         return gpuJSensor;
     }
 
@@ -90,7 +89,6 @@ public class DadosGpu {
             List<Load> loads = c.sensors.loads;
             for (final Load x : loads) {
                 i++;
-                System.out.println(x.name + ": " + x.value);
                 if (x.name.startsWith("Load GPU Core")) {
                     loadGpu.add(x.value);
                 } else if (x.name.startsWith("Load GPU Memory Controller")) {
@@ -161,8 +159,6 @@ public class DadosGpu {
             dadosGpuToJson.put("memoriaVRamGpu", getMemoryGpu());
             dadosGpuToJson.put("videoEngineGpu", getVideoEngineGpu());
 
-            System.out.println(dadosGpuToJson.toString());
-
             //Com esse String acima podemos guardar um unico campo
             //no banco de dados, e consumir esse JSON no front-end web
         } catch (JSONException ex) {
@@ -202,10 +198,5 @@ public class DadosGpu {
         getLoadInfo();
         coreGpu = loadGpu.get(0);
         return coreGpu;
-    }
-
-    @Override
-    public String toString() {
-        return "DadosGpu{" + "media=" + media + '}';
     }
 }

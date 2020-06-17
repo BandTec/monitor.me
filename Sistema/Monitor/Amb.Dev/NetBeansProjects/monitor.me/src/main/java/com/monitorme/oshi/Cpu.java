@@ -6,6 +6,7 @@
 package com.monitorme.oshi;
 
 import static com.monitorme.oshi.SystemInfoTest.oshi;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -20,24 +21,24 @@ import oshi.util.FormatUtil;
 import oshi.util.Util;
 
 public class Cpu {
-    
+    DecimalFormat df = new DecimalFormat();
     private SystemInfo si = new SystemInfo();
     private HardwareAbstractionLayer hal = si.getHardware();
     private CentralProcessor cpu = hal.getProcessor();
     private Sensors sensors = hal.getSensors();
     private float dadosCPU;
     long[] freq;
-    
+
     //informaçoes do processador
     public String printProcessor() {
         return cpu.getProcessorIdentifier().getName();
     }
-    
+
     //velocidade de clock de cada processador lógico
     public StringBuilder getClock() {
         freq = cpu.getCurrentFreq();
         StringBuilder sb = new StringBuilder("Current Frequencies: ");
-        
+
         if (freq[0] > 0) {
             for (int i = 0; i < freq.length; i++) {
                 if (i > 0) {
@@ -48,50 +49,54 @@ public class Cpu {
         }
         return sb;
     }
-    
+
     //temperatura atual do processador
-    public Double getTemperature(){
+    public Double getTemperature() {
         return sensors.getCpuTemperature();
     }
-    
+
     //uso do processador
-    public float getUso(){
-        Double total = 0.0;
-        long[] prevTicks = cpu.getSystemCpuLoadTicks();
-        long[][] prevProcTicks = cpu.getProcessorCpuLoadTicks();
-        
-        Util.sleep(1000);
-        long[] ticks = cpu.getSystemCpuLoadTicks();
-        
-        long user = ticks[TickType.USER.getIndex()] - prevTicks[TickType.USER.getIndex()];
-        long nice = ticks[TickType.NICE.getIndex()] - prevTicks[TickType.NICE.getIndex()];
-        long sys = ticks[TickType.SYSTEM.getIndex()] - prevTicks[TickType.SYSTEM.getIndex()];
-        long idle = ticks[TickType.IDLE.getIndex()] - prevTicks[TickType.IDLE.getIndex()];
-        long iowait = ticks[TickType.IOWAIT.getIndex()] - prevTicks[TickType.IOWAIT.getIndex()];
-        long irq = ticks[TickType.IRQ.getIndex()] - prevTicks[TickType.IRQ.getIndex()];
-        long softirq = ticks[TickType.SOFTIRQ.getIndex()] - prevTicks[TickType.SOFTIRQ.getIndex()];
-        long steal = ticks[TickType.STEAL.getIndex()] - prevTicks[TickType.STEAL.getIndex()];
-        long totalCpu = user + nice + sys + idle + iowait + irq + softirq + steal;
-        
-//        StringBuilder procCpu = new StringBuilder("CPU load per processor:");
-//        double[] load = cpu.getProcessorCpuLoadBetweenTicks(prevProcTicks);
-//        for (double avg : load) {
-//            total += avg * 100;
-//            procCpu.append(String.format(" %.1f%%", avg * 100));
-//            }
-//        double usoCPU = total;
-//        return dadosCPU = (float)usoCPU;
-        System.out.println(String.format("CPU load: %.1f%%", cpu.getSystemCpuLoadBetweenTicks(prevTicks) * 100));
-        float valor = (float) (cpu.getSystemCpuLoadBetweenTicks(prevTicks) * 100);
-        return valor;
+    public float getUso() {
+        try {
+            Double total = 0.0;
+            long[] prevTicks = cpu.getSystemCpuLoadTicks();
+            long[][] prevProcTicks = cpu.getProcessorCpuLoadTicks();
+
+            Util.sleep(5000);
+            long[] ticks = cpu.getSystemCpuLoadTicks();
+
+            long user = ticks[TickType.USER.getIndex()] - prevTicks[TickType.USER.getIndex()];
+            long nice = ticks[TickType.NICE.getIndex()] - prevTicks[TickType.NICE.getIndex()];
+            long sys = ticks[TickType.SYSTEM.getIndex()] - prevTicks[TickType.SYSTEM.getIndex()];
+            long idle = ticks[TickType.IDLE.getIndex()] - prevTicks[TickType.IDLE.getIndex()];
+            long iowait = ticks[TickType.IOWAIT.getIndex()] - prevTicks[TickType.IOWAIT.getIndex()];
+            long irq = ticks[TickType.IRQ.getIndex()] - prevTicks[TickType.IRQ.getIndex()];
+            long softirq = ticks[TickType.SOFTIRQ.getIndex()] - prevTicks[TickType.SOFTIRQ.getIndex()];
+            long steal = ticks[TickType.STEAL.getIndex()] - prevTicks[TickType.STEAL.getIndex()];
+            long totalCpu = user + nice + sys + idle + iowait + irq + softirq + steal;
+            
+            System.out.println("Sys: " + (100d * sys / totalCpu));
+            
+            double[] load = cpu.getProcessorCpuLoadBetweenTicks(prevProcTicks);
+            Integer somaProc = 0;
+            for (double avg : load) {
+                somaProc ++;
+                total += avg * 100;
+                System.out.println(String.format(" %.1f%%", avg * 100));
+            }
+            System.out.println("somadosproc: " + somaProc);
+            float usoCPU = (float)(total/somaProc);
+            System.out.println(">>>>> "+ usoCPU);
+            dadosCPU = usoCPU;
+        } catch (Exception e) {
+            System.out.println("erro: " + e);;
+        }
+        return this.dadosCPU;
     }
 
-    
 //    public Double cpuPercent(){
 //
 //    }
-    
-    
     public static void main(String[] args) {
         Cpu cpu = new Cpu();
 //        System.out.println(cpu.printProcessor());
