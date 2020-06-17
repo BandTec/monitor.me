@@ -36,7 +36,6 @@ public class Chart extends JInternalFrame {
     Memoria m1 = new Memoria();
     Cpu cpu = new Cpu();
     private float valorRecebido;
-    //DadosGpu gpu = new DadosGpu();
 
     public Chart() {
         final DynamicTimeSeriesCollection dataset =
@@ -52,8 +51,7 @@ public class Chart extends JInternalFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("----------");
-                newData[0] = cpu.getUso().floatValue();
-//                newData[0] = gpu.getMediaTemperatura().floatValue();
+                newData[0] = cpu.getUso();
                 
                 dataset.advanceTime();
                 dataset.appendData(newData);
@@ -64,7 +62,7 @@ public class Chart extends JInternalFrame {
     public float[] chartData() {
         float[] a = new float[COUNT];
         for (int i = 0; i < a.length; i++) {
-            a[i] = cpu.getUso().floatValue();
+            a[i] = cpu.getUso();
 //            a[i] = gpu.getMediaTemperatura().floatValue();
         }
         return a;

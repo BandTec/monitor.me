@@ -21,7 +21,7 @@ public class TelaMonitor extends javax.swing.JFrame {
         final long time = 3000;
 
         TimerTask timeTask = new TimerTask() {
-            DadosGpu DGpu = new DadosGpu();
+//            DadosGpu DGpu = new DadosGpu();
             Memoria MRam = new Memoria();
 //            Processos Proc = new Processos();
 //            CPU cpu = new CPU();         
@@ -35,7 +35,7 @@ public class TelaMonitor extends javax.swing.JFrame {
                     lblUtil.setText(String.valueOf(df.format(MRam.memoriaRamPorcentagem())));
 
                     // <! -------------------------------------------------------------->
-                    if (MRam.memoriaRamPorcentagem() > 0) {
+                    if (MRam.memoriaRamPorcentagem() > 1000) {
                         // Inserir no banco informações
                         inserir.InserirInforHardware();
                         System.out.println("Ram alta: " + MRam.memoriaRamPorcentagem());
