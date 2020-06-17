@@ -1,35 +1,19 @@
-<<<<<<< HEAD
-C:\Users\bruno\Desktop\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\banco\User.java
-C:\Users\bruno\Desktop\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\jsensor\DadosGpu.java
-C:\Users\bruno\Desktop\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\oshi\OshiGPU.java
-C:\Users\bruno\Desktop\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\tela\TelaDetalhamento.java
-C:\Users\bruno\Desktop\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\banco\ConexaoBanco.java
-C:\Users\bruno\Desktop\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\telegram\TelegramBot.java
-C:\Users\bruno\Desktop\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\tela\TelaTeste.java
-C:\Users\bruno\Desktop\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\oshi\Memoria.java
-C:\Users\bruno\Desktop\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\oshi\OshiCpu.java
-C:\Users\bruno\Desktop\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\tela\TelaLogin.java
-C:\Users\bruno\Desktop\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\oshi\MainTeste.java
-C:\Users\bruno\Desktop\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\telegram\AppTelegram.java
-C:\Users\bruno\Desktop\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\chart\Chart.java
-C:\Users\bruno\Desktop\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\oshi\SystemInfoTest.java
-C:\Users\bruno\Desktop\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\tela\TelaMonitor.java
-=======
-/home/igor/Área de Trabalho/monitor.me/Sistema/Monitor/Amb.Dev/NetBeansProjects/monitor.me/src/main/java/com/monitorme/oshi/Cpu.java
-/home/igor/Área de Trabalho/monitor.me/Sistema/Monitor/Amb.Dev/NetBeansProjects/monitor.me/src/main/java/com/monitorme/oshi/SystemInfoTest.java
-/home/igor/Área de Trabalho/monitor.me/Sistema/Monitor/Amb.Dev/NetBeansProjects/monitor.me/src/main/java/com/monitorme/tela/TelaGpu.java
-/home/igor/Área de Trabalho/monitor.me/Sistema/Monitor/Amb.Dev/NetBeansProjects/monitor.me/src/main/java/com/monitorme/banco/ConexaoBanco.java
-/home/igor/Área de Trabalho/monitor.me/Sistema/Monitor/Amb.Dev/NetBeansProjects/monitor.me/src/main/java/com/monitorme/tela/TelaLogin.java
-/home/igor/Área de Trabalho/monitor.me/Sistema/Monitor/Amb.Dev/NetBeansProjects/monitor.me/src/main/java/com/monitorme/banco/User.java
-/home/igor/Área de Trabalho/monitor.me/Sistema/Monitor/Amb.Dev/NetBeansProjects/monitor.me/src/main/java/com/monitorme/tela/TelaMonitor.java
-/home/igor/Área de Trabalho/monitor.me/Sistema/Monitor/Amb.Dev/NetBeansProjects/monitor.me/src/main/java/com/monitorme/oshi/Memoria.java
-/home/igor/Área de Trabalho/monitor.me/Sistema/Monitor/Amb.Dev/NetBeansProjects/monitor.me/src/main/java/com/monitorme/chart/Chart.java
-/home/igor/Área de Trabalho/monitor.me/Sistema/Monitor/Amb.Dev/NetBeansProjects/monitor.me/src/main/java/com/monitorme/oshi/MainTeste.java
-/home/igor/Área de Trabalho/monitor.me/Sistema/Monitor/Amb.Dev/NetBeansProjects/monitor.me/src/main/java/com/monitorme/tela/TelaDetalhamento.java
-/home/igor/Área de Trabalho/monitor.me/Sistema/Monitor/Amb.Dev/NetBeansProjects/monitor.me/src/main/java/com/monitorme/oshi/Processos.java
-/home/igor/Área de Trabalho/monitor.me/Sistema/Monitor/Amb.Dev/NetBeansProjects/monitor.me/src/main/java/com/monitorme/tela/TelaTeste.java
-/home/igor/Área de Trabalho/monitor.me/Sistema/Monitor/Amb.Dev/NetBeansProjects/monitor.me/src/main/java/com/monitorme/oshi/Gpu.java
-/home/igor/Área de Trabalho/monitor.me/Sistema/Monitor/Amb.Dev/NetBeansProjects/monitor.me/src/main/java/com/monitorme/jsensor/DadosGpu.java
-/home/igor/Área de Trabalho/monitor.me/Sistema/Monitor/Amb.Dev/NetBeansProjects/monitor.me/src/main/java/com/monitorme/telegram/TelegramBot.java
-/home/igor/Área de Trabalho/monitor.me/Sistema/Monitor/Amb.Dev/NetBeansProjects/monitor.me/src/main/java/com/monitorme/telegram/AppTelegram.java
->>>>>>> 8440b123f9494c95036437d836f755ed5298ee36
+C:\Users\Aluno\Desktop\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\banco\User.java
+C:\Users\Aluno\Desktop\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\telegram\AppTelegram.java
+C:\Users\Aluno\Desktop\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\chart\ChartGpu.java
+C:\Users\Aluno\Desktop\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\oshi\Gpu.java
+C:\Users\Aluno\Desktop\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\oshi\Cpu.java
+C:\Users\Aluno\Desktop\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\tela\TelaMonitor.java
+C:\Users\Aluno\Desktop\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\telegram\TelegramBot.java
+C:\Users\Aluno\Desktop\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\banco\ConexaoBanco.java
+C:\Users\Aluno\Desktop\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\oshi\SystemInfoTest.java
+C:\Users\Aluno\Desktop\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\jsensor\DadosGpu.java
+C:\Users\Aluno\Desktop\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\oshi\Memoria.java
+C:\Users\Aluno\Desktop\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\tela\TelaGpu.java
+C:\Users\Aluno\Desktop\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\tela\TelaLogin.java
+C:\Users\Aluno\Desktop\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\tela\TelaTeste.java
+C:\Users\Aluno\Desktop\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\banco\InserirBanco.java
+C:\Users\Aluno\Desktop\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\oshi\MainTeste.java
+C:\Users\Aluno\Desktop\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\chart\Chart.java
+C:\Users\Aluno\Desktop\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\tela\TelaDetalhamento.java
+C:\Users\Aluno\Desktop\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\oshi\Processos.java
