@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 C:\Users\gabri\OneDrive\Documentos\DeV\ADS2BTEC\Projeto2Sem\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\telegram\TelegramBot.java
 C:\Users\gabri\OneDrive\Documentos\DeV\ADS2BTEC\Projeto2Sem\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\oshi\Processos.java
 C:\Users\gabri\OneDrive\Documentos\DeV\ADS2BTEC\Projeto2Sem\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\oshi\SystemInfoTest.java
@@ -17,3 +18,25 @@ C:\Users\gabri\OneDrive\Documentos\DeV\ADS2BTEC\Projeto2Sem\monitor.me\Sistema\M
 C:\Users\gabri\OneDrive\Documentos\DeV\ADS2BTEC\Projeto2Sem\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\jsensor\DadosGpu.java
 C:\Users\gabri\OneDrive\Documentos\DeV\ADS2BTEC\Projeto2Sem\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\tela\TelaGpu.java
 C:\Users\gabri\OneDrive\Documentos\DeV\ADS2BTEC\Projeto2Sem\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\tela\TelaLogin.java
+=======
+C:\Users\jpbo9\Desktop\Fernanda\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\tela\TelaMonitor.java
+C:\Users\jpbo9\Desktop\Fernanda\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\oshi\Processos.java
+C:\Users\jpbo9\Desktop\Fernanda\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\banco\ConexaoBanco.java
+C:\Users\jpbo9\Desktop\Fernanda\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\banco\User.java
+C:\Users\jpbo9\Desktop\Fernanda\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\telegram\TelegramBot.java
+C:\Users\jpbo9\Desktop\Fernanda\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\oshi\Cpu.java
+C:\Users\jpbo9\Desktop\Fernanda\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\chart\ChartGpu.java
+C:\Users\jpbo9\Desktop\Fernanda\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\jsensor\DadosGpu.java
+C:\Users\jpbo9\Desktop\Fernanda\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\tela\TelaDetalhamento.java
+C:\Users\jpbo9\Desktop\Fernanda\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\oshi\Memoria.java
+C:\Users\jpbo9\Desktop\Fernanda\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\banco\InserirBanco.java
+C:\Users\jpbo9\Desktop\Fernanda\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\tela\TelaTeste.java
+C:\Users\jpbo9\Desktop\Fernanda\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\oshi\SystemInfoTest.java
+C:\Users\jpbo9\Desktop\Fernanda\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\tela\TelaCpu.java
+C:\Users\jpbo9\Desktop\Fernanda\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\oshi\Gpu.java
+C:\Users\jpbo9\Desktop\Fernanda\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\oshi\MainTeste.java
+C:\Users\jpbo9\Desktop\Fernanda\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\tela\TelaGpu.java
+C:\Users\jpbo9\Desktop\Fernanda\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\telegram\AppTelegram.java
+C:\Users\jpbo9\Desktop\Fernanda\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\tela\TelaLogin.java
+C:\Users\jpbo9\Desktop\Fernanda\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\chart\Chart.java
+>>>>>>> 42a29c0d9b36e36cc8f2ee877396922756c18890
