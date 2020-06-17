@@ -55,7 +55,7 @@ public class Cpu {
     }
     
     //uso do processador
-    public Double getUso(){
+    public float getUso(){
         Double total = 0.0;
         long[] prevTicks = cpu.getSystemCpuLoadTicks();
         long[][] prevProcTicks = cpu.getProcessorCpuLoadTicks();
@@ -82,7 +82,7 @@ public class Cpu {
 //        double usoCPU = total;
 //        return dadosCPU = (float)usoCPU;
         System.out.println(String.format("CPU load: %.1f%%", cpu.getSystemCpuLoadBetweenTicks(prevTicks) * 100));
-        Double valor = cpu.getSystemCpuLoadBetweenTicks(prevTicks) * 100;
+        float valor = (float) (cpu.getSystemCpuLoadBetweenTicks(prevTicks) * 100);
         return valor;
     }
 

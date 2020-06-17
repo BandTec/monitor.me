@@ -63,7 +63,7 @@ public class DadosGpu {
             nomeGpu = g.name;
             List<Load> loads = g.sensors.loads;
             for (final Load loadGpu : loads) {
-                System.out.println("\n " +loadGpu.name + ": " + loadGpu.value);
+                System.out.println("\n " + loadGpu.name + ": " + loadGpu.value);
                 gpuJSensor.add(loadGpu.name + ": " + loadGpu.value);
             }
 
@@ -106,11 +106,14 @@ public class DadosGpu {
     }
 
     public String getNomeGpu() {
-
-        for (final Gpu g : gpus) {
-            nomeGpu = g.name;
+        try {
+            for (GraphicsCard c : hal.getGraphicsCards()) {
+                this.nomeGpu = c.getName();
+            }
+            return nomeGpu;
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
         }
-
         return nomeGpu;
     }
 
@@ -163,28 +166,40 @@ public class DadosGpu {
             //Com esse String acima podemos guardar um unico campo
             //no banco de dados, e consumir esse JSON no front-end web
         } catch (JSONException ex) {
-            Logger.getLogger(DadosGpu.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DadosGpu.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
         return dadosGpuToJson.toString();
     }
 
     //Getters
     public Double getMemoryGpu() {
+        getLoadInfo();
         memoryGpu = loadGpu.get(3);
+        
+        if (memoryGpu == null || memoryGpu == 0) {
+            for(GraphicsCard c : hal.getGraphicsCards()){
+                this.memoryGpu = Double.valueOf(c.getVRam());
+                System.out.println(this.memoryGpu);
+            }
+        }
         return memoryGpu;
     }
 
     public Double getMemoryControllerGpu() {
+        getLoadInfo();
         memoryControllerGpu = loadGpu.get(1);
         return memoryControllerGpu;
     }
 
     public Double getVideoEngineGpu() {
+        getLoadInfo();
         videoEngineGpu = loadGpu.get(2);
         return videoEngineGpu;
     }
 
     public Double getCoreGpu() {
+        getLoadInfo();
         coreGpu = loadGpu.get(0);
         return coreGpu;
     }
