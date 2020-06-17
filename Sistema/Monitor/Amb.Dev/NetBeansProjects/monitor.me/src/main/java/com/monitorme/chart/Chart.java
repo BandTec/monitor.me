@@ -10,8 +10,8 @@ package com.monitorme.chart;
  * @author bruno
  */
 
+import com.monitorme.oshi.Cpu;
 import com.monitorme.oshi.Memoria;
-import com.monitorme.oshi.OshiCpu;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
@@ -34,7 +34,7 @@ public class Chart extends JInternalFrame {
     private static final int COUNT = 2 * 130;
     private Timer timer;
     Memoria m1 = new Memoria();
-    OshiCpu cpu = new OshiCpu();
+    Cpu cpu = new Cpu();
     private float valorRecebido;
     //DadosGpu gpu = new DadosGpu();
 

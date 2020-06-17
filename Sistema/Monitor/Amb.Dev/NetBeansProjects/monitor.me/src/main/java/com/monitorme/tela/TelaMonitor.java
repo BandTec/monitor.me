@@ -1,5 +1,6 @@
 package com.monitorme.tela;
 
+import com.monitorme.banco.InserirBanco;
 import com.monitorme.chart.Chart;
 import com.monitorme.jsensor.DadosGpu;
 import com.monitorme.oshi.Memoria;
@@ -26,6 +27,7 @@ public class TelaMonitor extends javax.swing.JFrame {
 //            CPU cpu = new CPU();         
 //            TelegramBot mensagem = new TelegramBot();
             DecimalFormat df = new DecimalFormat();
+            InserirBanco inserir = new InserirBanco();
             
             public void run() {
 
@@ -34,6 +36,8 @@ public class TelaMonitor extends javax.swing.JFrame {
 
                     // <! -------------------------------------------------------------->
                     if (MRam.memoriaRamPorcentagem() > 0) {
+                        // Inserir no banco informações
+                        inserir.InserirInforHardware();
                         System.out.println("Ram alta: " + MRam.memoriaRamPorcentagem());
                         //Se cair no alerta acima mande a mensagem abaixo: 
 //                            TelegramBot.mensagem("");
