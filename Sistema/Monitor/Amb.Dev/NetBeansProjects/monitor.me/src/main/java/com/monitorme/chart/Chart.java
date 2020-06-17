@@ -11,6 +11,7 @@ package com.monitorme.chart;
  */
 
 import com.monitorme.oshi.Memoria;
+import com.monitorme.oshi.OshiCpu;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
@@ -29,15 +30,15 @@ import org.jfree.data.xy.XYDataset;
 
 public class Chart extends JInternalFrame {
 
-    private static final String TITLE = "";
     private static final float MINMAX = 100;
     private static final int COUNT = 2 * 130;
     private Timer timer;
     Memoria m1 = new Memoria();
+    OshiCpu cpu = new OshiCpu();
+    private float valorRecebido;
     //DadosGpu gpu = new DadosGpu();
 
-    public Chart(final String title) {
-        super(title);
+    public Chart() {
         final DynamicTimeSeriesCollection dataset =
         new DynamicTimeSeriesCollection(1, COUNT, new Second());
         dataset.setTimeBase(new Second(0, 0, 0, 1, 1, 2011));
@@ -50,7 +51,8 @@ public class Chart extends JInternalFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                newData[0] = m1.memoriaRamPorcentagem();
+                System.out.println("----------");
+                newData[0] = cpu.getUso().floatValue();
 //                newData[0] = gpu.getMediaTemperatura().floatValue();
                 
                 dataset.advanceTime();
@@ -62,14 +64,14 @@ public class Chart extends JInternalFrame {
     public float[] chartData() {
         float[] a = new float[COUNT];
         for (int i = 0; i < a.length; i++) {
-            a[i] = m1.memoriaRamPorcentagem();
+            a[i] = cpu.getUso().floatValue();
 //            a[i] = gpu.getMediaTemperatura().floatValue();
         }
         return a;
     }
 
     private JFreeChart createChart(final XYDataset dataset) {
-        final JFreeChart result = ChartFactory.createTimeSeriesChart(TITLE, "", "", dataset, false, false, false);
+        final JFreeChart result = ChartFactory.createTimeSeriesChart("", "", "", dataset, false, false, false);
         final XYPlot plot = result.getXYPlot();
         ValueAxis domain = plot.getDomainAxis();
         domain.setAutoRange(true);
@@ -92,7 +94,7 @@ public class Chart extends JInternalFrame {
             
             @Override
             public void run() {
-                Chart demo = new Chart(TITLE);
+                Chart demo = new Chart();
                 demo.pack();
                 demo.setVisible(true);
                 demo.start();

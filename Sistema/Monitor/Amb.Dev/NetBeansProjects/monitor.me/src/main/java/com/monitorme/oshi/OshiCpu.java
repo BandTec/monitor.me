@@ -29,6 +29,7 @@ public class OshiCpu {
     private HardwareAbstractionLayer hal = si.getHardware();
     private CentralProcessor cpu = hal.getProcessor();
     private Sensors sensors = hal.getSensors();
+    private float dadosCPU;
     long[] freq;
     
     //informaçoes do processador
@@ -58,7 +59,8 @@ public class OshiCpu {
     }
     
     //uso do processador
-    public String getUso(){
+    public Double getUso(){
+        Double total = 0.0;
         long[] prevTicks = cpu.getSystemCpuLoadTicks();
         long[][] prevProcTicks = cpu.getProcessorCpuLoadTicks();
         
@@ -74,16 +76,30 @@ public class OshiCpu {
         long softirq = ticks[TickType.SOFTIRQ.getIndex()] - prevTicks[TickType.SOFTIRQ.getIndex()];
         long steal = ticks[TickType.STEAL.getIndex()] - prevTicks[TickType.STEAL.getIndex()];
         long totalCpu = user + nice + sys + idle + iowait + irq + softirq + steal;
-
-        return String.format("CPU load: %.1f%%", cpu.getSystemCpuLoadBetweenTicks(prevTicks) * 100);
+        
+//        StringBuilder procCpu = new StringBuilder("CPU load per processor:");
+//        double[] load = cpu.getProcessorCpuLoadBetweenTicks(prevProcTicks);
+//        for (double avg : load) {
+//            total += avg * 100;
+//            procCpu.append(String.format(" %.1f%%", avg * 100));
+//            }
+//        double usoCPU = total;
+//        return dadosCPU = (float)usoCPU;
+        System.out.println(String.format("CPU load: %.1f%%", cpu.getSystemCpuLoadBetweenTicks(prevTicks) * 100));
+        Double valor = cpu.getSystemCpuLoadBetweenTicks(prevTicks) * 100;
+        return valor;
     }
+    
+//    public Double cpuPercent(){
+//
+//    }
     
     
     public static void main(String[] args) {
         OshiCpu cpu = new OshiCpu();
-        System.out.println(cpu.printProcessor());
-        System.out.println(cpu.getClock());
-        System.out.println(String.format("%.2fºC", cpu.getTemperature()));
+//        System.out.println(cpu.printProcessor());
+//        System.out.println(cpu.getClock());
+//        System.out.println(String.format("%.2fºC", cpu.getTemperature()));
         System.out.println(cpu.getUso());
     }
 }

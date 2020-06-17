@@ -432,7 +432,7 @@ public class TelaMonitor extends javax.swing.JFrame {
         lblTextProcesso.setText(String.format("Cache:"));
         lblTitulo.setText(String.format("MEMÓRIA"));
         
-        Chart demo = new Chart("");
+        Chart demo = new Chart();
                 demo.pack();
                 demo.setVisible(true);
                 demo.start();
@@ -460,7 +460,7 @@ public class TelaMonitor extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGpuActionPerformed
 
     private void painelCentralInternalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_painelCentralInternalFrameDeactivated
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_painelCentralInternalFrameDeactivated
 
     public static void main(String args[]) throws UnsupportedLookAndFeelException {
