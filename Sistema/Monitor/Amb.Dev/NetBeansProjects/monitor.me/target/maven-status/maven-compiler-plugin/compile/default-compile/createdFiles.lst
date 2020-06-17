@@ -13,6 +13,7 @@ com\monitorme\oshi\MainTeste.class
 com\monitorme\telegram\AppTelegram.class
 com\monitorme\banco\ConexaoBanco.class
 com\monitorme\chart\Chart$1.class
+com\monitorme\tela\TelaGpu$4.class
 com\monitorme\tela\TelaMonitor$2.class
 com\monitorme\tela\TelaGpu.class
 com\monitorme\tela\TelaLogin.class
@@ -34,3 +35,4 @@ com\monitorme\tela\TelaMonitor$3.class
 com\monitorme\tela\TelaTeste$2.class
 com\monitorme\chart\Chart.class
 com\monitorme\oshi\Memoria.class
+com\monitorme\tela\TelaGpu$3.class
