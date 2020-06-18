@@ -16,8 +16,8 @@ const ApiRoutes = {
 })
 export class UserService {
 
-  private UrlApi = "http://localhost:3333"
-  baseConsultaLogin = "http://localhost:3333/sessions";
+  private UrlApi = "https://monitor-bandtec.herokuapp.com/"
+  baseConsultaLogin = "https://monitor-bandtec.herokuapp.com/sessions";
 
   constructor(private snackBar: MatSnackBar, private http: HttpClient) { }
 

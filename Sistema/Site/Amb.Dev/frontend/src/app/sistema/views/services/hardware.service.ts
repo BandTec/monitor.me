@@ -13,10 +13,10 @@ export class HardwareService {
 
   private UserId = `${localStorage.getItem('id')}`;
 
-  baseCadastro = `http://localhost:3333/sistema/cadastrar/${this.UserId}/novoHardware`
-  baseConsulta = `http://localhost:3333/sistema/${this.UserId}/eventMyHardware`
+  baseCadastro = `https://monitor-bandtec.herokuapp.com/sistema/cadastrar/${this.UserId}/novoHardware`
+  baseConsulta = `https://monitor-bandtec.herokuapp.com/sistema/${this.UserId}/eventMyHardware`
 
-  urlApiSistema = "http://localhost:3333/sistema"
+  urlApiSistema = "https://monitor-bandtec.herokuapp.com/sistema"
 
   constructor(private snackBar: MatSnackBar, private http: HttpClient,private userService: UserService) { }
 

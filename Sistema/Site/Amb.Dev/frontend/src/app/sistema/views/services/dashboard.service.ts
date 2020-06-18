@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 })
 export class DashboardService {
 
-  urlApiSistema = "http://localhost:3333/sistema"
+  urlApiSistema = "https://monitor-bandtec.herokuapp.com/sistema"
 
   constructor(private snackBar: MatSnackBar) { }
 
