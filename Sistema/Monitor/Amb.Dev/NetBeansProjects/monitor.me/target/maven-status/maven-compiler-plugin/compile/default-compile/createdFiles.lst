@@ -8,6 +8,7 @@ com\monitorme\tela\TelaCpu$4.class
 com\monitorme\tela\TelaTeste$1.class
 com\monitorme\oshi\Cpu.class
 com\monitorme\oshi\SystemInfoTest.class
+com\monitorme\chart\ChatCpu.class
 com\monitorme\tela\TelaMonitor$4.class
 com\monitorme\tela\TelaTeste.class
 com\monitorme\oshi\MainTeste.class

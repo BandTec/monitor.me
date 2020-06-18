@@ -60,7 +60,6 @@ public class Processos {
         }
 //        System.out.println(oshi);
         return oshiProcessos;
-
     }
     
 //    public String gravaDadosProcessos(){

@@ -455,7 +455,7 @@ public class TelaCpu extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void btnCPUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCPUActionPerformed
-       // lblUso.setText(cpu1.getUso());
+        lblUso.setText(String.valueOf(cpu1.consomeCpu()));
         lblClock.setText(cpu1.getClock().toString());
         lblTemp.setText(cpu1.getTemperature().toString());
         lblTemperatura.setText(cpu1.getTemperature().toString());

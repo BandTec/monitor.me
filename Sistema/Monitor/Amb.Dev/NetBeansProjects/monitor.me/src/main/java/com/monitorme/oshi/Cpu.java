@@ -27,6 +27,7 @@ public class Cpu {
     private CentralProcessor cpu = hal.getProcessor();
     private Sensors sensors = hal.getSensors();
     private float dadosCPU;
+    private List<Double> listFloatCpu = new ArrayList<>();
     long[] freq;
 
     //informaçoes do processador
@@ -56,13 +57,13 @@ public class Cpu {
     }
 
     //uso do processador
-    public float getUso() {
+    public void getUso() {
         try {
-            Double total = 0.0;
+            
             long[] prevTicks = cpu.getSystemCpuLoadTicks();
             long[][] prevProcTicks = cpu.getProcessorCpuLoadTicks();
 
-            Util.sleep(5000);
+            Util.sleep(300);
             long[] ticks = cpu.getSystemCpuLoadTicks();
 
             long user = ticks[TickType.USER.getIndex()] - prevTicks[TickType.USER.getIndex()];
@@ -75,24 +76,30 @@ public class Cpu {
             long steal = ticks[TickType.STEAL.getIndex()] - prevTicks[TickType.STEAL.getIndex()];
             long totalCpu = user + nice + sys + idle + iowait + irq + softirq + steal;
             
-            System.out.println("Sys: " + (100d * sys / totalCpu));
             
             double[] load = cpu.getProcessorCpuLoadBetweenTicks(prevProcTicks);
             Integer somaProc = 0;
+            Double total = 0.0;
+            
+            System.out.println(String.format("User: %.1f%%", (100d * user / totalCpu)));
+            
             for (double avg : load) {
                 somaProc ++;
                 total += avg * 100;
-                System.out.println(String.format(" %.1f%%", avg * 100));
+//                System.out.println(String.format(" %.1f%%", avg * 100));
             }
-            System.out.println("somadosproc: " + somaProc);
             float usoCPU = (float)(total/somaProc);
-            System.out.println(">>>>> "+ usoCPU);
             dadosCPU = usoCPU;
         } catch (Exception e) {
             System.out.println("erro: " + e);;
         }
-        return this.dadosCPU;
     }
+    
+    public float consomeCpu(){
+        getUso();
+        return dadosCPU;
+    }
+    
 
 //    public Double cpuPercent(){
 //
@@ -102,6 +109,6 @@ public class Cpu {
 //        System.out.println(cpu.printProcessor());
 //        System.out.println(cpu.getClock());
 //        System.out.println(String.format("%.2fºC", cpu.getTemperature()));
-        System.out.println(cpu.getUso());
+        System.out.println(cpu.consomeCpu());
     }
 }

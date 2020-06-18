@@ -35,7 +35,7 @@ public class TelaMonitor extends javax.swing.JFrame {
 
                 try {
                     lblUtil.setText(String.valueOf(df.format(MRam.memoriaRamPorcentagem())));
-                    System.out.println("Cpu uso: " + cpu.getUso());
+                    System.out.println("Cpu uso: " + cpu.consomeCpu());
                     // <! -------------------------------------------------------------->
                     if (MRam.memoriaRamPorcentagem() > 1000) {
                         // Inserir no banco informações
