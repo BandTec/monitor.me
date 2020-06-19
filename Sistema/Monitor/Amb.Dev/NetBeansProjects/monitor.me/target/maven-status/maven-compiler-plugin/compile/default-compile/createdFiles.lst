@@ -2,7 +2,6 @@ com\monitorme\tela\TelaDash$2.class
 com\monitorme\tela\TelaMonitor$6.class
 com\monitorme\tela\TelaLogin$3.class
 com\monitorme\tela\TelaMonitor$1.class
-com\monitorme\tela\TelaGpu$2.class
 com\monitorme\chart\ChartGpu.class
 com\monitorme\tela\TelaLogin$1.class
 com\monitorme\tela\TelaCpu$4.class
@@ -18,10 +17,8 @@ com\monitorme\banco\ConexaoBanco.class
 com\monitorme\tela\TelaCpu$3.class
 com\monitorme\chart\Chart$1.class
 com\monitorme\tela\TelaCpu$1.class
-com\monitorme\tela\TelaGpu$4.class
 com\monitorme\tela\TelaMonitor$2.class
 com\monitorme\tela\TelaDash$1.class
-com\monitorme\tela\TelaGpu.class
 com\monitorme\tela\TelaLogin.class
 com\monitorme\telegram\TelegramBot.class
 com\monitorme\oshi\Gpu.class
@@ -33,7 +30,6 @@ com\monitorme\chart\Chart$2.class
 com\monitorme\tela\TelaDetalhamento$1.class
 com\monitorme\jsensor\DadosGpu.class
 com\monitorme\tela\TelaDetalhamento.class
-com\monitorme\tela\TelaGpu$1.class
 com\monitorme\tela\TelaCpu.class
 com\monitorme\tela\TelaDash$3.class
 com\monitorme\tela\TelaMonitor$5.class
@@ -45,4 +41,3 @@ com\monitorme\tela\TelaTeste$2.class
 com\monitorme\chart\Chart.class
 com\monitorme\oshi\Memoria.class
 com\monitorme\tela\TelaCpu$2.class
-com\monitorme\tela\TelaGpu$3.class
