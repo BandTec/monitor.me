@@ -5,24 +5,58 @@
  */
 package com.monitorme.tela;
 
+import com.monitorme.banco.InserirBanco;
 import com.monitorme.jsensor.DadosGpu;
 import com.monitorme.oshi.Cpu;
 import com.monitorme.oshi.Memoria;
-
+import java.text.DecimalFormat;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class TelaDash extends javax.swing.JFrame {
 
+    //Atributos
+    public Timer timerColeta = new Timer();
     
     //Objetos
-    
     DadosGpu gpu1 = new DadosGpu();
     Cpu cpu1 = new Cpu();
     Memoria memoria1 = new Memoria();
     Memoria memoria2 = new Memoria();
-    
+    InserirBanco inserir = new InserirBanco();
     
     public TelaDash() {
         initComponents();
+        setLocationRelativeTo(null);
+        setTitle("Monitor Me");
+
+        final long time = 3000;
+
+        TimerTask timeTask = new TimerTask() {
+
+            public void run() {
+
+                try {
+                    System.out.println("Aqui vai os metodos que precisam repetir!");
+                    // <! -----------------Abaixo valida os alertas------------------>
+                    if (memoria1.memoriaRamPorcentagem() > 1000) {
+                        inserir.InserirInforHardware();
+                        System.out.println("Ram alta: " + memoria1.memoriaRamPorcentagem());
+                        //Se cair no alerta acima mande a mensagem abaixo: 
+//                            TelegramBot.mensagem("");
+                    }else{
+                        System.out.println("Sistemas OK!");
+                    }
+                    // <! -------------------------------------------------------------->
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+        };
+        timerColeta.scheduleAtFixedRate(timeTask, 0, time);
+
     }
 
     /**
@@ -675,20 +709,20 @@ public class TelaDash extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGpuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGpuActionPerformed
-    lblModel.setText(gpu1.getNomeGpu().toString());
-    lblCoreGpu.setText(gpu1.getCoreGpu().toString());
-    lblMemoria.setText(gpu1.getMemoryGpu().toString());
-    lblTemperatura.setText(gpu1.getMediaTemperatura().toString());
-    
-    lblDisco.setText(memoria2.getDiscosRigidos().toString());
-    lblCpu.setText(cpu1.getClock().toString());
+        lblModel.setText(gpu1.getNomeGpu().toString());
+        lblCoreGpu.setText(gpu1.getCoreGpu().toString());
+        lblMemoria.setText(gpu1.getMemoryGpu().toString());
+        lblTemperatura.setText(gpu1.getMediaTemperatura().toString());
+
+        lblDisco.setText(memoria2.getDiscosRigidos().toString());
+        lblCpu.setText(cpu1.getClock().toString());
 
         // TODO add your handling code here:
     }//GEN-LAST:event_btnGpuActionPerformed
 
     private void btnMemoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMemoriaActionPerformed
-    lblMemoRam.setText(memoria1.getDiscosRigidos().toString());
-    lblMemoUso.setText(memoria1.getRamDisponivel().toString());
+        lblMemoRam.setText(memoria1.getDiscosRigidos().toString());
+        lblMemoUso.setText(memoria1.getRamDisponivel().toString());
         // TODO add your handling code here:
     }//GEN-LAST:event_btnMemoriaActionPerformed
 

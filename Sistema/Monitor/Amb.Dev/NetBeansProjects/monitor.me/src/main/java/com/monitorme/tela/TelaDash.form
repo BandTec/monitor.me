@@ -416,11 +416,6 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel14">
-              <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\Aluno\Desktop\monitor.me\Sistema\Monitor\Amb.Dev\NetBeansProjects\monitor.me\src\main\java\com\monitorme\tela\LogoIndiv.png"/>
-                </Property>
-              </Properties>
             </Component>
           </SubComponents>
         </Container>
