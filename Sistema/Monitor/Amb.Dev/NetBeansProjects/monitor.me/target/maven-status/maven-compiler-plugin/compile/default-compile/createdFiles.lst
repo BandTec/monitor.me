@@ -4,6 +4,7 @@ com\monitorme\tela\TelaLogin$3.class
 com\monitorme\tela\TelaMonitor$1.class
 com\monitorme\chart\ChartGpu.class
 com\monitorme\tela\TelaLogin$1.class
+com\monitorme\tela\TelaDash$4.class
 com\monitorme\tela\TelaCpu$4.class
 com\monitorme\tela\TelaTeste$1.class
 com\monitorme\oshi\Cpu.class
