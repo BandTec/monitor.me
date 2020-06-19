@@ -29,6 +29,7 @@ public class TelaDash extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Monitor Me");
+        setResizable(false);
 
         final long time = 3000;
 
