@@ -5,7 +5,6 @@ import com.monitorme.chart.Chart;
 import com.monitorme.jsensor.DadosGpu;
 import com.monitorme.oshi.Cpu;
 import com.monitorme.oshi.Memoria;
-import com.monitorme.telegram.TelegramBot;
 import java.text.DecimalFormat;
 import java.util.Timer;
 import java.util.TimerTask;
