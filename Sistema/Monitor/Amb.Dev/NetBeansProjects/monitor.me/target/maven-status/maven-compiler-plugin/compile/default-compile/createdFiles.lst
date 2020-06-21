@@ -21,7 +21,6 @@ com\monitorme\tela\TelaCpu$1.class
 com\monitorme\tela\TelaMonitor$2.class
 com\monitorme\tela\TelaDash$1.class
 com\monitorme\tela\TelaLogin.class
-com\monitorme\telegram\TelegramBot.class
 com\monitorme\oshi\Gpu.class
 com\monitorme\tela\TelaMonitor.class
 com\monitorme\tela\TelaMonitor$7.class
@@ -35,9 +34,11 @@ com\monitorme\tela\TelaCpu.class
 com\monitorme\tela\TelaDash$3.class
 com\monitorme\tela\TelaMonitor$5.class
 com\monitorme\banco\User.class
+com\monitorme\telegram\MonitorMe.class
 com\monitorme\tela\TelaDash.class
 com\monitorme\banco\InserirBanco.class
 com\monitorme\tela\TelaMonitor$3.class
+com\monitorme\tela\TelaLogin$4.class
 com\monitorme\tela\TelaTeste$2.class
 com\monitorme\chart\Chart.class
 com\monitorme\oshi\Memoria.class
