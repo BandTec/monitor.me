@@ -6,12 +6,15 @@
 package com.monitorme.tela;
 
 import com.monitorme.banco.InserirBanco;
+import com.monitorme.chart.Chart;
+import com.monitorme.chart.ChartGpu;
 import com.monitorme.jsensor.DadosGpu;
 import com.monitorme.oshi.Cpu;
 import com.monitorme.oshi.Memoria;
 import java.text.DecimalFormat;
 import java.util.Timer;
 import java.util.TimerTask;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 public class TelaDash extends javax.swing.JFrame {
 
@@ -56,6 +59,24 @@ public class TelaDash extends javax.swing.JFrame {
             }
         };
         timerColeta.scheduleAtFixedRate(timeTask, 0, time);
+        
+        Chart grafMem = new Chart();
+        ChartGpu grafGpu = new ChartGpu();
+               
+                grafMem.setVisible(true);
+                grafMem.start();
+                jInternalFrame2.setContentPane(grafMem);
+                jInternalFrame2.setEnabled(false);
+                
+                grafGpu.setVisible(true);
+                grafGpu.start();
+                jInternalFrame1.setContentPane(grafGpu);
+                jInternalFrame1.setEnabled(false);
+                
+                BasicInternalFrameUI bi = (BasicInternalFrameUI)jInternalFrame2.getUI();
+                BasicInternalFrameUI bi2 = (BasicInternalFrameUI)jInternalFrame1.getUI();
+                bi2.setNorthPane(null);
+                bi.setNorthPane(null);
 
     }
 
@@ -293,8 +314,6 @@ public class TelaDash extends javax.swing.JFrame {
         jLabel13.setForeground(new java.awt.Color(204, 204, 204));
         jLabel13.setText("Dashboard MonitorMe");
 
-        jLabel14.setIcon(new javax.swing.ImageIcon("C:\\Users\\Aluno\\Desktop\\monitor.me\\Sistema\\Monitor\\Amb.Dev\\NetBeansProjects\\monitor.me\\src\\main\\java\\com\\monitorme\\tela\\LogoIndiv.png")); // NOI18N
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -319,30 +338,37 @@ public class TelaDash extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(51, 51, 51));
 
+        jInternalFrame1.setBorder(null);
+        jInternalFrame1.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        jInternalFrame1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jInternalFrame1.setEnabled(false);
+        jInternalFrame1.setPreferredSize(new java.awt.Dimension(388, 313));
         jInternalFrame1.setVisible(true);
 
         javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
         jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
         jInternalFrame1Layout.setHorizontalGroup(
             jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 378, Short.MAX_VALUE)
+            .addGap(0, 388, Short.MAX_VALUE)
         );
         jInternalFrame1Layout.setVerticalGroup(
             jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
+        jInternalFrame2.setBorder(null);
+        jInternalFrame2.setPreferredSize(new java.awt.Dimension(388, 313));
         jInternalFrame2.setVisible(true);
 
         javax.swing.GroupLayout jInternalFrame2Layout = new javax.swing.GroupLayout(jInternalFrame2.getContentPane());
         jInternalFrame2.getContentPane().setLayout(jInternalFrame2Layout);
         jInternalFrame2Layout.setHorizontalGroup(
             jInternalFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 392, Short.MAX_VALUE)
+            .addGap(0, 388, Short.MAX_VALUE)
         );
         jInternalFrame2Layout.setVerticalGroup(
             jInternalFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 280, Short.MAX_VALUE)
+            .addGap(0, 290, Short.MAX_VALUE)
         );
 
         btnGpu.setBackground(new java.awt.Color(51, 0, 51));
@@ -389,10 +415,12 @@ public class TelaDash extends javax.swing.JFrame {
                     .addComponent(btnMemoria, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jInternalFrame2)
-                    .addComponent(jInternalFrame1))
+                    .addComponent(jInternalFrame2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jInternalFrame1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(38, Short.MAX_VALUE))
         );
+
+        jInternalFrame1.getAccessibleContext().setAccessibleParent(jInternalFrame1);
 
         jPanel21.setBackground(new java.awt.Color(51, 51, 51));
 
@@ -752,7 +780,7 @@ public class TelaDash extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(TelaDash.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
