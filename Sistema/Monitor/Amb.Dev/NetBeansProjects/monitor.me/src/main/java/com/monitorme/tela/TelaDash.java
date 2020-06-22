@@ -50,6 +50,7 @@ public class TelaDash extends javax.swing.JFrame {
         //Cpu
         lblCpu.setText(cpu1.printProcessor());
 
+        
         final long time = 1500;
 
         TimerTask timeTask = new TimerTask() {

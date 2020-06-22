@@ -19,6 +19,6 @@ public class InserirBanco {
       
       public void InserirInforHardware(){
           template2.update("INSERT INTO tbl_HardwareHistories(Data, OshiStatus, GPUStatus, id_idUsers) VALUES (?,?,?,?)",
-                     LocalDateTime.now(),memo.coletaMemoriaRam(),gpu.saveDadosGpu(),1);
+                     LocalDateTime.now(),memo.saveDadosMemoria(),gpu.saveDadosGpu(),1);
       }
 }

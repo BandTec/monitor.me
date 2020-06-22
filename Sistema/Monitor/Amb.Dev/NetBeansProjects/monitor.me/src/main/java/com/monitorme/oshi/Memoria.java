@@ -2,6 +2,7 @@ package com.monitorme.oshi;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.json.JSONObject;
 import oshi.SystemInfo;
 import oshi.hardware.CentralProcessor;
 import oshi.hardware.GlobalMemory;
@@ -87,10 +88,6 @@ public class Memoria {
         return discosRigidos;
     }
 
-    public String sensoresHardware(Sensors sensors){
-        return "Sensors: " + sensors.toString();
-    }
-    
     //Getters & Setters
     public List<String> getDadosMemoriaRam() {
         coletaMemoriaRam();
@@ -100,5 +97,20 @@ public class Memoria {
     public List<String> getDiscosRigidos() {
         coletaDiscosRigidos(hal.getDiskStores());
         return discosRigidos;
+    }
+    
+    public String saveDadosMemoria(){
+        
+        JSONObject dadosMemoToJson = new JSONObject();
+        
+        try {
+            dadosMemoToJson.put("porcentRam", String.format(" %.2f", getPorcentagemRam()));
+            dadosMemoToJson.put("dadosRam", getDadosMemoriaRam());
+            dadosMemoToJson.put("dadosDiscosRigidos", getDiscosRigidos());
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+        }
+        
+        return dadosMemoToJson.toString();
     }
 }

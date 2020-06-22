@@ -35,10 +35,6 @@ public class DadosGpu {
     private List<Double> loadGpu = new ArrayList<>();
     List<String> gpuJSensor = new ArrayList<>();
 
-    //constructor
-    public DadosGpu() {
-    }
-
     //Metodos
     //Tentando capturar GPU com oshi
     public List<String> capturaGpuOshi(GraphicsCard[] cards) {
