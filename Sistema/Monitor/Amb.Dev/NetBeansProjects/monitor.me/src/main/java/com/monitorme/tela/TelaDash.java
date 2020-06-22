@@ -12,6 +12,8 @@ import com.monitorme.jsensor.DadosGpu;
 import com.monitorme.oshi.Cpu;
 import com.monitorme.oshi.Memoria;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
@@ -26,25 +28,24 @@ public class TelaDash extends javax.swing.JFrame {
     Cpu cpu1 = new Cpu();
     Memoria memoria1 = new Memoria();
     InserirBanco inserir = new InserirBanco();
-
+    private String[] x = new String[1];
+    
     public TelaDash() {
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Monitor Me");
         setResizable(false);
         
-        memoria1.coletaMemoriaRam();
-        System.out.println("><" + memoria1.coletaMemoriaRam());
+        this.x = memoria1.getDadosMemoriaRam().get(13).split(":");
         //Abaixo coloque tudo que for estático e precisa ser setado 1 unica vez, como por exemplo, nome dos Hardwares.
 //        lblMemoRam.setText(memoria1.getDiscosRigidos().toString());
 //        
+        //GPU
 //        lblModel.setText(gpu1.getNomeGpu().toString());
 //        lblCoreGpu.setText(gpu1.getCoreGpu().toString());
 //        lblMemoria.setText(gpu1.getMemoryGpu().toString());
-        
         //Memoria
         lblTemperatura.setText(gpu1.getMediaTemperatura().toString());
-        System.out.println("memoria: " + memoria1.getDadosMemoriaRam());
         lblDisco.setText(memoria1.getDiscosRigidos().toString());
         //Cpu
         lblCpu.setText(cpu1.printProcessor());
@@ -56,18 +57,20 @@ public class TelaDash extends javax.swing.JFrame {
             public void run() {
 
                 try {
+                    memoria1.coletaMemoriaRam();
                     //RAM
-                    lblMemoRam.setText(String.format(" %.2f", memoria1.getPorcentagemRam()) + "%");
+                    lblMemoUso.setText(String.format(" %.2f", memoria1.getPorcentagemRam()) + "%");
+                    lblMemoRam.setText("Status: "+x[2]);
 
                     //GPU
                     //CPU
                     lblCpuUso.setText(String.format(" %.2f", cpu1.getUso()) + "%");
                     // <! -----------------Abaixo valida os alertas------------------>
-                    if (memoria1.getPorcentagemRam() > 1000) {
+                    if (memoria1.getPorcentagemRam() > 800) {
                         inserir.InserirInforHardware();
                         System.out.println("Ram alta: " + memoria1.getPorcentagemRam());
                         //Se cair no alerta acima mande a mensagem abaixo: 
-//                            TelegramBot.mensagem("");
+//                            TelegramBot.mensagem("Seu Hardware parece estranho, de uma olhada: ");
                     } else {
                         System.out.println("Sistemas OK!");
                     }
@@ -80,24 +83,24 @@ public class TelaDash extends javax.swing.JFrame {
             }
         };
         timerColeta.scheduleAtFixedRate(timeTask, 0, time);
-        
+
         Chart grafMem = new Chart();
         ChartGpu grafGpu = new ChartGpu();
-               
-                grafMem.setVisible(true);
-                grafMem.start();
-                jInternalFrame2.setContentPane(grafMem);
-                jInternalFrame2.setEnabled(false);
-                
-                grafGpu.setVisible(true);
-                grafGpu.start();
-                jInternalFrame1.setContentPane(grafGpu);
-                jInternalFrame1.setEnabled(false);
-                
-                BasicInternalFrameUI bi = (BasicInternalFrameUI)jInternalFrame2.getUI();
-                BasicInternalFrameUI bi2 = (BasicInternalFrameUI)jInternalFrame1.getUI();
-                bi2.setNorthPane(null);
-                bi.setNorthPane(null);
+
+        grafMem.setVisible(true);
+        grafMem.start();
+        jInternalFrame2.setContentPane(grafMem);
+        jInternalFrame2.setEnabled(false);
+
+        grafGpu.setVisible(true);
+        grafGpu.start();
+        jInternalFrame1.setContentPane(grafGpu);
+        jInternalFrame1.setEnabled(false);
+
+        BasicInternalFrameUI bi = (BasicInternalFrameUI) jInternalFrame2.getUI();
+        BasicInternalFrameUI bi2 = (BasicInternalFrameUI) jInternalFrame1.getUI();
+        bi2.setNorthPane(null);
+        bi.setNorthPane(null);
 
     }
 
@@ -390,7 +393,7 @@ public class TelaDash extends javax.swing.JFrame {
         );
         jInternalFrame2Layout.setVerticalGroup(
             jInternalFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 290, Short.MAX_VALUE)
+            .addGap(0, 293, Short.MAX_VALUE)
         );
 
         btnGpu.setBackground(new java.awt.Color(51, 0, 51));
@@ -422,7 +425,7 @@ public class TelaDash extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnGpu, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jInternalFrame2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnMemoria, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -653,11 +656,11 @@ public class TelaDash extends javax.swing.JFrame {
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel10.setText("Memoria Ram Disponivel");
+        jLabel10.setText("Memoria Ram");
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel12.setText("Memoria em uso");
+        jLabel12.setText("Memoria em uso: ");
 
         lblMemoRam.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblMemoRam.setForeground(new java.awt.Color(204, 204, 204));
@@ -673,29 +676,27 @@ public class TelaDash extends javax.swing.JFrame {
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addComponent(jLabel10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
-                .addComponent(jLabel12)
-                .addGap(40, 40, 40))
-            .addGroup(jPanel14Layout.createSequentialGroup()
-                .addGap(75, 75, 75)
-                .addComponent(lblMemoRam)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblMemoUso)
-                .addGap(69, 69, 69))
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblMemoRam)
+                    .addGroup(jPanel14Layout.createSequentialGroup()
+                        .addComponent(jLabel12)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblMemoUso))
+                    .addComponent(jLabel10))
+                .addGap(203, 203, 203))
         );
         jPanel14Layout.setVerticalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(jLabel12))
+                .addComponent(jLabel10)
                 .addGap(26, 26, 26)
+                .addComponent(lblMemoRam)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblMemoRam)
+                    .addComponent(jLabel12)
                     .addComponent(lblMemoUso))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel23Layout = new javax.swing.GroupLayout(jPanel23);
@@ -707,7 +708,7 @@ public class TelaDash extends javax.swing.JFrame {
                 .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(43, 43, 43)
                 .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel23Layout.setVerticalGroup(
             jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -725,15 +726,15 @@ public class TelaDash extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(69, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addContainerGap(79, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(42, 42, 42)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -802,7 +803,7 @@ public class TelaDash extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(TelaDash.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
