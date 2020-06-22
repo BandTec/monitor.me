@@ -17,35 +17,55 @@ public class TelaDash extends javax.swing.JFrame {
 
     //Atributos
     public Timer timerColeta = new Timer();
-    
+
     //Objetos
     DadosGpu gpu1 = new DadosGpu();
     Cpu cpu1 = new Cpu();
     Memoria memoria1 = new Memoria();
-    Memoria memoria2 = new Memoria();
     InserirBanco inserir = new InserirBanco();
-    
+
     public TelaDash() {
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Monitor Me");
         setResizable(false);
+        
+        memoria1.coletaMemoriaRam();
+        System.out.println("><" + memoria1.coletaMemoriaRam());
+        //Abaixo coloque tudo que for estático e precisa ser setado 1 unica vez, como por exemplo, nome dos Hardwares.
+//        lblMemoRam.setText(memoria1.getDiscosRigidos().toString());
+//        
+//        lblModel.setText(gpu1.getNomeGpu().toString());
+//        lblCoreGpu.setText(gpu1.getCoreGpu().toString());
+//        lblMemoria.setText(gpu1.getMemoryGpu().toString());
+        
+        //Memoria
+        lblTemperatura.setText(gpu1.getMediaTemperatura().toString());
+        System.out.println("memoria: " + memoria1.getDadosMemoriaRam());
+        lblDisco.setText(memoria1.getDiscosRigidos().toString());
+        //Cpu
+        lblCpu.setText(cpu1.printProcessor());
 
-        final long time = 3000;
+        final long time = 1500;
 
         TimerTask timeTask = new TimerTask() {
 
             public void run() {
 
                 try {
-                    System.out.println("Aqui vai os metodos que precisam repetir!");
+                    //RAM
+                    lblMemoRam.setText(String.format(" %.2f", memoria1.getPorcentagemRam()) + "%");
+
+                    //GPU
+                    //CPU
+                    lblCpuUso.setText(String.format(" %.2f", cpu1.getUso()) + "%");
                     // <! -----------------Abaixo valida os alertas------------------>
-                    if (memoria1.memoriaRamPorcentagem() > 1000) {
+                    if (memoria1.getPorcentagemRam() > 1000) {
                         inserir.InserirInforHardware();
-                        System.out.println("Ram alta: " + memoria1.memoriaRamPorcentagem());
+                        System.out.println("Ram alta: " + memoria1.getPorcentagemRam());
                         //Se cair no alerta acima mande a mensagem abaixo: 
 //                            TelegramBot.mensagem("");
-                    }else{
+                    } else {
                         System.out.println("Sistemas OK!");
                     }
                     // <! -------------------------------------------------------------->
@@ -99,6 +119,7 @@ public class TelaDash extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         lblCpu = new javax.swing.JLabel();
+        lblCpuUso = new javax.swing.JLabel();
         jPanel22 = new javax.swing.JPanel();
         pgbDisco = new javax.swing.JProgressBar();
         jLabel11 = new javax.swing.JLabel();
@@ -294,8 +315,6 @@ public class TelaDash extends javax.swing.JFrame {
         jLabel13.setForeground(new java.awt.Color(204, 204, 204));
         jLabel13.setText("Dashboard MonitorMe");
 
-        jLabel14.setIcon(new javax.swing.ImageIcon("C:\\Users\\Aluno\\Desktop\\monitor.me\\Sistema\\Monitor\\Amb.Dev\\NetBeansProjects\\monitor.me\\src\\main\\java\\com\\monitorme\\tela\\LogoIndiv.png")); // NOI18N
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -407,21 +426,29 @@ public class TelaDash extends javax.swing.JFrame {
         lblCpu.setForeground(new java.awt.Color(204, 204, 204));
         lblCpu.setText("--------");
 
+        lblCpuUso.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblCpuUso.setForeground(new java.awt.Color(204, 204, 204));
+        lblCpuUso.setText("--------");
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(109, 109, 109)
-                .addComponent(lblCpu)
-                .addContainerGap(114, Short.MAX_VALUE))
+                .addGap(14, 14, 14)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblCpuUso)
+                    .addComponent(lblCpu))
+                .addGap(209, 209, 209))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(39, 39, 39)
+                .addContainerGap()
                 .addComponent(lblCpu)
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(lblCpuUso)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel21Layout = new javax.swing.GroupLayout(jPanel21);
@@ -710,20 +737,12 @@ public class TelaDash extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGpuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGpuActionPerformed
-        lblModel.setText(gpu1.getNomeGpu().toString());
-        lblCoreGpu.setText(gpu1.getCoreGpu().toString());
-        lblMemoria.setText(gpu1.getMemoryGpu().toString());
-        lblTemperatura.setText(gpu1.getMediaTemperatura().toString());
-
-        lblDisco.setText(memoria2.getDiscosRigidos().toString());
-        lblCpu.setText(cpu1.getClock().toString());
 
         // TODO add your handling code here:
     }//GEN-LAST:event_btnGpuActionPerformed
 
     private void btnMemoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMemoriaActionPerformed
-        lblMemoRam.setText(memoria1.getDiscosRigidos().toString());
-        lblMemoUso.setText(memoria1.getRamDisponivel().toString());
+
         // TODO add your handling code here:
     }//GEN-LAST:event_btnMemoriaActionPerformed
 
@@ -803,6 +822,7 @@ public class TelaDash extends javax.swing.JFrame {
     private javax.swing.JLabel lblCore;
     private javax.swing.JLabel lblCoreGpu;
     private javax.swing.JLabel lblCpu;
+    private javax.swing.JLabel lblCpuUso;
     private javax.swing.JLabel lblDisco;
     private javax.swing.JLabel lblMemoRam;
     private javax.swing.JLabel lblMemoUso;

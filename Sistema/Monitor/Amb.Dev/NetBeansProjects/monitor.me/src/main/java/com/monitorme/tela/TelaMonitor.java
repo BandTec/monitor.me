@@ -34,13 +34,13 @@ public class TelaMonitor extends javax.swing.JFrame {
             public void run() {
 
                 try {
-                    lblUtil.setText(String.valueOf(df.format(MRam.memoriaRamPorcentagem())));
+                    lblUtil.setText(String.valueOf(df.format(MRam.getPorcentagemRam())));
                     System.out.println("Cpu uso: " + cpu.consomeCpu());
                     // <! -------------------------------------------------------------->
-                    if (MRam.memoriaRamPorcentagem() > 1000) {
+                    if (MRam.getPorcentagemRam() > 1000) {
                         // Inserir no banco informações
                         inserir.InserirInforHardware();
-                        System.out.println("Ram alta: " + MRam.memoriaRamPorcentagem());
+                        System.out.println("Ram alta: " + MRam.getPorcentagemRam());
                         //Se cair no alerta acima mande a mensagem abaixo: 
 //                            TelegramBot.mensagem("");
                     }

@@ -21,6 +21,7 @@ import oshi.util.FormatUtil;
 import oshi.util.Util;
 
 public class Cpu {
+
     DecimalFormat df = new DecimalFormat();
     private SystemInfo si = new SystemInfo();
     private HardwareAbstractionLayer hal = si.getHardware();
@@ -51,64 +52,21 @@ public class Cpu {
         return sb;
     }
 
-    //temperatura atual do processador
     public Double getTemperature() {
         return sensors.getCpuTemperature();
     }
 
-    //uso do processador
-    public void getUso() {
+    public float getUso() {
         try {
-            
-            long[] prevTicks = cpu.getSystemCpuLoadTicks();
-            long[][] prevProcTicks = cpu.getProcessorCpuLoadTicks();
 
-            Util.sleep(300);
-            long[] ticks = cpu.getSystemCpuLoadTicks();
-
-            long user = ticks[TickType.USER.getIndex()] - prevTicks[TickType.USER.getIndex()];
-            long nice = ticks[TickType.NICE.getIndex()] - prevTicks[TickType.NICE.getIndex()];
-            long sys = ticks[TickType.SYSTEM.getIndex()] - prevTicks[TickType.SYSTEM.getIndex()];
-            long idle = ticks[TickType.IDLE.getIndex()] - prevTicks[TickType.IDLE.getIndex()];
-            long iowait = ticks[TickType.IOWAIT.getIndex()] - prevTicks[TickType.IOWAIT.getIndex()];
-            long irq = ticks[TickType.IRQ.getIndex()] - prevTicks[TickType.IRQ.getIndex()];
-            long softirq = ticks[TickType.SOFTIRQ.getIndex()] - prevTicks[TickType.SOFTIRQ.getIndex()];
-            long steal = ticks[TickType.STEAL.getIndex()] - prevTicks[TickType.STEAL.getIndex()];
-            long totalCpu = user + nice + sys + idle + iowait + irq + softirq + steal;
-            
-            
-            double[] load = cpu.getProcessorCpuLoadBetweenTicks(prevProcTicks);
-            Integer somaProc = 0;
-            Double total = 0.0;
-            
-            System.out.println(String.format("User: %.1f%%", (100d * user / totalCpu)));
-            
-            for (double avg : load) {
-                somaProc ++;
-                total += avg * 100;
-//                System.out.println(String.format(" %.1f%%", avg * 100));
-            }
-            float usoCPU = (float)(total/somaProc);
+            CentralProcessor cp = hal.getProcessor();
+            long[] prevTicks = cp.getSystemCpuLoadTicks();
+            Util.sleep(1000);
+            float usoCPU = (float) (cp.getSystemCpuLoadBetweenTicks(prevTicks) * 100d);
             dadosCPU = usoCPU;
         } catch (Exception e) {
             System.out.println("erro: " + e);;
         }
-    }
-    
-    public float consomeCpu(){
-        getUso();
         return dadosCPU;
-    }
-    
-
-//    public Double cpuPercent(){
-//
-//    }
-    public static void main(String[] args) {
-        Cpu cpu = new Cpu();
-//        System.out.println(cpu.printProcessor());
-//        System.out.println(cpu.getClock());
-//        System.out.println(String.format("%.2fºC", cpu.getTemperature()));
-        System.out.println(cpu.consomeCpu());
     }
 }

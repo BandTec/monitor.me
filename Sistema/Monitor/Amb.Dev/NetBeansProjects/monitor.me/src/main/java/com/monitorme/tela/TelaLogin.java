@@ -164,7 +164,7 @@ public class TelaLogin extends javax.swing.JFrame {
         user = new User(inputEmail.getText(), inputSenha.getText());
         if (user.getUsuarioLogado() != null) {
             this.setVisible(false);
-            TelaMonitor tela = new TelaMonitor();
+            TelaDash tela = new TelaDash();
             tela.setVisible(true);
         } else {
             System.out.println("Não encontrado");

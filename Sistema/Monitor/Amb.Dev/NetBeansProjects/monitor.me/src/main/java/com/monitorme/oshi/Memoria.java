@@ -19,7 +19,7 @@ public class Memoria {
 
     
     private float porcentagemMemoria;
-    private List<String> ramDisponivel = new ArrayList<>();
+    private List<String> dadosRam = new ArrayList<>();
     private List<String> discosRigidos = new ArrayList<>();
     private List<String> dadosColetados = new ArrayList<>();
     //Atributos
@@ -29,7 +29,7 @@ public class Memoria {
         coletaMemoriaRam();
         coletaDiscosRigidos(hal.getDiskStores());
         
-        dadosColetados.add(this.getRamDisponivel().toString());
+        dadosColetados.add(this.getDadosMemoriaRam().toString());
         dadosColetados.add(this.getDiscosRigidos().toString());
         return dadosColetados;
     }
@@ -40,28 +40,28 @@ public class Memoria {
     public List<String> coletaMemoriaRam() {
 //        long ram = (hal.getMemory().getAvailable() / 1024)/ 1024;
         
-        ramDisponivel.add("Avaiable: " + (hal.getMemory().getAvailable() / 1024)/ 1024);
-        ramDisponivel.add("Page Size: " + hal.getMemory().getPageSize());
-//        ramDisponivel.add("Memory Phisical: " + hal.getMemory().getPhysicalMemory());
+        dadosRam.add("Avaiable: " + (hal.getMemory().getAvailable() / 1024)/ 1024);
+        dadosRam.add("Page Size: " + hal.getMemory().getPageSize());
+//        dadosRam.add("Memory Phisical: " + hal.getMemory().getPhysicalMemory());
         
         PhysicalMemory[] pmArray = hal.getMemory().getPhysicalMemory();
         if (pmArray.length > 0) {
-            ramDisponivel.add("\n Physical Memory: ");
+            dadosRam.add("\n Physical Memory: ");
             for (PhysicalMemory pm : pmArray) {
-                ramDisponivel.add("Bank Label: " + pm.getBankLabel());
-                ramDisponivel.add("Manufacturer : " + pm.getManufacturer());
-                ramDisponivel.add("Memory Type: " + pm.getMemoryType());
-                ramDisponivel.add("Capacidade: " + ((pm.getCapacity()/1024)/1024));
-                ramDisponivel.add("\n Velocidade de Clock: " + ((pm.getClockSpeed()/1024)/1024));
+                dadosRam.add("Bank Label: " + pm.getBankLabel());
+                dadosRam.add("Manufacturer : " + pm.getManufacturer());
+                dadosRam.add("Memory Type: " + pm.getMemoryType());
+                dadosRam.add("Capacidade: " + ((pm.getCapacity()/1024)/1024));
+                dadosRam.add("\n Velocidade de Clock: " + ((pm.getClockSpeed()/1024)/1024));
             }
         }
-        ramDisponivel.add("Memoria Virtual: " + hal.getMemory().getVirtualMemory());
-        ramDisponivel.add("Memoria Total: " + (hal.getMemory().getTotal()/ 1024)/ 1024);
-        return ramDisponivel;
+        dadosRam.add("Memoria Virtual: " + hal.getMemory().getVirtualMemory());
+        dadosRam.add("Memoria Total: " + (hal.getMemory().getTotal()/ 1024)/ 1024);
+        return dadosRam;
     }
     
     //Porcetagem da memória que está sendo gasta
-    public float memoriaRamPorcentagem(){
+    public float getPorcentagemRam(){
         long usadoMem = hal.getMemory().getTotal() - hal.getMemory().getAvailable();
         return this.porcentagemMemoria = (float) ((100d * usadoMem) / hal.getMemory().getTotal());
     }
@@ -80,6 +80,8 @@ public class Memoria {
                 discosRigidos.add("\n | Name: " + part.getName());
                 discosRigidos.add("\n | Tipo: " + part.getType());
                 discosRigidos.add("\n | Uuid: " + part.getUuid());
+                discosRigidos.add("\n | Minor: " + part.getMajor());
+                discosRigidos.add("\n | Major: " + part.getMinor());
             }
         }
         return discosRigidos;
@@ -90,16 +92,13 @@ public class Memoria {
     }
     
     //Getters & Setters
-    public List<String> getRamDisponivel() {
-        return ramDisponivel;
+    public List<String> getDadosMemoriaRam() {
+        coletaMemoriaRam();
+        return dadosRam;
     }
 
     public List<String> getDiscosRigidos() {
+        coletaDiscosRigidos(hal.getDiskStores());
         return discosRigidos;
-    }
-    
-    public static void main(String[] args) {
-        Memoria m = new Memoria();
-        System.out.println(m.memoriaRamPorcentagem());
     }
 }
