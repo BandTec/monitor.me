@@ -18,8 +18,8 @@ public class MainTeste {
         Processos proc = new Processos();
         
         
-        System.out.println(g.getNomeGpu());
-        System.out.println(g.getMemoryGpu());
+//        System.out.println(g.getNomeGpu());
+//        System.out.println(g.getMemoryGpu());
 //        System.out.println(g.capturaNomeGpuOshi());
         
         //EXECUTE SEMPRE O NETBEANS COMO ADM, POIS PRECISA DE PERMISSAO ELEVADA PARA TER ACESSO AOS SENSORES
@@ -38,7 +38,7 @@ public class MainTeste {
 //        //Gpu teste com tudo que a api Jsensors consegue abstrair
 //        System.out.println("\n\n");
 //        System.out.println("JSensors: " + g.capturaGpuJsensor());
-//        
+          System.out.println(">> "+ proc.saveDadosProcessos());
 //        //Processos
 //        System.out.println("\n\n");        
 ////        System.out.println(proc.printProcesses(os, hal.getMemory()));

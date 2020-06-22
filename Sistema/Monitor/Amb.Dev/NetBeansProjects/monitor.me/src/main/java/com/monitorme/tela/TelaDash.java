@@ -11,6 +11,7 @@ import com.monitorme.chart.ChartGpu;
 import com.monitorme.jsensor.DadosGpu;
 import com.monitorme.oshi.Cpu;
 import com.monitorme.oshi.Memoria;
+import com.monitorme.oshi.Processos;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +50,6 @@ public class TelaDash extends javax.swing.JFrame {
         lblDisco.setText(memoria1.getDiscosRigidos().toString());
         //Cpu
         lblCpu.setText(cpu1.printProcessor());
-
         
         final long time = 1500;
 
