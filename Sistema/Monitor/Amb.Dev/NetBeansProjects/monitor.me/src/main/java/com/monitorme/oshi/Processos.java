@@ -45,16 +45,16 @@ public class Processos {
             oshiProcessos.add(String.valueOf(processos.getName())); //Adiciona nome do processo;
             oshiProcessos.add(String.valueOf(processos.getUser())); //Adiciona usuario do processo;
 
-            JSONObject json = new JSONObject();
-            json.put("PID", processos.getProcessID());
-            json.put("%CPU", (100d * (processos.getKernelTime() + processos.getUserTime()) / processos.getUpTime()));
-            json.put("%MEM", 100d * processos.getResidentSetSize() / memory.getTotal());
-            json.put("%VSZ", FormatUtil.formatBytes(processos.getVirtualSize()));
-            json.put("%RSS", FormatUtil.formatBytes(processos.getResidentSetSize()));
-            json.put("NOME", processos.getName());
-            json.put("USER", processos.getUser());
-            
-            jsonProcessos.add(json);
+//            JSONObject json = new JSONObject();
+//            json.put("PID", processos.getProcessID());
+//            json.put("%CPU", (100d * (processos.getKernelTime() + processos.getUserTime()) / processos.getUpTime()));
+//            json.put("%MEM", 100d * processos.getResidentSetSize() / memory.getTotal());
+//            json.put("%VSZ", FormatUtil.formatBytes(processos.getVirtualSize()));
+//            json.put("%RSS", FormatUtil.formatBytes(processos.getResidentSetSize()));
+//            json.put("NOME", processos.getName());
+//            json.put("USER", processos.getUser());
+//            
+//            jsonProcessos.add(json);
             
 
         }
@@ -62,31 +62,24 @@ public class Processos {
         return oshiProcessos;
     }
     
-//    public String gravaDadosProcessos(){
-//        retornaProcessos();
-//        JSONObject dadosProcessosToJson = new JSONObject();
-//           
-//        
-//        return dadosProcessosToJson.toString();
-//        
-//    }
+    public String gravaDadosProcessos(){;
+        retornaProcessos();
+        GlobalMemory memory = hal.getMemory();
+        List<OSProcess> procs = Arrays.asList(os.getProcesses(10, ProcessSort.CPU));
+        JSONObject json = new JSONObject();
+        
+        for(OSProcess processos : procs){
+            json.put("PID", processos.getProcessID());
+            json.put("%CPU", (100d * (processos.getKernelTime() + processos.getUserTime()) / processos.getUpTime()));
+            json.put("%MEM", 100d * processos.getResidentSetSize() / memory.getTotal());
+            json.put("%VSZ", FormatUtil.formatBytes(processos.getVirtualSize()));
+            json.put("%RSS", FormatUtil.formatBytes(processos.getResidentSetSize()));
+            json.put("NOME", processos.getName());
+            json.put("USER", processos.getUser());
+        }       
 
-//    public List printProcesses(OperatingSystem os, GlobalMemory memory) {
-//        oshiProcessos.add("My PID: " + os.getProcessId() + " with affinity "
-//                + Long.toBinaryString(os.getProcessAffinityMask(os.getProcessId())));
-//        oshiProcessos.add("Processes: " + os.getProcessCount() + ", Threads: " + os.getThreadCount());
-//        // Sort by highest CPU
-//        List<OSProcess> procs = Arrays.asList(os.getProcesses(10, ProcessSort.CPU));
-//
-//        oshiProcessos.add("   PID  %CPU %MEM       VSZ       RSS Name");
-//        for (int i = 0; i < procs.size() && i < 10; i++) {
-//            OSProcess p = procs.get(i);
-//            oshiProcessos.add(String.format(" %5d %5.1f %4.1f %9s %9s %s", p.getProcessID(),
-//                    100d * (p.getKernelTime() + p.getUserTime()) / p.getUpTime(),
-//                    100d * p.getResidentSetSize() / memory.getTotal(), FormatUtil.formatBytes(p.getVirtualSize()),
-//                    FormatUtil.formatBytes(p.getResidentSetSize()), p.getName()));
-//        }
-//        return oshiProcessos;
-//    }
+        return json.toString();
+        
+    }
 
 }

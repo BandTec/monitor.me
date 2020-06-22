@@ -1,20 +1,23 @@
 package com.monitorme.telegram;
 
-import com.mashape.unirest.http.exceptions.UnirestException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.telegram.telegrambots.ApiContextInitializer;
+import org.telegram.telegrambots.meta.TelegramBotsApi;
+import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class AppTelegram {
 
     public static void main(String[] args) {
 
-        TelegramBot bot1 = new TelegramBot("1127314189:AAHcH7b9CmwknOeiCJLXN3kayd_-77LLFj4");
+        ApiContextInitializer.init();
+        TelegramBotsApi telegram = new TelegramBotsApi();  //objeto telegram
+        MonitorMe mensagem = new MonitorMe();              //objeto da Classe Monitorme
 
-   //     try {
-   //        bot1.run();
-   //    } catch (UnirestException ex) {
-   //       Logger.getLogger(AppTelegram.class.getName()).log(Level.SEVERE, null, ex);
-   //    }
-
+        //Condição logica para rodar os metodos da classe Monitorme
+        try {
+            telegram.registerBot(new MonitorMe());
+            //          mensagem.enviarMensagem("1170936455", "Teste monitorMe");
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
+        }
     }
 }
