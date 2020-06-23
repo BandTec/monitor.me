@@ -47,7 +47,10 @@ public class TelaDash extends javax.swing.JFrame {
 //        lblMemoria.setText(gpu1.getMemoryGpu().toString());
         //Memoria
         lblTemperatura.setText(gpu1.getMediaTemperatura().toString());
-        lblDisco.setText(memoria1.getDiscosRigidos().toString());
+//        lblDisco.setText(memoria1.getDiscosRigidos().toString());
+//        lblDisco.setText(String.format(" %s livre de %s ",memoria1.getHdDisponivel(),memoria1.getHdTotal()));
+        lblDisco.setText(String.format("Espaço livre: %s ",memoria1.getHdDisponivel()));
+        lblDisco1.setText(String.format("Total Disponível: %s ",memoria1.getHdTotal()));
         //Cpu
         lblCpu.setText(cpu1.printProcessor());
         
@@ -150,6 +153,7 @@ public class TelaDash extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         lblDisco = new javax.swing.JLabel();
+        lblDisco1 = new javax.swing.JLabel();
         jPanel23 = new javax.swing.JPanel();
         jPanel13 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -394,7 +398,7 @@ public class TelaDash extends javax.swing.JFrame {
         );
         jInternalFrame2Layout.setVerticalGroup(
             jInternalFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 293, Short.MAX_VALUE)
+            .addGap(0, 286, Short.MAX_VALUE)
         );
 
         btnGpu.setBackground(new java.awt.Color(51, 0, 51));
@@ -524,21 +528,29 @@ public class TelaDash extends javax.swing.JFrame {
         lblDisco.setForeground(new java.awt.Color(204, 204, 204));
         lblDisco.setText("--------");
 
+        lblDisco1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblDisco1.setForeground(new java.awt.Color(204, 204, 204));
+        lblDisco1.setText("--------");
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(104, 104, 104)
-                .addComponent(lblDisco)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblDisco1)
+                    .addComponent(lblDisco))
                 .addContainerGap(113, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(40, 40, 40)
+                .addGap(19, 19, 19)
                 .addComponent(lblDisco)
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(lblDisco1)
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel22Layout = new javax.swing.GroupLayout(jPanel22);
@@ -856,6 +868,7 @@ public class TelaDash extends javax.swing.JFrame {
     private javax.swing.JLabel lblCpu;
     private javax.swing.JLabel lblCpuUso;
     private javax.swing.JLabel lblDisco;
+    private javax.swing.JLabel lblDisco1;
     private javax.swing.JLabel lblMemoRam;
     private javax.swing.JLabel lblMemoUso;
     private javax.swing.JLabel lblMemoria;

@@ -1,5 +1,6 @@
 package com.monitorme.oshi;
 
+import static com.monitorme.oshi.SystemInfoTest.oshi;
 import java.util.ArrayList;
 import java.util.List;
 import org.json.JSONObject;
@@ -11,18 +12,24 @@ import oshi.hardware.HWPartition;
 import oshi.hardware.HardwareAbstractionLayer;
 import oshi.hardware.PhysicalMemory;
 import oshi.hardware.Sensors;
+import oshi.software.os.FileSystem;
+import oshi.software.os.OSFileStore;
+import oshi.software.os.OperatingSystem;
+import oshi.util.FormatUtil;
 
 public class Memoria {
 
     SystemInfo si = new SystemInfo();
     HardwareAbstractionLayer hal = si.getHardware();
     CentralProcessor cpu = hal.getProcessor();
-
+    OperatingSystem os = si.getOperatingSystem();
+    FileSystem fs = os.getFileSystem();
     
     private float porcentagemMemoria;
     private List<String> dadosRam = new ArrayList<>();
     private List<String> discosRigidos = new ArrayList<>();
     private List<String> dadosColetados = new ArrayList<>();
+    
     //Atributos
 
     //MetodoMain
@@ -87,7 +94,31 @@ public class Memoria {
         }
         return discosRigidos;
     }
-
+    
+//    pegar a quantia total de espaço disponivel
+    public String getHdDisponivel() {
+        OSFileStore[] fsArray = fs.getFileStores();
+        String hdDisponivel = "";
+                
+        for (OSFileStore fs : fsArray) {
+            hdDisponivel = (String.valueOf(FormatUtil.formatBytes(fs.getUsableSpace())));            
+        }
+        
+        return hdDisponivel;
+    }  
+    
+//    pegar a capacidade total de HD
+    public String getHdTotal() {
+        OSFileStore[] fsArray = fs.getFileStores();
+        String hdTotal = "";
+                
+        for (OSFileStore fs : fsArray) {
+            hdTotal = (String.valueOf(FormatUtil.formatBytes(fs.getTotalSpace())));            
+        }
+        
+        return hdTotal;
+    } 
+    
     //Getters & Setters
     public List<String> getDadosMemoriaRam() {
         coletaMemoriaRam();

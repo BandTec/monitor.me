@@ -4,6 +4,7 @@ import com.monitorme.jsensor.DadosGpu;
 import oshi.SystemInfo;
 import oshi.hardware.CentralProcessor;
 import oshi.hardware.HardwareAbstractionLayer;
+import oshi.software.os.FileSystem;
 import oshi.software.os.OperatingSystem;
 
 public class MainTeste {
@@ -38,7 +39,7 @@ public class MainTeste {
 //        //Gpu teste com tudo que a api Jsensors consegue abstrair
 //        System.out.println("\n\n");
 //        System.out.println("JSensors: " + g.capturaGpuJsensor());
-          System.out.println(">> "+ proc.saveDadosProcessos());
+//          System.out.println(">> "+ proc.saveDadosProcessos());
 //        //Processos
 //        System.out.println("\n\n");        
 ////        System.out.println(proc.printProcesses(os, hal.getMemory()));
@@ -52,5 +53,8 @@ public class MainTeste {
 //        System.out.println(cpux.getClock());
 //        System.out.println(String.format("%.2fºC", cpux.getTemperature()));
 //        System.out.println(cpux.getUso());
+
+          System.out.println(m.getHdDisponivel());
+          System.out.println(m.getHdTotal());
     }
 }
