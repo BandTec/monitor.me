@@ -12,6 +12,7 @@ import com.monitorme.jsensor.DadosGpu;
 import com.monitorme.oshi.Cpu;
 import com.monitorme.oshi.Memoria;
 import com.monitorme.oshi.Processos;
+import com.monitorme.telegram.MonitorMe;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.IOException;
@@ -23,6 +24,10 @@ import java.util.Timer;
 import java.util.TimerTask;
 import javax.imageio.ImageIO;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
+import org.telegram.telegrambots.ApiContextInitializer;
+import org.telegram.telegrambots.meta.TelegramBotsApi;
+import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import org.telegram.telegrambots.meta.generics.BotSession;
 
 public class TelaDash extends javax.swing.JFrame {
 
@@ -31,6 +36,8 @@ public class TelaDash extends javax.swing.JFrame {
 
     //Objetos
     DadosGpu gpu1 = new DadosGpu();
+    TelegramBotsApi telegram = new TelegramBotsApi();  //objeto telegram
+    MonitorMe mensagem = new MonitorMe();
     Cpu cpu1 = new Cpu();
     Memoria memoria1 = new Memoria();
     InserirBanco inserir = new InserirBanco();
@@ -78,11 +85,13 @@ public class TelaDash extends javax.swing.JFrame {
                     //CPU
                     lblCpuUso.setText("Uso: " + String.format(" %.2f", cpu1.getUso()) + "%");
                     // <! -----------------Abaixo valida os alertas------------------>
-                    if (memoria1.getPorcentagemRam() > 800) {
-                        inserir.InserirInforHardware();
+                    if (memoria1.getPorcentagemRam() > 10) {
+//                        inserir.InserirInforHardware();
                         System.out.println("Ram alta: " + memoria1.getPorcentagemRam());
-                        //Se cair no alerta acima mande a mensagem abaixo: 
-//                            TelegramBot.mensagem("Seu Hardware parece estranho, de uma olhada: ");
+                        enviarAlerta();
+                        
+                        //jeito certo -> 
+                        //enviarAlerta(usuarioLogadoChatId)
                     } else {
                         System.out.println("Sistemas OK!");
                     }
@@ -93,6 +102,15 @@ public class TelaDash extends javax.swing.JFrame {
                 }
 
             }
+
+            private void enviarAlerta() {
+                mensagem.enviarMensagem(Long.valueOf(1156684369), "ME DEPOSITA 500 REAL");
+            }
+            
+            //Jeito certo ->
+//            private void enviarAlerta(chatid) {
+//                mensagem.enviarMensagem(Long.valueOf(this.chatid), "ME DEPOSITA 500 REAL");
+//            }
         };
         timerColeta.scheduleAtFixedRate(timeTask, 0, time);
 
@@ -805,6 +823,9 @@ public class TelaDash extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        ApiContextInitializer.init();
+        TelegramBotsApi telegram = new TelegramBotsApi();  //objeto telegram
+        MonitorMe mensagem = new MonitorMe(); 
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -891,7 +912,7 @@ public class TelaDash extends javax.swing.JFrame {
     private javax.swing.JProgressBar pgbDisco;
     // End of variables declaration//GEN-END:variables
 
-    private void setIcon(){
+    private void setIcon() {
         try {
             URL url = getClass().getResource("/com/monitorme/tela/pesq.png");
             Image icon = Toolkit.getDefaultToolkit().getImage(url);
