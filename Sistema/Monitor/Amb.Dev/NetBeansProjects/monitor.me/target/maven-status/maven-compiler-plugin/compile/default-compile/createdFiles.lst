@@ -12,6 +12,7 @@ com\monitorme\oshi\SystemInfoTest.class
 com\monitorme\tela\TelaMonitor$4.class
 com\monitorme\tela\TelaTeste.class
 com\monitorme\oshi\MainTeste.class
+com\monitorme\telegram\AppTelegram.class
 com\monitorme\banco\ConexaoBanco.class
 com\monitorme\tela\TelaCpu$3.class
 com\monitorme\chart\Chart$1.class

@@ -43,11 +43,11 @@ public class DadosGpu {
             gpuOshi.add(" None detected.");
         } else {
             for (GraphicsCard card : cards) {
-                gpuOshi.add("\nName: " + card.getName());
-                gpuOshi.add("\nId: " + card.getDeviceId());
-                gpuOshi.add("\nFabricante: " + card.getVendor());
-                gpuOshi.add("\nInformações de fábricação: " + card.getVersionInfo());
-                gpuOshi.add("\nVRam total: " + ((card.getVRam() / 1024) / 1024));
+                gpuOshi.add("Name: " + card.getName());
+                gpuOshi.add("Id: " + card.getDeviceId());
+                gpuOshi.add("Fabricante: " + card.getVendor());
+                gpuOshi.add("Informações de fábricação: " + card.getVersionInfo());
+                gpuOshi.add("VRam total: " + ((card.getVRam() / 1024) / 1024));
             }
         }
 

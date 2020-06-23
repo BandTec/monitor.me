@@ -50,7 +50,6 @@ public class ChartGpu extends JInternalFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("----------");
                 newData[0] = gpu.getMediaTemperatura().floatValue();
                 
                 dataset.advanceTime();
