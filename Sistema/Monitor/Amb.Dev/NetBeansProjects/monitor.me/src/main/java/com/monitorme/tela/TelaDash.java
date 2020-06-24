@@ -9,6 +9,7 @@ import com.monitorme.banco.InserirBanco;
 import com.monitorme.chart.Chart;
 import com.monitorme.chart.ChartGpu;
 import com.monitorme.jsensor.DadosGpu;
+import com.monitorme.oshi.Alerta;
 import com.monitorme.oshi.Cpu;
 import com.monitorme.oshi.Memoria;
 import com.monitorme.oshi.Processos;
@@ -40,6 +41,7 @@ public class TelaDash extends javax.swing.JFrame {
     MonitorMe mensagem = new MonitorMe();
     Cpu cpu1 = new Cpu();
     Memoria memoria1 = new Memoria();
+    Alerta alert = new Alerta();
     InserirBanco inserir = new InserirBanco();
     private String[] x = new String[1];
 
@@ -48,9 +50,7 @@ public class TelaDash extends javax.swing.JFrame {
         setIcon();
         setLocationRelativeTo(null);
         setTitle("Monitor Me");
-        setResizable(true);
-        setExtendedState(MAXIMIZED_HORIZ);
-        setExtendedState(MAXIMIZED_BOTH);
+        setResizable(false);
 
         this.x = memoria1.getDadosMemoriaRam().get(13).split(":");
         //Abaixo coloque tudo que for estático e precisa ser setado 1 unica vez, como por exemplo, nome dos Hardwares.
@@ -82,35 +82,26 @@ public class TelaDash extends javax.swing.JFrame {
                     lblMemoRam.setText("Status: " + x[2]);
 
                     //GPU
+                    
                     //CPU
                     lblCpuUso.setText("Uso: " + String.format(" %.2f", cpu1.getUso()) + "%");
+                    
+                    
+                    
                     // <! -----------------Abaixo valida os alertas------------------>
                     if (memoria1.getPorcentagemRam() > 10) {
 //                        inserir.InserirInforHardware();
                         System.out.println("Ram alta: " + memoria1.getPorcentagemRam());
-                        enviarAlerta();
-                        
-                        //jeito certo -> 
-                        //enviarAlerta(usuarioLogadoChatId)
-                    } else {
-                        System.out.println("Sistemas OK!");
+                        alert.enviarAlerta("memoria", "critico", ("Sua memoria está em um nivel de uso de: " + memoria1.getPorcentagemRam()));
+                    } else if(cpu1.getUso() > 95){
+                        alert.enviarAlerta("cpu", "Critico", ("Sua Cpu está em um nivel de uso de: " + cpu1.getUso()));
+                        System.out.println("CPU ALTA!");
                     }
-                    // <! -------------------------------------------------------------->
-
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
 
             }
-
-            private void enviarAlerta() {
-                mensagem.enviarMensagem(Long.valueOf(1156684369), "ME DEPOSITA 500 REAL");
-            }
-            
-            //Jeito certo ->
-//            private void enviarAlerta(chatid) {
-//                mensagem.enviarMensagem(Long.valueOf(this.chatid), "ME DEPOSITA 500 REAL");
-//            }
         };
         timerColeta.scheduleAtFixedRate(timeTask, 0, time);
 
@@ -363,6 +354,7 @@ public class TelaDash extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(153, 153, 153));
+        jPanel1.setPreferredSize(new java.awt.Dimension(1400, 685));
 
         jPanel2.setBackground(new java.awt.Color(51, 51, 51));
 
@@ -379,7 +371,7 @@ public class TelaDash extends javax.swing.JFrame {
                 .addComponent(jLabel14)
                 .addGap(233, 233, 233)
                 .addComponent(jLabel13)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(553, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
