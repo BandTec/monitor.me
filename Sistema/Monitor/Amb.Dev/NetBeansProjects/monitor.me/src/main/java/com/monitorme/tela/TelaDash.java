@@ -41,7 +41,8 @@ public class TelaDash extends javax.swing.JFrame {
     MonitorMe mensagem = new MonitorMe();
     Cpu cpu1 = new Cpu();
     Memoria memoria1 = new Memoria();
-    Alerta alert = new Alerta();
+    Alerta alertMemoria = new Alerta();
+    Alerta alertCpu = new Alerta();
     InserirBanco inserir = new InserirBanco();
     private String[] x = new String[1];
 
@@ -91,12 +92,22 @@ public class TelaDash extends javax.swing.JFrame {
                     // <! -----------------Abaixo valida os alertas------------------>
                     if (memoria1.getPorcentagemRam() > 10) {
 //                        inserir.InserirInforHardware();
-                        System.out.println("Ram alta: " + memoria1.getPorcentagemRam());
-                        alert.enviarAlerta("memoria", "critico", ("Sua memoria está em um nivel de uso de: " + memoria1.getPorcentagemRam()));
-                    } else if(cpu1.getUso() > 95){
-                        alert.enviarAlerta("cpu", "Critico", ("Sua Cpu está em um nivel de uso de: " + cpu1.getUso()));
-                        System.out.println("CPU ALTA!");
+                        alertMemoria.adicionarEvento(Double.valueOf(memoria1.getPorcentagemRam()));
+                        if (alertMemoria.getContadorDeEventos().size() > 10) {
+                            alertMemoria.enviarAlerta("memoria", "Critico", ("Sua memoria está em média de uso de: " + alertMemoria.mediaEvento()));
+                            alertMemoria.limparEventos();
+                        }
                     }
+                    
+                    if(cpu1.getUso() > 1){
+                        alertCpu.adicionarEvento(Double.valueOf(cpu1.getUso()));
+                        if (alertCpu.getContadorDeEventos().size() > 2) {
+                            alertCpu.enviarAlerta("cpu", "Critico", ("Sua Cpu está em um nivel de uso de: " + alertCpu.mediaEvento()));
+                            alertCpu.limparEventos();
+                        }
+                    }
+                    
+                    
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
