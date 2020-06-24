@@ -24,6 +24,11 @@ export class CadastroComponent implements OnInit {
 
   }
 
+  public sendTelegramAlert(){
+    this.userService.show("Lembre-se, para recuperar seu id Telegram é necessário ter o App ou estar Logado na Web");
+    setInterval(() => {window.location.href = "https://telegram.me/chatid_echo_bot";}, 3000);
+  }
+
   async signup(form) {
 
     try {

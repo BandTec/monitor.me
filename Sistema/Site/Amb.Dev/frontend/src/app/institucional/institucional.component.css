@@ -31,6 +31,14 @@
 
 .menuButton {
   margin-right: 15px;
+  width: auto;
+  background-color: rgba(113, 32, 116, 0.7);
+  transition: 0.3s;
+}
+
+.menuButton:hover{
+  transition: 0.3s;
+  background-color: rgba(50, 15, 51, 0.5);
 }
 
 .logo {
