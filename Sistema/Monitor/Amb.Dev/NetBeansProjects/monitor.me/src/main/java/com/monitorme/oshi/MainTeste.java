@@ -55,7 +55,7 @@ public class MainTeste {
 //        System.out.println(cpux.getUso());
 
 //          System.out.println(m.getHdDisponivel());
-//          System.out.println(m.saveDadosMemoria());
-          System.out.println(m.coletaDadosMemoria(hal.getDiskStores()));
+          System.out.println(m.saveDadosMemoria());
+//          System.out.println(m.coletaDadosMemoria(hal.getDiskStores()));
     }
 }

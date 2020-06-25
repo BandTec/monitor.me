@@ -25,7 +25,7 @@ public class Memoria {
     OperatingSystem os = si.getOperatingSystem();
     FileSystem fs = os.getFileSystem();
 
-    private List<JSONObject> json = new ArrayList<>();
+    private List<JSONObject> dadosMemoria = new ArrayList<>();    
     private float porcentagemMemoria;
 
     //Porcetagem da memória que está sendo gasta
@@ -37,41 +37,47 @@ public class Memoria {
     //Disco Rigido
     public List<JSONObject> coletaDadosMemoria(HWDiskStore[] diskStores) {
         JSONObject jsonDisk = new JSONObject();
-
-        json.add(jsonDisk.put("Avaiable", (hal.getMemory().getAvailable() / 1024) / 1024));
-        json.add(jsonDisk.put("PageSize", hal.getMemory().getPageSize()));
+        try {
+            jsonDisk.put("Avaiable", (hal.getMemory().getAvailable() / 1024) / 1024);
+            jsonDisk.put("PageSize", hal.getMemory().getPageSize());
 
         PhysicalMemory[] pmArray = hal.getMemory().getPhysicalMemory();
         if (pmArray.length > 0) {
             for (PhysicalMemory pm : pmArray) {
-                json.add(jsonDisk.put("BankLabel", pm.getBankLabel()));
-                json.add(jsonDisk.put("Manufacturer", pm.getManufacturer()));
-                json.add(jsonDisk.put("MemoryType", pm.getMemoryType()));
-                json.add(jsonDisk.put("Capacidade", ((pm.getCapacity() / 1024) / 1024)));
-                json.add(jsonDisk.put("VelocidadeClock", ((pm.getClockSpeed() / 1024) / 1024)));
+                jsonDisk.put("BankLabel", pm.getBankLabel());
+                jsonDisk.put("Manufacturer", pm.getManufacturer());
+                jsonDisk.put("MemoryType", pm.getMemoryType());
+                jsonDisk.put("Capacidade", ((pm.getCapacity() / 1024) / 1024));
+                jsonDisk.put("VelocidadeClock", ((pm.getClockSpeed() / 1024) / 1024));
 
             }
         }
-        json.add(jsonDisk.put("MemoriaVirtual", hal.getMemory().getVirtualMemory()));
-        json.add(jsonDisk.put("MemoriaTotal", (hal.getMemory().getTotal() / 1024) / 1024));
+        jsonDisk.put("MemoriaVirtual", hal.getMemory().getVirtualMemory());
+        jsonDisk.put("MemoriaTotal", (hal.getMemory().getTotal() / 1024) / 1024);
 
         for (HWDiskStore disk : diskStores) {
-            json.add(jsonDisk.put("Modelo", disk.getModel()));
+            jsonDisk.put("Modelo", disk.getModel());
 //            discosRigidos.add("Nome: " + disk.getName()); // Talvez não seja necessário por isso deixei comentado
-            json.add(jsonDisk.put("Serial", disk.getSerial()));
+            jsonDisk.put("Serial", disk.getSerial());
 
             HWPartition[] partitions = disk.getPartitions();
             for (HWPartition part : partitions) {
-                json.add(jsonDisk.put("Identificacao", part.getIdentification()));
-                json.add(jsonDisk.put("MountPoint", part.getMountPoint()));
-                json.add(jsonDisk.put("Name", part.getName()));
-                json.add(jsonDisk.put("Tipo", part.getType()));
-                json.add(jsonDisk.put("Uuid", part.getUuid()));
-                json.add(jsonDisk.put("Minor", part.getMajor()));
-                json.add(jsonDisk.put("Major", part.getMinor()));
+                jsonDisk.put("Identificacao", part.getIdentification());
+                jsonDisk.put("MountPoint", part.getMountPoint());
+                jsonDisk.put("Name", part.getName());
+                jsonDisk.put("Tipo", part.getType());
+                jsonDisk.put("Uuid", part.getUuid());
+                jsonDisk.put("Minor", part.getMajor());
+                jsonDisk.put("Major", part.getMinor());
             }
         }
-        return json;
+        dadosMemoria.add(jsonDisk);
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+        }
+        
+        System.out.println("ESSE é o J" + dadosMemoria);
+        return dadosMemoria;
     }
 
 //    pegar a quantia total de espaço disponivel

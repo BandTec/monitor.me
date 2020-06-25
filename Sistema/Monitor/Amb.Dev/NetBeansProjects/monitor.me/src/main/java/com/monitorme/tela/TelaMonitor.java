@@ -38,7 +38,7 @@ public class TelaMonitor extends javax.swing.JFrame {
                     // <! -------------------------------------------------------------->
                     if (MRam.getPorcentagemRam() > 1000) {
                         // Inserir no banco informações
-                        inserir.InserirInforHardware();
+                        inserir.InserirBanco();
                         System.out.println("Ram alta: " + MRam.getPorcentagemRam());
                         //Se cair no alerta acima mande a mensagem abaixo: 
 //                            TelegramBot.mensagem("");
