@@ -22,11 +22,10 @@ import org.json.JSONObject;
  */
 public class Processos {
 
-    Memoria m = new Memoria();
     SystemInfo si = new SystemInfo();
     HardwareAbstractionLayer hal = si.getHardware();
-    CentralProcessor cpu = hal.getProcessor();
     OperatingSystem os = si.getOperatingSystem();
+    
     private List<String> oshiProcessos = new ArrayList<>();
     List<JSONObject> jsonProcessos = new ArrayList<>();
     

@@ -19,6 +19,7 @@ com\monitorme\chart\Chart$1.class
 com\monitorme\tela\TelaCpu$1.class
 com\monitorme\tela\TelaMonitor$2.class
 com\monitorme\chart\ChartGpu$2.class
+com\monitorme\oshi\Alerta.class
 com\monitorme\tela\TelaDash$1.class
 com\monitorme\tela\TelaLogin.class
 com\monitorme\oshi\Gpu.class
