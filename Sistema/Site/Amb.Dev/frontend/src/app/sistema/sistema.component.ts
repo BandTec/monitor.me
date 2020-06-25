@@ -26,11 +26,11 @@ export class SistemaComponent implements OnInit {
   
   ngOnInit(): void {
 
-    this.userService.getUser(this.token).
-    subscribe(data => {
-      this.user = data;
-      console.log(this.user)
-    });
+    // this.userService.getUser(this.token).
+    // subscribe(data => {
+    //   this.user = data;
+    //   console.log(this.user)
+    // });
 
   }
 

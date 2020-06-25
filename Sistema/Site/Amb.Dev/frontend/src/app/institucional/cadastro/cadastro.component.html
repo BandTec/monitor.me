@@ -12,7 +12,7 @@
             <input matInput placeholder="Email" [(ngModel)]="user.email" name="email">
           </mat-form-field>
           <mat-form-field class="field">
-            <input matInput placeholder="Celular" [(ngModel)]="user.contato" name="celular">
+            <input matInput placeholder="Celular" [(ngModel)]="user.cellphone" name="cellphone">
           </mat-form-field>
           <mat-form-field class="field">
             <input matInput placeholder="Senha" [(ngModel)]="user.password" name="password" type="password">
@@ -21,7 +21,7 @@
             <input matInput placeholder="Confirme sua Senha" name="confirmpassword" type="password">
           </mat-form-field>
           <mat-form-field class="field">
-            <input matInput placeholder="Telegram ChatID" name="confirmpassword">
+            <input matInput placeholder="Telegram ChatID" [(ngModel)]="user.idTelegram" name="idTelegram">
           </mat-form-field>
           <button mat-raised-button color="primary" type="submit" class="btnCad">Cadastrar</button>
         </form>

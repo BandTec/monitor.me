@@ -25,12 +25,12 @@ export class HardwareCreateComponent implements OnInit {
     
   }
 
-  createHardware(): void{
-    this.hardwareService.createHardware(this.hardware, this.token).subscribe(()=>{
-      this.hardwareService.show('Hardware Inserido com sucesso!')
-      this.router.navigate(['sistema/hardware'])
-    });
-  }
+  // createHardware(): void{
+  //   this.hardwareService.createHardware(this.hardware, this.token).subscribe(()=>{
+  //     this.hardwareService.show('Hardware Inserido com sucesso!')
+  //     this.router.navigate(['sistema/hardware'])
+  //   });
+  // }
 
   cancel():void {
     this.router.navigate(['sistema/hardware'])
