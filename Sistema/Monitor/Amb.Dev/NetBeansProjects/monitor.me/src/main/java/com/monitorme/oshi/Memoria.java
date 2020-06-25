@@ -3,6 +3,7 @@ package com.monitorme.oshi;
 import static com.monitorme.oshi.SystemInfoTest.oshi;
 import java.util.ArrayList;
 import java.util.List;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import oshi.SystemInfo;
 import oshi.hardware.CentralProcessor;
@@ -32,6 +33,12 @@ public class Memoria {
     public float getPorcentagemRam() {
         long usadoMem = hal.getMemory().getTotal() - hal.getMemory().getAvailable();
         return this.porcentagemMemoria = (float) ((100d * usadoMem) / hal.getMemory().getTotal());
+    }
+    
+    public String getFromJson(String valor){
+        JSONArray xt = new JSONArray(getDadosMemoriaRam());
+        JSONObject y = xt.getJSONObject(0);        
+        return y.get(valor).toString();
     }
 
     //Dados Memorias
@@ -75,8 +82,6 @@ public class Memoria {
         } catch (Exception e) {
             System.out.println("Error: " + e);
         }
-        
-        System.out.println("ESSE é o J" + dadosMemoria);
         return dadosMemoria;
     }
 

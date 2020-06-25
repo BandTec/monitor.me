@@ -48,7 +48,6 @@ public class TelaDash extends javax.swing.JFrame {
     SystemInfo si = new SystemInfo();
     HardwareAbstractionLayer hal = si.getHardware();
     InserirBanco inserir = new InserirBanco();
-    private String[] x = new String[1];
 
     public TelaDash() {
         initComponents();
@@ -56,8 +55,7 @@ public class TelaDash extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setTitle("Monitor Me");
         setResizable(false);
-
-//        this.x = memoria1.getDadosMemoriaRam().get(13).split(":");
+        
         //Abaixo coloque tudo que for estático e precisa ser setado 1 unica vez, como por exemplo, nome dos Hardwares.
 //        lblMemoRam.setText(memoria1.getDiscosRigidos().toString());
 //        
@@ -84,7 +82,7 @@ public class TelaDash extends javax.swing.JFrame {
                     memoria1.coletaDadosMemoria(hal.getDiskStores());
                     //RAM
                     lblMemoUso.setText(String.format(" %.2f", memoria1.getPorcentagemRam()) + "%");
-                    lblMemoRam.setText("Status: " + x[2]);
+                    lblMemoRam.setText("Status: " + memoria1.getFromJson("MemoriaVirtual"));
 
                     //GPU
                     
