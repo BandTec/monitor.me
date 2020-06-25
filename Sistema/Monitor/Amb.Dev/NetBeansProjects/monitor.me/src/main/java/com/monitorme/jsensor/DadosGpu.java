@@ -166,7 +166,6 @@ public class DadosGpu {
 
     //Getters
     public Double getMemoryGpu() {
-        getLoadInfo();
         memoryGpu = loadGpu.get(3);
         
         if (memoryGpu == null || memoryGpu == 0) {
@@ -179,19 +178,16 @@ public class DadosGpu {
     }
 
     public Double getMemoryControllerGpu() {
-        getLoadInfo();
         memoryControllerGpu = loadGpu.get(1);
         return memoryControllerGpu;
     }
 
     public Double getVideoEngineGpu() {
-        getLoadInfo();
         videoEngineGpu = loadGpu.get(2);
         return videoEngineGpu;
     }
 
     public Double getCoreGpu() {
-        getLoadInfo();
         coreGpu = loadGpu.get(0);
         return coreGpu;
     }

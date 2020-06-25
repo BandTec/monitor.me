@@ -1,22 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.monitorme.oshi;
 
-import static com.monitorme.oshi.SystemInfoTest.oshi;
+import com.profesorfalken.jsensors.JSensors;
+import com.profesorfalken.jsensors.model.components.Components;
+import com.profesorfalken.jsensors.model.sensors.Temperature;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import org.json.JSONObject;
 import oshi.SystemInfo;
 import oshi.hardware.CentralProcessor;
-import oshi.hardware.CentralProcessor.TickType;
-import oshi.hardware.ComputerSystem;
 import oshi.hardware.HardwareAbstractionLayer;
 import oshi.hardware.Sensors;
-import oshi.software.os.OperatingSystem;
 import oshi.util.FormatUtil;
 import oshi.util.Util;
 
@@ -29,6 +23,8 @@ public class Cpu {
     private Sensors sensors = hal.getSensors();
     private float dadosCPU;
     private List<Double> listFloatCpu = new ArrayList<>();
+    Components components = JSensors.get.components();
+    List<com.profesorfalken.jsensors.model.components.Cpu> cp = components.cpus;
     long[] freq;
 
     //informaçoes do processador
@@ -53,7 +49,21 @@ public class Cpu {
     }
 
     public Double getTemperature() {
-        return sensors.getCpuTemperature();
+        Double tempTotal = 0.0;
+        if (sensors.getCpuTemperature() == 0.0) {
+            for (final com.profesorfalken.jsensors.model.components.Cpu c : cp) {
+                List<Temperature> temp = c.sensors.temperatures;
+                for (final Temperature tempCpu : temp) {
+                    System.out.println(tempCpu.name + ": " + tempCpu.value);
+                    if (tempCpu.name.startsWith("Temp CPU Package")) {
+                        tempTotal = tempCpu.value;
+                    }
+                }
+            }
+        }else{
+            tempTotal = sensors.getCpuTemperature();
+        }
+        return tempTotal;
     }
 
     public float getUso() {
@@ -68,5 +78,20 @@ public class Cpu {
             System.out.println("erro: " + e);;
         }
         return dadosCPU;
+    }
+
+    public String saveDadosCpu() {
+
+        JSONObject dadosCpuToJson = new JSONObject();
+
+        try {
+            dadosCpuToJson.put("getUsoUser", String.format(" %.2f", getUso()));
+            dadosCpuToJson.put("getTemperatura", getTemperature());
+            dadosCpuToJson.put("getNomeProc", printProcessor());
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+        }
+
+        return dadosCpuToJson.toString();
     }
 }

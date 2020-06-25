@@ -34,7 +34,7 @@ public class Memoria {
         return this.porcentagemMemoria = (float) ((100d * usadoMem) / hal.getMemory().getTotal());
     }
 
-    //Disco Rigido
+    //Dados Memorias
     public List<JSONObject> coletaDadosMemoria(HWDiskStore[] diskStores) {
         JSONObject jsonDisk = new JSONObject();
         try {
@@ -119,6 +119,7 @@ public class Memoria {
             dadosMemoToJson.put("porcentRam", String.format(" %.2f", getPorcentagemRam()));
             dadosMemoToJson.put("dadosMemoria", getDadosMemoriaRam());
             dadosMemoToJson.put("hdTotal", getHdTotal());
+            dadosMemoToJson.put("hdDisponivel", getHdDisponivel());
         } catch (Exception e) {
             System.out.println("Error: " + e);
         }
