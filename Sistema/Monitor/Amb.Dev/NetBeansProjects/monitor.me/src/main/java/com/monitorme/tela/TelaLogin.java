@@ -12,7 +12,7 @@ public class TelaLogin extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setTitle("Login");
         setResizable(false);
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("DevLogoWhite.png")));
+//        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("DevLogoWhite.png")));
     }
 
     @SuppressWarnings("unchecked")
