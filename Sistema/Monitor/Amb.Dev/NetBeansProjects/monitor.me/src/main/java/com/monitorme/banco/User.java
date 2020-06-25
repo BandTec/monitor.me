@@ -9,12 +9,14 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 public class User {
 
-    private int idTelegram;
-    private Object x;
+    public static int idTelegram;
     public static Integer UsuarioLogado = null;
 
     public static Integer getUsuarioLogado() {
         return UsuarioLogado;
+    }
+    public static int getTelegram(){
+        return idTelegram;
     }
 
     public User(String email, String senha) {
@@ -39,7 +41,7 @@ public class User {
                 JSONObject id = xt.getJSONObject("Telegram");
                 this.idTelegram = id.getInt("idTelegram");
 
-                System.out.println("seu Telegram é: " + getIdTelegram());
+                System.out.println("seu Telegram é: " + idTelegram);
             } else {
                 JOptionPane.showMessageDialog(null, "Usuário ou Senha inválidos!", "Login inválido", JOptionPane.ERROR_MESSAGE);
             }
@@ -48,13 +50,5 @@ public class User {
         }
 
     }
-    public int getIdTelegram() {
-        return idTelegram;
-    }
-
-    public void setIdTelegram(int idTelegram) {
-        this.idTelegram = idTelegram;
-    }
-
     
 }

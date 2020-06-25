@@ -1,5 +1,6 @@
 package com.monitorme.oshi;
 
+import com.monitorme.banco.User;
 import com.monitorme.telegram.MonitorMe;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,11 +19,11 @@ public class Alerta {
     //Metodos
     public void enviarAlerta(String categoriaAlerta, String statusAlerta, String msgAlerta) {
         if (categoriaAlerta == "gpu") {
-            mensagem.enviarMensagem(Long.valueOf(1156684369), (statusAlerta+": "+ msgAlerta));
+            mensagem.enviarMensagem(Long.valueOf(User.idTelegram), (statusAlerta+": "+ msgAlerta));
         }else if(categoriaAlerta == "memoria"){
-            mensagem.enviarMensagem(Long.valueOf(1156684369), (statusAlerta+": "+ msgAlerta));
+            mensagem.enviarMensagem(Long.valueOf(User.idTelegram), (statusAlerta+": "+ msgAlerta));
         }else if(categoriaAlerta == "cpu"){
-            mensagem.enviarMensagem(Long.valueOf(1156684369), (statusAlerta+": "+ msgAlerta));
+            mensagem.enviarMensagem(Long.valueOf(User.idTelegram), (statusAlerta+": "+ msgAlerta));
         }
     }
     public void limparEventos(){
