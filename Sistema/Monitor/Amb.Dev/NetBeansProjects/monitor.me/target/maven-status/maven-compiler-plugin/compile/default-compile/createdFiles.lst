@@ -29,6 +29,7 @@ com\monitorme\oshi\Processos.class
 com\monitorme\tela\TelaLogin$2.class
 com\monitorme\tela\TelaDetalhamento$1.class
 com\monitorme\chart\ChartGpu$1.class
+com\monitorme\oshi\Logger.class
 com\monitorme\jsensor\DadosGpu.class
 com\monitorme\tela\TelaDetalhamento.class
 com\monitorme\tela\TelaCpu.class

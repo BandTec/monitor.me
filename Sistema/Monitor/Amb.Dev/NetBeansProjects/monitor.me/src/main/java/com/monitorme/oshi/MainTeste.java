@@ -54,7 +54,8 @@ public class MainTeste {
 //        System.out.println(String.format("%.2fºC", cpux.getTemperature()));
 //        System.out.println(cpux.getUso());
 
-          System.out.println(m.getHdDisponivel());
-          System.out.println(m.getHdTotal());
+//          System.out.println(m.getHdDisponivel());
+//          System.out.println(m.saveDadosMemoria());
+          System.out.println(m.coletaDadosMemoria(hal.getDiskStores()));
     }
 }

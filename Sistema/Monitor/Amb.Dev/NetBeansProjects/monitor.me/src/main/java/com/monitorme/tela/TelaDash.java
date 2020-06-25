@@ -29,6 +29,8 @@ import org.telegram.telegrambots.ApiContextInitializer;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.meta.generics.BotSession;
+import oshi.SystemInfo;
+import oshi.hardware.HardwareAbstractionLayer;
 
 public class TelaDash extends javax.swing.JFrame {
 
@@ -43,6 +45,8 @@ public class TelaDash extends javax.swing.JFrame {
     Memoria memoria1 = new Memoria();
     Alerta alertMemoria = new Alerta();
     Alerta alertCpu = new Alerta();
+    SystemInfo si = new SystemInfo();
+    HardwareAbstractionLayer hal = si.getHardware();
     InserirBanco inserir = new InserirBanco();
     private String[] x = new String[1];
 
@@ -53,7 +57,7 @@ public class TelaDash extends javax.swing.JFrame {
         setTitle("Monitor Me");
         setResizable(false);
 
-        this.x = memoria1.getDadosMemoriaRam().get(13).split(":");
+//        this.x = memoria1.getDadosMemoriaRam().get(13).split(":");
         //Abaixo coloque tudo que for estático e precisa ser setado 1 unica vez, como por exemplo, nome dos Hardwares.
 //        lblMemoRam.setText(memoria1.getDiscosRigidos().toString());
 //        
@@ -77,7 +81,7 @@ public class TelaDash extends javax.swing.JFrame {
             public void run() {
 
                 try {
-                    memoria1.coletaMemoriaRam();
+                    memoria1.coletaDadosMemoria(hal.getDiskStores());
                     //RAM
                     lblMemoUso.setText(String.format(" %.2f", memoria1.getPorcentagemRam()) + "%");
                     lblMemoRam.setText("Status: " + x[2]);

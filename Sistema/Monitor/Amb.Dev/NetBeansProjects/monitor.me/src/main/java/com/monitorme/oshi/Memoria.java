@@ -25,46 +25,8 @@ public class Memoria {
     OperatingSystem os = si.getOperatingSystem();
     FileSystem fs = os.getFileSystem();
 
+    private List<JSONObject> json = new ArrayList<>();
     private float porcentagemMemoria;
-    private List<String> dadosRam = new ArrayList<>();
-    private List<String> discosRigidos = new ArrayList<>();
-    private List<String> dadosColetados = new ArrayList<>();
-
-    //Atributos
-    //MetodoMain
-    public List dadosMemoria() {
-        coletaMemoriaRam();
-        coletaDiscosRigidos(hal.getDiskStores());
-
-        dadosColetados.add(this.getDadosMemoriaRam().toString());
-        dadosColetados.add(this.getDiscosRigidos().toString());
-        return dadosColetados;
-    }
-
-    //Metodos
-    //Memoria Ram
-    public List<String> coletaMemoriaRam() {
-//        long ram = (hal.getMemory().getAvailable() / 1024)/ 1024;
-
-        dadosRam.add("Avaiable: " + (hal.getMemory().getAvailable() / 1024) / 1024);
-        dadosRam.add("Page Size: " + hal.getMemory().getPageSize());
-//        dadosRam.add("Memory Phisical: " + hal.getMemory().getPhysicalMemory());
-
-        PhysicalMemory[] pmArray = hal.getMemory().getPhysicalMemory();
-        if (pmArray.length > 0) {
-            dadosRam.add("\n Physical Memory: ");
-            for (PhysicalMemory pm : pmArray) {
-                dadosRam.add("Bank Label: " + pm.getBankLabel());
-                dadosRam.add("Manufacturer : " + pm.getManufacturer());
-                dadosRam.add("Memory Type: " + pm.getMemoryType());
-                dadosRam.add("Capacidade: " + ((pm.getCapacity() / 1024) / 1024));
-                dadosRam.add("\n Velocidade de Clock: " + ((pm.getClockSpeed() / 1024) / 1024));
-            }
-        }
-        dadosRam.add("Memoria Virtual: " + hal.getMemory().getVirtualMemory());
-        dadosRam.add("Memoria Total: " + (hal.getMemory().getTotal() / 1024) / 1024);
-        return dadosRam;
-    }
 
     //Porcetagem da memória que está sendo gasta
     public float getPorcentagemRam() {
@@ -73,24 +35,43 @@ public class Memoria {
     }
 
     //Disco Rigido
-    public List<String> coletaDiscosRigidos(HWDiskStore[] diskStores) {
+    public List<JSONObject> coletaDadosMemoria(HWDiskStore[] diskStores) {
+        JSONObject jsonDisk = new JSONObject();
+
+        json.add(jsonDisk.put("Avaiable", (hal.getMemory().getAvailable() / 1024) / 1024));
+        json.add(jsonDisk.put("PageSize", hal.getMemory().getPageSize()));
+
+        PhysicalMemory[] pmArray = hal.getMemory().getPhysicalMemory();
+        if (pmArray.length > 0) {
+            for (PhysicalMemory pm : pmArray) {
+                json.add(jsonDisk.put("BankLabel", pm.getBankLabel()));
+                json.add(jsonDisk.put("Manufacturer", pm.getManufacturer()));
+                json.add(jsonDisk.put("MemoryType", pm.getMemoryType()));
+                json.add(jsonDisk.put("Capacidade", ((pm.getCapacity() / 1024) / 1024)));
+                json.add(jsonDisk.put("VelocidadeClock", ((pm.getClockSpeed() / 1024) / 1024)));
+
+            }
+        }
+        json.add(jsonDisk.put("MemoriaVirtual", hal.getMemory().getVirtualMemory()));
+        json.add(jsonDisk.put("MemoriaTotal", (hal.getMemory().getTotal() / 1024) / 1024));
+
         for (HWDiskStore disk : diskStores) {
-            discosRigidos.add("Modelo: " + disk.getModel());
+            json.add(jsonDisk.put("Modelo", disk.getModel()));
 //            discosRigidos.add("Nome: " + disk.getName()); // Talvez não seja necessário por isso deixei comentado
-            discosRigidos.add("Serial: " + disk.getSerial());
+            json.add(jsonDisk.put("Serial", disk.getSerial()));
 
             HWPartition[] partitions = disk.getPartitions();
             for (HWPartition part : partitions) {
-                discosRigidos.add("Identificacao: " + part.getIdentification());
-                discosRigidos.add("MountPoint: " + part.getMountPoint());
-                discosRigidos.add("Name: " + part.getName());
-                discosRigidos.add("Tipo: " + part.getType());
-                discosRigidos.add("Uuid: " + part.getUuid());
-                discosRigidos.add("Minor: " + part.getMajor());
-                discosRigidos.add("Major: " + part.getMinor());
+                json.add(jsonDisk.put("Identificacao", part.getIdentification()));
+                json.add(jsonDisk.put("MountPoint", part.getMountPoint()));
+                json.add(jsonDisk.put("Name", part.getName()));
+                json.add(jsonDisk.put("Tipo", part.getType()));
+                json.add(jsonDisk.put("Uuid", part.getUuid()));
+                json.add(jsonDisk.put("Minor", part.getMajor()));
+                json.add(jsonDisk.put("Major", part.getMinor()));
             }
         }
-        return discosRigidos;
+        return json;
     }
 
 //    pegar a quantia total de espaço disponivel
@@ -120,14 +101,8 @@ public class Memoria {
     }
 
     //Getters & Setters
-    public List<String> getDadosMemoriaRam() {
-        coletaMemoriaRam();
-        return dadosRam;
-    }
-
-    public List<String> getDiscosRigidos() {
-        coletaDiscosRigidos(hal.getDiskStores());
-        return discosRigidos;
+    public List<JSONObject> getDadosMemoriaRam() {
+        return coletaDadosMemoria(hal.getDiskStores());
     }
 
     public String saveDadosMemoria() {
@@ -136,8 +111,8 @@ public class Memoria {
 
         try {
             dadosMemoToJson.put("porcentRam", String.format(" %.2f", getPorcentagemRam()));
-            dadosMemoToJson.put("dadosRam", getDadosMemoriaRam());
-            dadosMemoToJson.put("dadosDiscosRigidos", getDiscosRigidos());
+            dadosMemoToJson.put("dadosMemoria", getDadosMemoriaRam());
+            dadosMemoToJson.put("hdTotal", getHdTotal());
         } catch (Exception e) {
             System.out.println("Error: " + e);
         }
