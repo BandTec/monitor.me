@@ -5,17 +5,55 @@
  */
 package com.monitorme.tela;
 
+import com.monitorme.oshi.Processos;
+import java.util.Timer;
+import java.util.TimerTask;
+import javax.swing.table.DefaultTableModel;
+
+
+
 /**
  *
  * @author Aluno
  */
 public class TelaDetalhamento extends javax.swing.JFrame {
-
+    
+    Object[] process;
+    public Timer timerProcessos = new Timer();
     /**
      * Creates new form TelaDetalhamento
      */
     public TelaDetalhamento() {
         initComponents();
+        
+        final DefaultTableModel dtmProcessos = (DefaultTableModel) tblProc.getModel();
+        final long time = 500;
+        
+        TimerTask timerTask = new TimerTask() {
+            Processos processos = new Processos();
+
+            public void run() {
+                try {
+                    processos.processosTela();
+                    for (Integer i = 0; i < processos.getJsonTela().size(); i++) {
+                        dtmProcessos.setRowCount(i);
+                        process = new Object[]{processos.getJsonTela().get(i).get("PID"),
+                            String.format("%.1f", processos.getJsonTela().get(i).get("%CPU")),
+                            String.format("%.1f", processos.getJsonTela().get(i).get("%MEM")),
+                            processos.getJsonTela().get(i).get("%VSZ"),
+                            processos.getJsonTela().get(i).get("%RSS"),
+                            processos.getJsonTela().get(i).get("NOME")};
+                        dtmProcessos.addRow(process);
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+        };
+        timerProcessos.scheduleAtFixedRate(timerTask, 0, time);
+        
     }
 
     /**
@@ -33,7 +71,7 @@ public class TelaDetalhamento extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblProc = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -43,9 +81,7 @@ public class TelaDetalhamento extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Detalhamento");
-
-        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\jpbo9\\Desktop\\Fernanda\\monitor.me\\Sistema\\Monitor\\Amb.Dev\\NetBeansProjects\\monitor.me\\src\\main\\java\\com\\monitorme\\tela\\LogoIndiv.png")); // NOI18N
+        jLabel2.setText("Detalhes Processos");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -67,7 +103,7 @@ public class TelaDetalhamento extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addGap(31, 31, 31))
             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -75,29 +111,29 @@ public class TelaDetalhamento extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTable1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblProc.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        tblProc.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Nome", "PID", "Status", "Descrição"
+                "PID", "%CPU", "%Memória", "VSZ", "RSS", "Usuário", "Nome"
             }
         ));
-        jTable1.setGridColor(new java.awt.Color(153, 153, 153));
-        jTable1.setRowHeight(30);
-        jTable1.setShowGrid(true);
-        jScrollPane1.setViewportView(jTable1);
+        tblProc.setGridColor(new java.awt.Color(153, 153, 153));
+        tblProc.setRowHeight(30);
+        tblProc.setShowGrid(true);
+        jScrollPane1.setViewportView(tblProc);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -112,10 +148,10 @@ public class TelaDetalhamento extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(104, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -174,6 +210,6 @@ public class TelaDetalhamento extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tblProc;
     // End of variables declaration//GEN-END:variables
 }
