@@ -7,8 +7,7 @@ import { EventEmitter } from 'events';
 
 const ApiRoutes = {
   login: 'sessions',
-  cadastrar: 'cadastrar',
-  user: 'user'
+  cadastrar: 'cadastrar'
 };
 
 @Injectable({
@@ -41,14 +40,9 @@ export class UserService {
     return { headers };
   }
 
-  public getUser(token: string = ''){
-    let url = `${this.UrlApi}/${ApiRoutes.user}`;
-    return this.http.get<Array<any>>(url, this.loadHeaders(token))
-  }
-
   show(msg: string){
     this.snackBar.open(msg, 'X', {
-      duration: 4000,
+      duration: 5000,
       horizontalPosition: "right",
       verticalPosition: "bottom"
     })

@@ -1,7 +1,10 @@
 package com.monitorme.oshi;
 
+import static com.monitorme.oshi.SystemInfoTest.oshi;
 import java.util.ArrayList;
 import java.util.List;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import oshi.SystemInfo;
 import oshi.hardware.CentralProcessor;
 import oshi.hardware.GlobalMemory;
@@ -10,96 +13,122 @@ import oshi.hardware.HWPartition;
 import oshi.hardware.HardwareAbstractionLayer;
 import oshi.hardware.PhysicalMemory;
 import oshi.hardware.Sensors;
+import oshi.software.os.FileSystem;
+import oshi.software.os.OSFileStore;
+import oshi.software.os.OperatingSystem;
+import oshi.util.FormatUtil;
 
 public class Memoria {
 
     SystemInfo si = new SystemInfo();
     HardwareAbstractionLayer hal = si.getHardware();
     CentralProcessor cpu = hal.getProcessor();
+    OperatingSystem os = si.getOperatingSystem();
+    FileSystem fs = os.getFileSystem();
 
-    
+    private List<JSONObject> dadosMemoria = new ArrayList<>();    
     private float porcentagemMemoria;
-    private List<String> ramDisponivel = new ArrayList<>();
-    private List<String> discosRigidos = new ArrayList<>();
-    private List<String> dadosColetados = new ArrayList<>();
-    //Atributos
 
-    //MetodoMain
-    public List dadosMemoria() {
-        coletaMemoriaRam();
-        coletaDiscosRigidos(hal.getDiskStores());
-        
-        dadosColetados.add(this.getRamDisponivel().toString());
-        dadosColetados.add(this.getDiscosRigidos().toString());
-        return dadosColetados;
-    }
-
-    //Metodos
-    
-    //Memoria Ram
-    public List<String> coletaMemoriaRam() {
-//        long ram = (hal.getMemory().getAvailable() / 1024)/ 1024;
-        
-        ramDisponivel.add("Avaiable: " + (hal.getMemory().getAvailable() / 1024)/ 1024);
-        ramDisponivel.add("Page Size: " + hal.getMemory().getPageSize());
-//        ramDisponivel.add("Memory Phisical: " + hal.getMemory().getPhysicalMemory());
-        
-        PhysicalMemory[] pmArray = hal.getMemory().getPhysicalMemory();
-        if (pmArray.length > 0) {
-            ramDisponivel.add("\n Physical Memory: ");
-            for (PhysicalMemory pm : pmArray) {
-                ramDisponivel.add("Bank Label: " + pm.getBankLabel());
-                ramDisponivel.add("Manufacturer : " + pm.getManufacturer());
-                ramDisponivel.add("Memory Type: " + pm.getMemoryType());
-                ramDisponivel.add("Capacidade: " + ((pm.getCapacity()/1024)/1024));
-                ramDisponivel.add("\n Velocidade de Clock: " + ((pm.getClockSpeed()/1024)/1024));
-            }
-        }
-        ramDisponivel.add("Memoria Virtual: " + hal.getMemory().getVirtualMemory());
-        ramDisponivel.add("Memoria Total: " + (hal.getMemory().getTotal()/ 1024)/ 1024);
-        return ramDisponivel;
-    }
-    
     //Porcetagem da memória que está sendo gasta
-    public float memoriaRamPorcentagem(){
+    public float getPorcentagemRam() {
         long usadoMem = hal.getMemory().getTotal() - hal.getMemory().getAvailable();
         return this.porcentagemMemoria = (float) ((100d * usadoMem) / hal.getMemory().getTotal());
     }
     
-    //Disco Rigido
-    public List<String> coletaDiscosRigidos(HWDiskStore[] diskStores) {
-        for (HWDiskStore disk : diskStores) {
-            discosRigidos.add("\n\n Modelo: " + disk.getModel());
-//            discosRigidos.add("Nome: " + disk.getName()); // Talvez não seja necessário por isso deixei comentado
-            discosRigidos.add("Serial: " + disk.getSerial());
-            
-            HWPartition[] partitions = disk.getPartitions();
-            for (HWPartition part : partitions) {
-                discosRigidos.add("\n | Identificacao " + part.getIdentification());
-                discosRigidos.add("\n | MountPoint: " + part.getMountPoint());
-                discosRigidos.add("\n | Name: " + part.getName());
-                discosRigidos.add("\n | Tipo: " + part.getType());
-                discosRigidos.add("\n | Uuid: " + part.getUuid());
+    public String getFromJson(String valor){
+        JSONArray xt = new JSONArray(getDadosMemoriaRam());
+        JSONObject y = xt.getJSONObject(0);        
+        return y.get(valor).toString();
+    }
+
+    //Dados Memorias
+    public List<JSONObject> coletaDadosMemoria(HWDiskStore[] diskStores) {
+        JSONObject jsonDisk = new JSONObject();
+        try {
+            jsonDisk.put("Avaiable", (hal.getMemory().getAvailable() / 1024) / 1024);
+            jsonDisk.put("PageSize", hal.getMemory().getPageSize());
+
+        PhysicalMemory[] pmArray = hal.getMemory().getPhysicalMemory();
+        if (pmArray.length > 0) {
+            for (PhysicalMemory pm : pmArray) {
+                jsonDisk.put("BankLabel", pm.getBankLabel());
+                jsonDisk.put("Manufacturer", pm.getManufacturer());
+                jsonDisk.put("MemoryType", pm.getMemoryType());
+                jsonDisk.put("Capacidade", ((pm.getCapacity() / 1024) / 1024));
+                jsonDisk.put("VelocidadeClock", ((pm.getClockSpeed() / 1024) / 1024));
+
             }
         }
-        return discosRigidos;
+        jsonDisk.put("MemoriaVirtual", hal.getMemory().getVirtualMemory());
+        jsonDisk.put("MemoriaTotal", (hal.getMemory().getTotal() / 1024) / 1024);
+
+        for (HWDiskStore disk : diskStores) {
+            jsonDisk.put("Modelo", disk.getModel());
+//            discosRigidos.add("Nome: " + disk.getName()); // Talvez não seja necessário por isso deixei comentado
+            jsonDisk.put("Serial", disk.getSerial());
+
+            HWPartition[] partitions = disk.getPartitions();
+            for (HWPartition part : partitions) {
+                jsonDisk.put("Identificacao", part.getIdentification());
+                jsonDisk.put("MountPoint", part.getMountPoint());
+                jsonDisk.put("Name", part.getName());
+                jsonDisk.put("Tipo", part.getType());
+                jsonDisk.put("Uuid", part.getUuid());
+                jsonDisk.put("Minor", part.getMajor());
+                jsonDisk.put("Major", part.getMinor());
+            }
+        }
+        dadosMemoria.add(jsonDisk);
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+        }
+        return dadosMemoria;
     }
 
-    public String sensoresHardware(Sensors sensors){
-        return "Sensors: " + sensors.toString();
+//    pegar a quantia total de espaço disponivel
+    public List<String> getHdDisponivel() {
+        OSFileStore[] fsArray = fs.getFileStores();
+        List<String> diskName = new ArrayList<>();
+        String hdDisponivel;
+        for (OSFileStore fs : fsArray) {
+            hdDisponivel = String.valueOf((fs.getMount())) + String.format(" %.2f", Double.valueOf(((fs.getUsableSpace() / 1024) / 1024) / 1024));
+            diskName.add(hdDisponivel);
+        }
+        return diskName;
     }
-    
+
+//    pegar a capacidade total de HD
+    public List<String> getHdTotal() {
+        OSFileStore[] fsArray = fs.getFileStores();
+        List<String> disksFree = new ArrayList<>();
+        String hdTotal;
+
+        for (OSFileStore fs : fsArray) {
+            hdTotal = String.valueOf((fs.getMount())) + (String.valueOf(FormatUtil.formatBytes(fs.getTotalSpace())));
+            disksFree.add(hdTotal);
+        }
+
+        return disksFree;
+    }
+
     //Getters & Setters
-    public List<String> getRamDisponivel() {
-        return ramDisponivel;
+    public List<JSONObject> getDadosMemoriaRam() {
+        return coletaDadosMemoria(hal.getDiskStores());
     }
 
-    public List<String> getDiscosRigidos() {
-        return discosRigidos;
-    }
-    
-    public static void main(String[] args) {
-        Memoria m = new Memoria();
-        System.out.println(m.memoriaRamPorcentagem());
+    public String saveDadosMemoria() {
+
+        JSONObject dadosMemoToJson = new JSONObject();
+
+        try {
+            dadosMemoToJson.put("porcentRam", String.format(" %.2f", getPorcentagemRam()));
+            dadosMemoToJson.put("dadosMemoria", getDadosMemoriaRam());
+            dadosMemoToJson.put("hdTotal", getHdTotal());
+            dadosMemoToJson.put("hdDisponivel", getHdDisponivel());
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+        }
+
+        return dadosMemoToJson.toString();
     }
 }

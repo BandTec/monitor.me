@@ -1,26 +1,21 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.monitorme.oshi;
 
-import static com.monitorme.oshi.SystemInfoTest.oshi;
+import com.profesorfalken.jsensors.JSensors;
+import com.profesorfalken.jsensors.model.components.Components;
+import com.profesorfalken.jsensors.model.sensors.Temperature;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import org.json.JSONObject;
 import oshi.SystemInfo;
 import oshi.hardware.CentralProcessor;
-import oshi.hardware.CentralProcessor.TickType;
-import oshi.hardware.ComputerSystem;
 import oshi.hardware.HardwareAbstractionLayer;
 import oshi.hardware.Sensors;
-import oshi.software.os.OperatingSystem;
 import oshi.util.FormatUtil;
 import oshi.util.Util;
 
 public class Cpu {
+
     DecimalFormat df = new DecimalFormat();
     private SystemInfo si = new SystemInfo();
     private HardwareAbstractionLayer hal = si.getHardware();
@@ -28,6 +23,8 @@ public class Cpu {
     private Sensors sensors = hal.getSensors();
     private float dadosCPU;
     private List<Double> listFloatCpu = new ArrayList<>();
+    Components components = JSensors.get.components();
+    List<com.profesorfalken.jsensors.model.components.Cpu> cp = components.cpus;
     long[] freq;
 
     //informaçoes do processador
@@ -51,64 +48,50 @@ public class Cpu {
         return sb;
     }
 
-    //temperatura atual do processador
     public Double getTemperature() {
-        return sensors.getCpuTemperature();
+        Double tempTotal = 0.0;
+        if (sensors.getCpuTemperature() == 0.0) {
+            for (final com.profesorfalken.jsensors.model.components.Cpu c : cp) {
+                List<Temperature> temp = c.sensors.temperatures;
+                for (final Temperature tempCpu : temp) {
+                    System.out.println(tempCpu.name + ": " + tempCpu.value);
+                    if (tempCpu.name.startsWith("Temp CPU Package")) {
+                        tempTotal = tempCpu.value;
+                    }
+                }
+            }
+        }else{
+            tempTotal = sensors.getCpuTemperature();
+        }
+        return tempTotal;
     }
 
-    //uso do processador
-    public void getUso() {
+    public float getUso() {
         try {
-            
-            long[] prevTicks = cpu.getSystemCpuLoadTicks();
-            long[][] prevProcTicks = cpu.getProcessorCpuLoadTicks();
 
-            Util.sleep(300);
-            long[] ticks = cpu.getSystemCpuLoadTicks();
-
-            long user = ticks[TickType.USER.getIndex()] - prevTicks[TickType.USER.getIndex()];
-            long nice = ticks[TickType.NICE.getIndex()] - prevTicks[TickType.NICE.getIndex()];
-            long sys = ticks[TickType.SYSTEM.getIndex()] - prevTicks[TickType.SYSTEM.getIndex()];
-            long idle = ticks[TickType.IDLE.getIndex()] - prevTicks[TickType.IDLE.getIndex()];
-            long iowait = ticks[TickType.IOWAIT.getIndex()] - prevTicks[TickType.IOWAIT.getIndex()];
-            long irq = ticks[TickType.IRQ.getIndex()] - prevTicks[TickType.IRQ.getIndex()];
-            long softirq = ticks[TickType.SOFTIRQ.getIndex()] - prevTicks[TickType.SOFTIRQ.getIndex()];
-            long steal = ticks[TickType.STEAL.getIndex()] - prevTicks[TickType.STEAL.getIndex()];
-            long totalCpu = user + nice + sys + idle + iowait + irq + softirq + steal;
-            
-            
-            double[] load = cpu.getProcessorCpuLoadBetweenTicks(prevProcTicks);
-            Integer somaProc = 0;
-            Double total = 0.0;
-            
-            System.out.println(String.format("User: %.1f%%", (100d * user / totalCpu)));
-            
-            for (double avg : load) {
-                somaProc ++;
-                total += avg * 100;
-//                System.out.println(String.format(" %.1f%%", avg * 100));
-            }
-            float usoCPU = (float)(total/somaProc);
+            CentralProcessor cp = hal.getProcessor();
+            long[] prevTicks = cp.getSystemCpuLoadTicks();
+            Util.sleep(1000);
+            float usoCPU = (float) (cp.getSystemCpuLoadBetweenTicks(prevTicks) * 100d);
             dadosCPU = usoCPU;
         } catch (Exception e) {
             System.out.println("erro: " + e);;
         }
-    }
-    
-    public float consomeCpu(){
-        getUso();
         return dadosCPU;
     }
-    
 
-//    public Double cpuPercent(){
-//
-//    }
-    public static void main(String[] args) {
-        Cpu cpu = new Cpu();
-//        System.out.println(cpu.printProcessor());
-//        System.out.println(cpu.getClock());
-//        System.out.println(String.format("%.2fºC", cpu.getTemperature()));
-        System.out.println(cpu.consomeCpu());
+    public String saveDadosCpu() {
+
+        JSONObject dadosCpuToJson = new JSONObject();
+
+        try {
+            dadosCpuToJson.put("getUsoUser", String.format(" %.2f", getUso()));
+            dadosCpuToJson.put("getTemperatura", getTemperature());
+            dadosCpuToJson.put("getNomeProc", printProcessor());
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+        }
+
+        return dadosCpuToJson.toString();
     }
 }

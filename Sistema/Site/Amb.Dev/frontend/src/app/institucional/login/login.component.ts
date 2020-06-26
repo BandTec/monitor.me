@@ -33,17 +33,19 @@ export class LoginComponent implements OnInit {
       if (response['token']) {
         const token = response['token'];
         const id = response['userAtivo']['id'];
-        const contato = response['userAtivo']['whatsapp']
+        const cellphone = response['userAtivo']['cellphone']
         const name = response['userAtivo']['name']
         const email = response['userAtivo']['email']
+        const idTelegram = response['userAtivo']['idTelegram']
 
-        // console.log('><>>>',response)
+        console.log('><>>>',response)
 
         localStorage.setItem('token', token);
         localStorage.setItem('id', id);
         localStorage.setItem('name', name);
-        localStorage.setItem('contato', contato);
-        localStorage.setItem('contato', email);
+        localStorage.setItem('contato', cellphone);
+        localStorage.setItem('email', email);
+        localStorage.setItem('idTelegram', idTelegram);
         
 
         this.userService.show(`Bem vindo, Logado com sucesso!`)

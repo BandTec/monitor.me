@@ -35,10 +35,6 @@ public class DadosGpu {
     private List<Double> loadGpu = new ArrayList<>();
     List<String> gpuJSensor = new ArrayList<>();
 
-    //constructor
-    public DadosGpu() {
-    }
-
     //Metodos
     //Tentando capturar GPU com oshi
     public List<String> capturaGpuOshi(GraphicsCard[] cards) {
@@ -47,11 +43,11 @@ public class DadosGpu {
             gpuOshi.add(" None detected.");
         } else {
             for (GraphicsCard card : cards) {
-                gpuOshi.add("\nName: " + card.getName());
-                gpuOshi.add("\nId: " + card.getDeviceId());
-                gpuOshi.add("\nFabricante: " + card.getVendor());
-                gpuOshi.add("\nInformações de fábricação: " + card.getVersionInfo());
-                gpuOshi.add("\nVRam total: " + ((card.getVRam() / 1024) / 1024));
+                gpuOshi.add("Name: " + card.getName());
+                gpuOshi.add("Id: " + card.getDeviceId());
+                gpuOshi.add("Fabricante: " + card.getVendor());
+                gpuOshi.add("Informações de fábricação: " + card.getVersionInfo());
+                gpuOshi.add("VRam total: " + ((card.getVRam() / 1024) / 1024));
             }
         }
 
@@ -170,7 +166,6 @@ public class DadosGpu {
 
     //Getters
     public Double getMemoryGpu() {
-        getLoadInfo();
         memoryGpu = loadGpu.get(3);
         
         if (memoryGpu == null || memoryGpu == 0) {
@@ -183,19 +178,16 @@ public class DadosGpu {
     }
 
     public Double getMemoryControllerGpu() {
-        getLoadInfo();
         memoryControllerGpu = loadGpu.get(1);
         return memoryControllerGpu;
     }
 
     public Double getVideoEngineGpu() {
-        getLoadInfo();
         videoEngineGpu = loadGpu.get(2);
         return videoEngineGpu;
     }
 
     public Double getCoreGpu() {
-        getLoadInfo();
         coreGpu = loadGpu.get(0);
         return coreGpu;
     }

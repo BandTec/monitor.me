@@ -1,6 +1,7 @@
 package com.monitorme.tela;
 
 import com.monitorme.banco.User;
+import java.awt.Toolkit;
 
 public class TelaLogin extends javax.swing.JFrame {
 
@@ -11,6 +12,7 @@ public class TelaLogin extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setTitle("Login");
         setResizable(false);
+//        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("DevLogoWhite.png")));
     }
 
     @SuppressWarnings("unchecked")
@@ -36,7 +38,6 @@ public class TelaLogin extends javax.swing.JFrame {
         jPanel2.setForeground(new java.awt.Color(255, 255, 255));
 
         logo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/monitorme/tela/DevLogoWhite.png"))); // NOI18N
         logo.setFocusable(false);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -111,7 +112,7 @@ public class TelaLogin extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(0, 0, 0)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(50, 50, 50)
@@ -152,7 +153,7 @@ public class TelaLogin extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 820, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -170,7 +171,7 @@ public class TelaLogin extends javax.swing.JFrame {
         user = new User(inputEmail.getText(), inputSenha.getText());
         if (user.getUsuarioLogado() != null) {
             this.setVisible(false);
-            TelaMonitor tela = new TelaMonitor();
+            TelaDash tela = new TelaDash();
             tela.setVisible(true);
         } else {
             System.out.println("Não encontrado");

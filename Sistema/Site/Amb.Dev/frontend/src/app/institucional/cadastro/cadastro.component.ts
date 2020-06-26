@@ -17,11 +17,15 @@ export class CadastroComponent implements OnInit {
     this.user = {
       name: '',
       email: '',
-      whatsapp: '',
+      cellphone: '',
       password: '',
+      idTelegram: ''
     }
+  }
 
-
+  public sendTelegramAlert(){
+    this.userService.show("Lembre-se, para recuperar seu id Telegram é necessário ter o App ou estar Logado na Web");
+    setInterval(() => {window.location.href = "https://telegram.me/chatid_echo_bot";}, 3500);
   }
 
   async signup(form) {
@@ -36,12 +40,14 @@ export class CadastroComponent implements OnInit {
         const contato = response['user']['whatsapp']
         const name = response['user']['name']
         const email = response['user']['email']
+        const telegramId = response['user']['telegramId']
 
         localStorage.setItem('token', token);
         localStorage.setItem('id', id);
         localStorage.setItem('name', name);
         localStorage.setItem('contato', contato);
-        localStorage.setItem('contato', email);
+        localStorage.setItem('email', email);
+        localStorage.setItem('telegramId', telegramId);
         
 
         this.userService.show(`Bem vindo, Logado com sucesso!`)
