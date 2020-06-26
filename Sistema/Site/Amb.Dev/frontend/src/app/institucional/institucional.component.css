@@ -55,7 +55,7 @@ ul, a{
   display: flex;
   justify-content: center;
   min-width: 300px;
-  min-height: 40vw;
+  min-height: 30vw;
   margin: 5px auto;
   background-color: rgba(255, 255, 255, 0);
   font-family: 'Courier New', Courier, monospace;
@@ -75,37 +75,35 @@ ul, a{
   color: white;
 }
 .mainDevs{
-  display: flex;
-  flex-direction: row;
+  display: inline-flex;
+  flex-flow: row wrap;
   justify-content: space-between;
   align-items: center;
   height: 100%;
 }
 .profileCard{
-  justify-content: flex-end;
+  display: flexbox;
+  width: 15%;
+  justify-content: center;
   align-items: center;
-  margin-right: 30px;
-  max-width: 400px;
-  height: 50%;
   background-color: rgba(139, 0, 139, 0.466);
 }
 .profileCard img{
-  height: 150px;
-  width: 250px;
+
   background-size: cover;
 }
 .profileData{
   text-align: center;
 }
 .mainInstLeft {
-  display: flexbox;
+  display: inline-flexbox;
   justify-content: center;
   width: 60%;
   height: 90%;
   background-color: rgba(14, 14, 14, 0.5);
   min-height: 80%;
   border-radius: 15px;
-  font-size: 2.5vh;
+  font-size: 113%;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: normal;
   font-style: italic;
@@ -128,22 +126,21 @@ ul, a{
 .scndInstRight {
   display: flexbox;
   justify-content: center;
-  width: 40%;
+  width: 50%;
   height: 90%;
   background-color: rgba(14, 14, 14, 0.5);
   min-height: 80%;
   border-radius: 15px;
-  font-size: 2.5vh;
+  font-size: 113%;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: normal;
   font-style: italic;
   font-stretch: expanded;
-
 }
 
 
 .scndInstLeft {
-  width: 60%;
+  width: 50%;
   border-radius: 15px;
   background-size: cover;
   background-repeat: no-repeat;  
@@ -162,4 +159,9 @@ ul, a{
 .mat-tab-label {
   font-family: 'Courier New', Courier, monospace;
   color: black;
+}
+
+.devName {
+  font-size: medium;
+  justify-content: center;
 }
