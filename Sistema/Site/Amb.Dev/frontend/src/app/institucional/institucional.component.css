@@ -72,15 +72,15 @@ ul, a{
 .large-box {
   display: flex;
   align-items: left;
-  width: 100%;
+  width: 88vw;
   justify-content: left;
   margin: 30px;
   padding: 20px;
   border-radius:15px;
-  height: 500px;
   background-color: rgb(0, 0, 0);
-  width: 90vw;
   color: white;
+  padding-top: 45px;
+  height: 80%;
 }
 .mainDevs{
   display: inline-flex;
@@ -103,11 +103,11 @@ ul, a{
 .profileData{
   text-align: center;
 }
-.mainInstLeft {
+.mainInstRight {
   display: inline-flexbox;
   justify-content: center;
-  width: 60%;
-  height: 90%;
+  width: 40%;
+  height: 100%;
   background-color: rgba(14, 14, 14, 0.5);
   min-height: 80%;
   border-radius: 15px;
@@ -116,43 +116,21 @@ ul, a{
   font-weight: normal;
   font-style: italic;
   font-stretch: expanded;
+  margin-left: 10vw;
 }
 
-.mainInstRight {
+.mainInstLeft {
   width: 40%;
   border-radius: 15px;
-  background-size: cover;
+  background-size: contain;
   background-repeat: no-repeat;  
-  background-image: url(../../assets/img/imgeditor.jpg);
-  padding: 15px;
-  margin-right: 1vh;
+  background-image: url(../../../src/assets/img/dashprint.PNG);
+  margin-left: 10vh;
+  margin-bottom: 20px;
 }
 .tabMain{
   background-color: rgba(0, 0, 0, 0.6);
   border-radius: 15px;
-}
-.scndInstRight {
-  display: flexbox;
-  justify-content: center;
-  width: 50%;
-  height: 90%;
-  background-color: rgba(14, 14, 14, 0.5);
-  min-height: 80%;
-  border-radius: 15px;
-  font-size: 113%;
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: normal;
-  font-style: italic;
-  font-stretch: expanded;
-}
-
-
-.scndInstLeft {
-  width: 50%;
-  border-radius: 15px;
-  background-size: cover;
-  background-repeat: no-repeat;  
-  background-image: url();
 }
 
 .headerInst {
