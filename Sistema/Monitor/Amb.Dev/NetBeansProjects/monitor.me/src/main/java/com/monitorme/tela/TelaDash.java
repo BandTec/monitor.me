@@ -62,13 +62,13 @@ public class TelaDash extends javax.swing.JFrame {
         //GPU
 //        lblModel.setText(gpu1.getNomeGpu().toString());
 //        lblCoreGpu.setText(gpu1.getCoreGpu().toString());
-//        lblMemoria.setText(gpu1.getMemoryGpu().toString());
+        
         //Memoria
-        lblTemperatura.setText(gpu1.getMediaTemperatura().toString());
+        
 //        lblDisco.setText(memoria1.getDiscosRigidos().toString());
 //        lblDisco.setText(String.format(" %s livre de %s ",memoria1.getHdDisponivel(),memoria1.getHdTotal()));
         lblDisco.setText(String.format("Espaço livre: %s ", memoria1.getHdDisponivel()));
-        lblDisco1.setText(String.format("Total Disponível: %s ", memoria1.getHdTotal()));
+        lblDisco1.setText(String.format("Capacidade Total: %s ", memoria1.getHdTotal()));
         //Cpu
         lblCpu.setText(cpu1.printProcessor());
 
@@ -85,7 +85,8 @@ public class TelaDash extends javax.swing.JFrame {
                     lblMemoRam.setText("Status: " + memoria1.getFromJson("MemoriaVirtual"));
 
                     //GPU
-                    
+                    lblTemperatura.setText(gpu1.getMediaTemperatura().toString());
+                    lblMemoria.setText(gpu1.getMemoryGpu().toString());
                     //CPU
                     lblCpuUso.setText("Uso: " + String.format(" %.2f", cpu1.getUso()) + "%");
                     
@@ -429,7 +430,7 @@ public class TelaDash extends javax.swing.JFrame {
         );
         jInternalFrame2Layout.setVerticalGroup(
             jInternalFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 293, Short.MAX_VALUE)
+            .addGap(0, 286, Short.MAX_VALUE)
         );
 
         btnGpu.setBackground(new java.awt.Color(51, 0, 51));
