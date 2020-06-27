@@ -25,20 +25,21 @@
           </mat-form-field>
           <button mat-raised-button color="primary" type="submit" class="btnCad">Cadastrar</button>
         </form>
-        <a class="cad" routerLink="/home/login" >
-          <i class="material-icons v-middle">
-            undo
-          </i>
-          <span style="color: white;">Voltar para Login</span>
-        </a>
-        <a class="telegramCad" (click)="sendTelegramAlert()">
-          <i class="material-icons v-middle" style="margin-right: 5px;">
-            send
-          </i>
-          <span style="color: white;">encontrar meu Telegram ID</span>
-        </a>
+        <div class="links">
+          <a class="cad" routerLink="/home/login">
+            <i class="material-icons v-middle">
+              undo
+            </i>
+            <span style="color: white;">Voltar para Login</span>
+          </a>
+          <a class="telegramCad" (click)="sendTelegramAlert()">
+            <i class="material-icons v-middle" style="margin-right: 5px;">
+              send
+            </i>
+            <span style="color: white;">encontrar meu Telegram ID</span>
+          </a>
+        </div>
       </mat-card-content>
-      
     </mat-card>
   </mat-card>
 </mat-card>

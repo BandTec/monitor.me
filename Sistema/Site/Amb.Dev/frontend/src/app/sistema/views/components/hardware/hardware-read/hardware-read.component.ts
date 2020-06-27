@@ -21,5 +21,4 @@ export class HardwareReadComponent implements OnInit {
       this.hardwares = xhardwares['hardwares'];
     })
   }
-
 }

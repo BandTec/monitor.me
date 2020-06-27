@@ -58,19 +58,22 @@
 }
 
 .cad {
-  position: absolute;
+  position: static;
   bottom: 20px;
   text-decoration: none;
   font-size: 0.8rem;
   color: white;
-  right: 20px;
 }
 
 .telegramCad{
-  position: absolute;
-  bottom: 0px;
+  position: static;
   text-decoration: none;
   font-size: 0.8rem;
   color: white;
-  right: 20px;
+}
+
+.links{
+  display: flex;
+  justify-content: space-between;
+  margin: 25px;
 }

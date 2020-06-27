@@ -3,7 +3,7 @@ import { map } from 'rxjs/operators';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { Chart } from 'chart.js';
 import { DashboardService } from '../../services/dashboard.service';
-import { Data } from './dash.model';
+import { DataJson } from 'src/app/models/dataHard.models';
 
 @Component({
   selector: 'app-dash',
@@ -12,15 +12,25 @@ import { Data } from './dash.model';
 })
 export class DashComponent implements OnInit {
   private token = `bearer ${localStorage.getItem('token')}`;
-  hardwares: Data[];
+  dataFromApi: DataJson[];
+  sttsCpu: any[];
 
   @ViewChild("dashGPU", { static: true }) elemento: ElementRef;
 
   ngOnInit() {
-    this.dashService.readHardware(this.token).subscribe(xhardwares =>{
-      console.log("AQUI OOOOO", xhardwares);
-      this.hardwares = xhardwares['hardwares'];
-    })
+    this.dashService.readHardware(this.token).subscribe((data) =>{
+      console.log(data)
+      this.dataFromApi = data['dadosHardware'];
+      console.log("data>>> ",this.dataFromApi)
+
+      this.sttsCpu = this.dataFromApi.map((x) => {
+      console.log("Processador",x.cpuDados['getNomeProc'])
+      console.log("MemoriaController da Gpu", x.gpuDados['memoriaCtrlGpu'])
+      })
+      
+    }, error => {
+      console.log(error);
+    });
     new Chart(this.elemento.nativeElement, {
       type: "line",
       data: {

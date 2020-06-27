@@ -1,4 +1,11 @@
 <div class="grid-container">
+  <mat-card class="contentAlert mat-elevation-z6">
+    <mat-card-content>
+      <mat-card class="small-card" *ngFor="let data of dataFromApi">
+        <h1 style="color: red; width: 500px; height: 500px;">{{sttsCpu}}</h1>
+      </mat-card>
+    </mat-card-content>
+  </mat-card>
   <h1 class="mat-h1">Bem-vindo Usuário...</h1>
   <mat-grid-list cols="2" rowHeight="350px">
     <mat-grid-tile *ngFor="let card of cards | async" [colspan]="card.cols" [rowspan]="card.rows">
@@ -16,7 +23,7 @@
           </mat-card-title>
         </mat-card-header>
         <mat-card-content class="dashboard-card-content">
-          
+
         </mat-card-content>
       </mat-card>
     </mat-grid-tile>

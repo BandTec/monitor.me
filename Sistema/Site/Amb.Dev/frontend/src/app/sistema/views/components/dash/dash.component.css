@@ -19,3 +19,17 @@
 .dashboard-card-content {
   text-align: center;
 }
+.contentAlert{
+  display: flex;
+  background-color: #3333330a;
+  flex-direction: column;
+  margin: 15px;
+}
+.small-card{
+  display: flex;
+  float: left;
+  width: 46%;
+  height: 50px;
+  margin: 3px;
+  background-color: rgb(109, 109, 109);
+}

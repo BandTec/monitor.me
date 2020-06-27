@@ -4,7 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Data } from '../components/dash/dash.model';
+import { DataJson } from 'src/app/models/dataHard.models';
 
 @Injectable({
   providedIn: 'root'
@@ -33,7 +33,7 @@ export class DashboardService {
     return { headers };
   }
 
-  readHardware(token: string = ''): Observable<Data[]>{
-    return this.http.get<Data[]>(this.baseConsulta, this.loadHeaders(token))
+  readHardware(token: string = ''): Observable<DataJson[]>{
+    return this.http.get<DataJson[]>(this.baseConsulta, this.loadHeaders(token))
   }
 }
