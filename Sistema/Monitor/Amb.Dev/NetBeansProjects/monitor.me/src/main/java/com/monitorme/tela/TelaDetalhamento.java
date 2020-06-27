@@ -6,8 +6,11 @@
 package com.monitorme.tela;
 
 import com.monitorme.oshi.Processos;
+import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -20,6 +23,9 @@ public class TelaDetalhamento extends javax.swing.JFrame {
     
     Object[] process;
     public Timer timerProcessos = new Timer();
+    
+    String pidTask;
+    
     /**
      * Creates new form TelaDetalhamento
      */
@@ -27,7 +33,7 @@ public class TelaDetalhamento extends javax.swing.JFrame {
         initComponents();
         
         final DefaultTableModel dtmProcessos = (DefaultTableModel) tblProc.getModel();
-        final long time = 500;
+        final long time = 5000;
         
         TimerTask timerTask = new TimerTask() {
             Processos processos = new Processos();
@@ -72,6 +78,8 @@ public class TelaDetalhamento extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblProc = new javax.swing.JTable();
+        txtfFinProc = new javax.swing.JTextField();
+        btnFinProc = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -114,36 +122,59 @@ public class TelaDetalhamento extends javax.swing.JFrame {
         tblProc.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         tblProc.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "PID", "%CPU", "%Memória", "VSZ", "RSS", "Usuário", "Nome"
+                "PID", "%CPU", "%Memória", "VSZ", "RSS", "Nome"
             }
         ));
+        tblProc.setColumnSelectionAllowed(true);
         tblProc.setGridColor(new java.awt.Color(153, 153, 153));
         tblProc.setRowHeight(30);
         tblProc.setShowGrid(true);
         jScrollPane1.setViewportView(tblProc);
+        tblProc.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+
+        txtfFinProc.setToolTipText("Insert PID");
+        txtfFinProc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtfFinProcActionPerformed(evt);
+            }
+        });
+
+        btnFinProc.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnFinProc.setText("Finalizar Processo:");
+        btnFinProc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFinProcActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 685, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(229, 229, 229)
+                .addComponent(btnFinProc)
+                .addGap(5, 5, 5)
+                .addComponent(txtfFinProc, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -151,7 +182,11 @@ public class TelaDetalhamento extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(104, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtfFinProc)
+                    .addComponent(btnFinProc, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -167,6 +202,22 @@ public class TelaDetalhamento extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtfFinProcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfFinProcActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtfFinProcActionPerformed
+
+    private void btnFinProcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinProcActionPerformed
+        // TODO add your handling code here:
+        pidTask = txtfFinProc.getText();
+        
+        String comando = String.format("taskkill /pid %s /f", pidTask);
+        try {
+            Runtime.getRuntime().exec(comando);
+        } catch (IOException ex) {
+            Logger.getLogger(TelaDetalhamento.class.getName()).log(Level.SEVERE, null, ex); //ALTERAR ESSA LINHA COM O LOG DO NOSSO PROJETO
+        }
+    }//GEN-LAST:event_btnFinProcActionPerformed
 
     /**
      * @param args the command line arguments
@@ -204,6 +255,7 @@ public class TelaDetalhamento extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnFinProc;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -211,5 +263,6 @@ public class TelaDetalhamento extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblProc;
+    private javax.swing.JTextField txtfFinProc;
     // End of variables declaration//GEN-END:variables
 }
