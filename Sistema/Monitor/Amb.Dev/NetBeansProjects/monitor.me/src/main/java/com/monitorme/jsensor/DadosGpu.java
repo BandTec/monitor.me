@@ -118,8 +118,14 @@ public class DadosGpu {
 
     //Getters
     public Double getMemoryGpu() {
+<<<<<<< HEAD
         Double memoryGpu = (Double) getLoadInfo().get(3);
 
+=======
+        getLoadInfo();
+        memoryGpu = loadGpu.get(3);
+        
+>>>>>>> ed9572addccddf7a0a28696c843e8a3c6a89eb1a
         if (memoryGpu == null || memoryGpu == 0) {
             for(GraphicsCard c : hal.getGraphicsCards()){
                 memoryGpu = Double.valueOf(c.getVRam());
@@ -129,6 +135,7 @@ public class DadosGpu {
     }
 
     public Double getMemoryControllerGpu() {
+<<<<<<< HEAD
         return (Double) getLoadInfo().get(1);
     }
 
@@ -138,5 +145,22 @@ public class DadosGpu {
 
     public Double getCoreGpu() {
         return (Double) getLoadInfo().get(0);
+=======
+        getLoadInfo();
+        memoryControllerGpu = loadGpu.get(1);
+        return memoryControllerGpu;
+    }
+
+    public Double getVideoEngineGpu() {
+        getLoadInfo();
+        videoEngineGpu = loadGpu.get(2);
+        return videoEngineGpu;
+    }
+
+    public Double getCoreGpu() {
+        getLoadInfo();
+        coreGpu = loadGpu.get(0);
+        return coreGpu;
+>>>>>>> ed9572addccddf7a0a28696c843e8a3c6a89eb1a
     }
 }

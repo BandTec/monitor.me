@@ -28,7 +28,7 @@ public class TelaLogin extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         btnLogin = new javax.swing.JButton();
-        inputSenha = new javax.swing.JPasswordField();
+        inputTelegram = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -88,7 +88,7 @@ public class TelaLogin extends javax.swing.JFrame {
 
         jLabel3.setText("Email:");
 
-        jLabel4.setText("Senha:");
+        jLabel4.setText("ID Telegram:");
 
         btnLogin.setBackground(new java.awt.Color(51, 51, 51));
         btnLogin.setForeground(new java.awt.Color(255, 255, 255));
@@ -100,9 +100,9 @@ public class TelaLogin extends javax.swing.JFrame {
             }
         });
 
-        inputSenha.addActionListener(new java.awt.event.ActionListener() {
+        inputTelegram.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inputSenhaActionPerformed(evt);
+                inputTelegramActionPerformed(evt);
             }
         });
 
@@ -122,7 +122,7 @@ public class TelaLogin extends javax.swing.JFrame {
                                     .addComponent(inputEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)
                                     .addComponent(jLabel3)
                                     .addComponent(jLabel4)
-                                    .addComponent(inputSenha))
+                                    .addComponent(inputTelegram))
                                 .addGap(50, 50, 50))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -142,8 +142,8 @@ public class TelaLogin extends javax.swing.JFrame {
                 .addGap(34, 34, 34)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(inputSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
+                .addComponent(inputTelegram, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
                 .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50))
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -168,7 +168,7 @@ public class TelaLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_inputEmailActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        user = new User(inputEmail.getText(), inputSenha.getText());
+        user = new User(inputEmail.getText(), inputTelegram.getText());
         if (user.getUsuarioLogado() != null) {
             this.setVisible(false);
             TelaDash tela = new TelaDash();
@@ -178,9 +178,9 @@ public class TelaLogin extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 
-    private void inputSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputSenhaActionPerformed
+    private void inputTelegramActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputTelegramActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_inputSenhaActionPerformed
+    }//GEN-LAST:event_inputTelegramActionPerformed
 
     /**
      * @param args the command line arguments
@@ -196,7 +196,7 @@ public class TelaLogin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogin;
     private javax.swing.JTextField inputEmail;
-    private javax.swing.JPasswordField inputSenha;
+    private javax.swing.JTextField inputTelegram;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

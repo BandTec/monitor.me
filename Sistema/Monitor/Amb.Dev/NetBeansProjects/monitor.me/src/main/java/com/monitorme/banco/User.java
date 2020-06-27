@@ -20,16 +20,16 @@ public class User {
         return idTelegram;
     }
 
-    public User(String email, String senha) {
+    public User(String email, String telegram) {
 
         try {
             TelaLogin login = new TelaLogin();
             ConexaoBanco dadosConexao = new ConexaoBanco();
             JdbcTemplate jdbcTemplate = new JdbcTemplate(dadosConexao.getDataSource());
-            List lista = jdbcTemplate.queryForList("select email,password from tbl_Users"
-                    + " where email='" + email + "'and password='" + senha + "'or email='" + email + "'and password='" + senha + "'");
+            List lista = jdbcTemplate.queryForList("select email,idTelegram from tbl_Users"
+                    + " where email='" + email + "'and idTelegram='" + telegram + "'or email='" + email + "'and idTelegram='" + telegram + "'");
             List ID = jdbcTemplate.queryForList("select idTelegram,id from tbl_Users"
-                    + " where email='" + email + "'and password='" + senha + "'or email='" + email + "'and password='" + senha + "'");
+                    + " where email='" + email + "'and idTelegram='" + telegram + "'or email='" + email + "'and idTelegram='" + telegram + "'");
             if (lista.isEmpty() == false) {
                 JSONObject result = new JSONObject();
                 
@@ -46,7 +46,7 @@ public class User {
                 System.out.println("seu Telegram é: " + idTelegram);
                 System.out.println("seu id é: " + idUser);
             } else {
-                JOptionPane.showMessageDialog(null, "Usuário ou Senha inválidos!", "Login inválido", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Usuário ou ID inválidos!", "Login inválido", JOptionPane.ERROR_MESSAGE);
             }
         } catch (Exception e) {
             System.out.println("Error: " + e);
