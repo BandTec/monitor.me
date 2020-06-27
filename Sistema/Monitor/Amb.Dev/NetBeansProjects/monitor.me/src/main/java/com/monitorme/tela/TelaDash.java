@@ -60,8 +60,8 @@ public class TelaDash extends javax.swing.JFrame {
 //        lblMemoRam.setText(memoria1.getDiscosRigidos().toString());
 //        
         //GPU
-//        lblModel.setText(gpu1.getNomeGpu().toString());
-//        lblCoreGpu.setText(gpu1.getCoreGpu().toString());
+        lblModel.setText(gpu1.getNomeGpu().toString());
+
         
         //Memoria
         
@@ -87,6 +87,8 @@ public class TelaDash extends javax.swing.JFrame {
                     //GPU
                     lblTemperatura.setText(gpu1.getMediaTemperatura().toString());
                     lblMemoria.setText(gpu1.getMemoryGpu().toString());
+                    lblCoreGpu.setText(gpu1.getCoreGpu().toString());
+                    System.out.println(gpu1.saveDadosGpu());
                     //CPU
                     lblCpuUso.setText("Uso: " + String.format(" %.2f", cpu1.getUso()) + "%");
                     
