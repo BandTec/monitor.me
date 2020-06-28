@@ -21,8 +21,8 @@ public class MonitorMe extends TelegramLongPollingBot {
         Long chatId = update.getMessage().getChatId();
         String mensagem = update.getMessage().getText();
         System.out.println(mensagem);
-        if (mensagem.equals("/start")) {
-            enviarMensagem(chatId, String.format("Olá seu chat id é: %d", chatId));  //Condição logica para enviar mensagem através da interação do usuario"Oi"
+        if (mensagem.equals("Oi")) {
+            enviarMensagem(chatId, String.format(">> %d", chatId));  //Condição logica para enviar mensagem através da interação do usuario"Oi"
         }
     }
 
