@@ -1,6 +1,5 @@
 package com.monitorme.oshi;
 
-import static com.monitorme.oshi.SystemInfoTest.oshi;
 import java.util.ArrayList;
 import java.util.List;
 import org.json.JSONArray;

@@ -45,6 +45,7 @@ public class TelaDash extends javax.swing.JFrame {
     Memoria memoria1 = new Memoria();
     Alerta alertMemoria = new Alerta();
     Alerta alertCpu = new Alerta();
+    Alerta alertGpu = new Alerta();
     SystemInfo si = new SystemInfo();
     HardwareAbstractionLayer hal = si.getHardware();
     InserirBanco inserir = new InserirBanco();
@@ -55,16 +56,14 @@ public class TelaDash extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setTitle("Monitor Me");
         setResizable(false);
-        
+
         //Abaixo coloque tudo que for estático e precisa ser setado 1 unica vez, como por exemplo, nome dos Hardwares.
 //        lblMemoRam.setText(memoria1.getDiscosRigidos().toString());
 //        
         //GPU
         lblModel.setText(gpu1.getNomeGpu().toString());
 
-        
         //Memoria
-        
 //        lblDisco.setText(memoria1.getDiscosRigidos().toString());
 //        lblDisco.setText(String.format(" %s livre de %s ",memoria1.getHdDisponivel(),memoria1.getHdTotal()));
         lblDisco.setText(String.format("Espaço livre: %s ", memoria1.getHdDisponivel()));
@@ -91,28 +90,51 @@ public class TelaDash extends javax.swing.JFrame {
                     System.out.println(gpu1.saveDadosGpu());
                     //CPU
                     lblCpuUso.setText("Uso: " + String.format(" %.2f", cpu1.getUso()) + "%");
-                    
-                    
-                    
+
                     // <! -----------------Abaixo valida os alertas------------------>
-                    if (memoria1.getPorcentagemRam() > 10) {
-//                        inserir.InserirInforHardware();
+                    if (memoria1.getPorcentagemRam() > 90) {
                         alertMemoria.adicionarEvento(Double.valueOf(memoria1.getPorcentagemRam()));
-                        if (alertMemoria.getContadorDeEventos().size() > 10) {
-                            alertMemoria.enviarAlerta("memoria", "Critico", ("Sua memoria está em média de uso de: " + alertMemoria.mediaEvento()));
+                        if (alertMemoria.getContadorDeEventos().size() > 30) {
+                            inserir.InserirBanco();
+                            alertMemoria.enviarAlerta("memoria", "Critico", ("Sua memoria está em média de uso de: " + String.format(" %.2f", alertMemoria.mediaEvento())));
                             alertMemoria.limparEventos();
                         }
                     }
-                    
-                    if(cpu1.getUso() > 1){
+
+                    if (cpu1.getUso() < 8) {
                         alertCpu.adicionarEvento(Double.valueOf(cpu1.getUso()));
-                        if (alertCpu.getContadorDeEventos().size() > 2) {
-                            alertCpu.enviarAlerta("cpu", "Critico", ("Sua Cpu está em um nivel de uso de: " + alertCpu.mediaEvento()));
+                        if (alertCpu.getContadorDeEventos().size() > 30) {
+                            inserir.InserirBanco();
+                            alertCpu.enviarAlerta("cpu", "Critico", ("Sua Cpu está sendo mal utilizada, verifique o uso em %: " + String.format(" %.2f", alertCpu.mediaEvento())));
                             alertCpu.limparEventos();
                         }
                     }
+
+                    if (gpu1.getMediaTemperatura() > 75 || gpu1.getFanRpm() == 0) {
+                        alertGpu.adicionarEvento(gpu1.getMediaTemperatura());
+                        if (alertGpu.getContadorDeEventos().size() > 15) {
+                            inserir.InserirBanco();
+                            alertGpu.enviarAlerta("gpu", "Alerta", "seu trabalho está em risco, sua gpu está com " + String.format(" %.2f", alertGpu.mediaEvento()));
+                            alertGpu.limparEventos();
+                        }
+                    }else if(gpu1.getMediaTemperatura() > 90){
+                        alertGpu.adicionarEvento(gpu1.getMediaTemperatura());
+                        if (alertGpu.getContadorDeEventos().size() > 15) {
+                            inserir.InserirBanco();
+                            alertGpu.enviarAlerta("gpu", "Critico", "seu trabalho está em risco, sua gpu está com " + String.format(" %.2f", alertGpu.mediaEvento()));
+                            alertGpu.limparEventos();
+                        }
+                    }
                     
-                    
+                    if (gpu1.getMemoryGpu() < 1) {
+                        alertGpu.adicionarEvento(gpu1.getMemoryGpu());
+                        if (alertGpu.getContadorDeEventos().size() > 15) {
+                            inserir.InserirBanco();
+                            alertGpu.enviarAlerta("gpu", "Critico", "seu trabalho está em risco, sua gpu está com " + String.format(" %.2f", alertGpu.mediaEvento()));
+                            alertGpu.limparEventos();
+                        }
+                    }
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -848,7 +870,7 @@ public class TelaDash extends javax.swing.JFrame {
     public static void main(String args[]) {
         ApiContextInitializer.init();
         TelegramBotsApi telegram = new TelegramBotsApi();  //objeto telegram
-        MonitorMe mensagem = new MonitorMe(); 
+        MonitorMe mensagem = new MonitorMe();
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
