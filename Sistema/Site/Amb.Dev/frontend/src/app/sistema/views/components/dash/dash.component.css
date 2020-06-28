@@ -25,6 +25,12 @@
   flex-direction: column;
   margin: 15px;
 }
+.contentCanva{
+  display: flex;
+  background-color: #3333330a;
+  flex-direction: column;
+  margin: 15px;
+}
 .small-card{
   display: flex;
   float: left;

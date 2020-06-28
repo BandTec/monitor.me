@@ -1,10 +1,11 @@
 <div class="grid-container">
   <mat-card class="contentAlert mat-elevation-z6">
     <mat-card-content>
-      <mat-card-title>Máquina acusada</mat-card-title>
+      <mat-card-title>Máquinas em Alerta</mat-card-title>
       <mat-card class="small-card" *ngFor="let data of dataFromApi">
         <div class="pcStatus">
           <h1 style="color: lightblue; display:flex; justify-content: center; font-size: small;">{{nomeProcessador}}</h1>
+          <span style="color: rgb(223, 143, 143);">Temperatura <p style="font-size: medium; font-weight: 400;">{{tempProcessador}}</p></span>
         </div>
       </mat-card>
     </mat-card-content>
@@ -13,9 +14,9 @@
   <h2>Temperatura média da gpu: {{ArrayTempGpu}}</h2>
 </div>
 
-<mat-card class="contentAlert mat-elevation-z6">
+<mat-card class="contentCanva mat-elevation-z12">
   <div width="200" height="200">
     <canvas #dashGPU>
     </canvas>
-  </div>  
+  </div> 
 </mat-card>

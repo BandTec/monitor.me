@@ -18,17 +18,17 @@ export class DashComponent implements OnInit {
   sttsHardware: any;
   hardResult: any;
   nomeProcessador: any;
+  tempProcessador: any;
   public ArrayTempGpu: Array<number>;
   public ArrayData: Array<number>;
   TempMediaGpu: number;
   
-  @ViewChild('dashGPU', { static: true }) elemento: ElementRef;
+  @ViewChild('dashGPU', { static: false }) elemento: ElementRef;
 
   ngOnInit() {
     this.dashService.readHardware(this.token).subscribe(
       (data) => {
         this.dataFromApi = data['dadosHardware'];
-        console.log('data>>> ', this.dataFromApi);
         const apiTempGpu = [];
         const apiDataGpu = [];
         this.sttsHardware = this.dataFromApi.map((x) => {
@@ -52,8 +52,7 @@ export class DashComponent implements OnInit {
 
         //Setar abaixo as variaveis que irao aparecer no front
         this.nomeProcessador = this.hardResult['cpu']['getNomeProc'];
-
-        console.log(">>>>",this.ArrayTempGpu);
+        this.tempProcessador = `${this.hardResult['cpu']['getTemperatura'].toFixed(2)}ºC`
 
         new Chart(this.elemento.nativeElement, {
           type: 'line',
@@ -65,10 +64,15 @@ export class DashComponent implements OnInit {
                 data: this.ArrayTempGpu,
                 borderColor: '#7b1fa2',
                 fill: true,
+                backgroundColor: '#7b1fa259'
               },
             ],
           },
+          options: {
+            responsive: true
+          }
         });
+
       },
       (error) => {
         console.log(error);
