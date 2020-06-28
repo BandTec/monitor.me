@@ -8,45 +8,76 @@ import { DataJson } from 'src/app/models/dataHard.models';
 @Component({
   selector: 'app-dash',
   templateUrl: './dash.component.html',
-  styleUrls: ['./dash.component.css']
+  styleUrls: ['./dash.component.css'],
 })
 export class DashComponent implements OnInit {
   private token = `bearer ${localStorage.getItem('token')}`;
-  dataFromApi: DataJson[];
-  sttsCpu: any[];
 
-  @ViewChild("dashGPU", { static: true }) elemento: ElementRef;
+  userLogado = `${localStorage.getItem('name')}`;
+  dataFromApi: DataJson[];
+  sttsHardware: any;
+  hardResult: any;
+  nomeProcessador: any;
+  public ArrayTempGpu: Array<number>;
+  TempMediaGpu: number;
+  
+  @ViewChild('dashGPU', { static: true }) elemento: ElementRef;
 
   ngOnInit() {
-    this.dashService.readHardware(this.token).subscribe((data) =>{
-      console.log(data)
-      this.dataFromApi = data['dadosHardware'];
-      console.log("data>>> ",this.dataFromApi)
+    this.dashService.readHardware(this.token).subscribe(
+      (data) => {
+        this.dataFromApi = data['dadosHardware'];
+        console.log('data>>> ', this.dataFromApi);
+        const xpto = [];
+        this.sttsHardware = this.dataFromApi.map((x) => {
+          
+          const dadosRecebidos = {
+            cpu: x.cpuDados,
+            gpu: x.gpuDados,
+            oshi: x.oshiDados,
+          };
+          this.hardResult = dadosRecebidos;          
+          
+          xpto.push(this.hardResult['gpu']['temperaturaMedia']);
+          this.ArrayTempGpu = xpto;
 
-      this.sttsCpu = this.dataFromApi.map((x) => {
-      console.log("Processador",x.cpuDados['getNomeProc'])
-      console.log("MemoriaController da Gpu", x.gpuDados['memoriaCtrlGpu'])
-      })
-      
-    }, error => {
-      console.log(error);
-    });
-    new Chart(this.elemento.nativeElement, {
-      type: "line",
-      data: {
-        labels: ["11-10-2019", "11-10-2019", "11-10-2019", "11-10-2019", "11-10-2019", "11-10-2019"],
-        datasets: [
-          {
-            label: 'Alerta em Graus ºC',
-            data: [12, 34, 55, 66, 13, 100],
-            borderColor: '#7b1fa2',
-            fill: false
-          }
-        ],
+          return dadosRecebidos;
+        });
+
+        //Setar abaixo as variaveis que irao aparecer no front
+        this.nomeProcessador = this.hardResult['cpu']['getNomeProc'];
+
+        console.log(">>>>",this.ArrayTempGpu);
+
+        new Chart(this.elemento.nativeElement, {
+          type: 'line',
+          data: {
+            labels: [
+              '11-10-2019',
+              '11-10-2019',
+              '11-10-2019',
+              '11-10-2019',
+              '11-10-2019',
+              '11-10-2019',
+            ],
+            datasets: [
+              {
+                label: 'Alerta em Graus ºC',
+                data: this.ArrayTempGpu,
+                borderColor: '#7b1fa2',
+                fill: false,
+              },
+            ],
+          },
+        });
+      },
+      (error) => {
+        console.log(error);
       }
-    });
-  }
+    );
 
+    
+  }
 
   /** Based on the screen size, switch from standard to one column per row */
   cards = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
@@ -56,7 +87,7 @@ export class DashComponent implements OnInit {
           { title: 'Sua GPU', cols: 1, rows: 1 },
           { title: 'Card 2', cols: 1, rows: 1 },
           { title: 'Card 3', cols: 1, rows: 1 },
-          { title: 'Card 4', cols: 1, rows: 1 }
+          { title: 'Card 4', cols: 1, rows: 1 },
         ];
       }
 
@@ -64,10 +95,13 @@ export class DashComponent implements OnInit {
         { title: 'Sua GPU', cols: 2, rows: 1 },
         { title: 'Card 2', cols: 1, rows: 1 },
         { title: 'Card 3', cols: 1, rows: 2 },
-        { title: 'Card 4', cols: 1, rows: 1 }
+        { title: 'Card 4', cols: 1, rows: 1 },
       ];
     })
   );
 
-  constructor(private breakpointObserver: BreakpointObserver, private dashService: DashboardService) { }
+  constructor(
+    private breakpointObserver: BreakpointObserver,
+    private dashService: DashboardService
+  ) {}
 }
