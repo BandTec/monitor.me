@@ -19,7 +19,11 @@ export class DashComponent implements OnInit {
   hardResult: any;
   nomeProcessador: any;
   tempProcessador: any;
+
+  nomeGpu: string;
   public ArrayTempGpu: Array<number>;
+  public ArrayMemoriaRam: Array<number>;
+  public ArrayCpuUso: Array<number>;
   public ArrayData: Array<number>;
   TempMediaGpu: number;
   
@@ -31,6 +35,8 @@ export class DashComponent implements OnInit {
         this.dataFromApi = data['dadosHardware'];
         const apiTempGpu = [];
         const apiDataGpu = [];
+        const apiMemRam = [];
+        const apiCpuUso = [];
         this.sttsHardware = this.dataFromApi.map((x) => {
           
           const dadosRecebidos = {
@@ -42,11 +48,16 @@ export class DashComponent implements OnInit {
           this.hardResult = dadosRecebidos;          
           
           apiTempGpu.push(this.hardResult['gpu']['temperaturaMedia']);
+          apiCpuUso.push(parseFloat(this.hardResult['cpu']['getUsoUser']))
           apiDataGpu.push(this.hardResult['data'])
-          
+          apiMemRam.push(parseFloat(this.hardResult['oshi']['porcentRam']))
+
           this.ArrayTempGpu = apiTempGpu;
           this.ArrayData = apiDataGpu;
+          this.ArrayMemoriaRam = apiMemRam;
+          this.ArrayCpuUso = apiCpuUso;
 
+          console.log(this.ArrayMemoriaRam)
           return dadosRecebidos;
         });
 
@@ -54,18 +65,32 @@ export class DashComponent implements OnInit {
         this.nomeProcessador = this.hardResult['cpu']['getNomeProc'];
         this.tempProcessador = `${this.hardResult['cpu']['getTemperatura'].toFixed(2)}ºC`
 
+        this.nomeGpu = this.hardResult['gpu']['nomeGpu'];
+        
         new Chart(this.elemento.nativeElement, {
           type: 'line',
           data: {
             labels: this.ArrayData,
             datasets: [
               {
-                label: 'Alerta em Graus ºC',
+                label: 'Alerta em ºC',
                 data: this.ArrayTempGpu,
                 borderColor: '#7b1fa2',
                 fill: true,
-                backgroundColor: '#7b1fa259'
-              },
+                backgroundColor: '#7b1fa339'
+              },{
+                label: '% de Uso Memoria Ram',
+                data: this.ArrayMemoriaRam,
+                borderColor: '#df8f8f',
+                fill: true,
+                backgroundColor: '#df8f8fb3'
+              },{
+                label: '% de Uso Cpu',
+                data: this.ArrayCpuUso,
+                borderColor: '#80bfff',
+                fill: true,
+                backgroundColor: '#80bfff'
+              }
             ],
           },
           options: {

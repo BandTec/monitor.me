@@ -5,7 +5,8 @@
       <mat-card class="small-card" *ngFor="let data of dataFromApi">
         <div class="pcStatus">
           <h1 style="color: lightblue; display:flex; justify-content: center; font-size: small;">{{nomeProcessador}}</h1>
-          <span style="color: rgb(223, 143, 143);">Temperatura <p style="font-size: medium; font-weight: 400;">{{tempProcessador}}</p></span>
+          <h1 style="color: lightblue; display:flex; justify-content: center; font-size: small;">{{nomeGpu}}</h1>
+          <span style="color: #df8f8f;">Temperatura <p style="font-size: medium; font-weight: 400;">{{tempProcessador}}</p></span>
         </div>
       </mat-card>
     </mat-card-content>
@@ -15,7 +16,7 @@
 </div>
 
 <mat-card class="contentCanva mat-elevation-z12">
-  <div width="200" height="200">
+  <div width="200" height="200" style="background-color: #ffffff;">
     <canvas #dashGPU>
     </canvas>
   </div> 
