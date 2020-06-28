@@ -5,7 +5,7 @@
 }
 .small-card{
     display: flex;
-    float: left;
+    justify-content: center;
     width: 46%;
     height: 50px;
     margin: 3px;

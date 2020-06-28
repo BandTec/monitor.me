@@ -1,8 +1,11 @@
 <div class="grid-container">
   <mat-card class="contentAlert mat-elevation-z6">
     <mat-card-content>
+      <mat-card-title>Máquina acusada</mat-card-title>
       <mat-card class="small-card" *ngFor="let data of dataFromApi">
-        <h1 style="color: red; width: 500px; height: 500px;">{{nomeProcessador}}</h1>
+        <div class="pcStatus">
+          <h1 style="color: lightblue; display:flex; justify-content: center; font-size: small;">{{nomeProcessador}}</h1>
+        </div>
       </mat-card>
     </mat-card-content>
   </mat-card>
@@ -11,7 +14,7 @@
 </div>
 
 <mat-card class="contentAlert mat-elevation-z6">
-  <div width="400" height="400">
+  <div width="200" height="200">
     <canvas #dashGPU>
     </canvas>
   </div>  

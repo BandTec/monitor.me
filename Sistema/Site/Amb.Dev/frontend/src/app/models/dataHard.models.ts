@@ -4,6 +4,7 @@ export class DataJson {
   public oshiDados: JSON;
   public gpuDados: JSON;
   public cpuDados: JSON;
+  public ctDDados: string;
   public createdAt: string;
   public updatedAt: string;
 }
