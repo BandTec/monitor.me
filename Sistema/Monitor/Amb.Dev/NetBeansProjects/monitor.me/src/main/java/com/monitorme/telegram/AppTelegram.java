@@ -15,7 +15,7 @@ public class AppTelegram {
         //Condição logica para rodar os metodos da classe Monitorme
         try {
             telegram.registerBot(new MonitorMe());
-                      mensagem.enviarMensagem(Long.valueOf(1170936455), "Teste monitorMe");
+        //              mensagem.enviarMensagem(Long.valueOf(1170936455), "Teste monitorMe");
         } catch (TelegramApiException e) {
             e.printStackTrace();
         }
