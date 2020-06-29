@@ -23,7 +23,7 @@
   display: flexbox;
   justify-content: flex-start;
   width: 40%;
-  background-color: rgba(55, 48, 61, 0.96);
+  background-color: rgba(55, 48, 61, 0.99);
   max-height: 90%;
   min-height: 90%;
 }

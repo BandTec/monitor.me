@@ -6,22 +6,22 @@
       <mat-card-content class="formCad">
         <form method="post" #form="ngForm" novalidate (ngSubmit)="signup(form)">
           <mat-form-field class="field">
-            <input matInput placeholder="Qual seu nome?" [(ngModel)]="user.name" name="name">
+            <input matInput placeholder="Qual seu nome?" [(ngModel)]="user.name" type="text" minlength="5" name="name" required>
           </mat-form-field>
           <mat-form-field class="field">
-            <input matInput placeholder="Email" [(ngModel)]="user.email" name="email">
+            <input matInput placeholder="Email" [(ngModel)]="user.email" type="email" name="email" required>
           </mat-form-field>
           <mat-form-field class="field">
-            <input matInput placeholder="Celular" [(ngModel)]="user.cellphone" name="cellphone">
+            <input matInput placeholder="Celular" [(ngModel)]="user.cellphone" type="tel" name="cellphone" required>
           </mat-form-field>
           <mat-form-field class="field">
-            <input matInput placeholder="Senha" [(ngModel)]="user.password" name="password" type="password">
+            <input matInput placeholder="Senha" [(ngModel)]="user.password" name="password" type="password" required>
           </mat-form-field>
           <mat-form-field class="field">
-            <input matInput placeholder="Confirme sua Senha" name="confirmpassword" type="password">
+            <input matInput placeholder="Confirme sua Senha" name="confirmpassword" type="password" required>
           </mat-form-field>
           <mat-form-field class="field">
-            <input matInput placeholder="Telegram ChatID" [(ngModel)]="user.idTelegram" name="idTelegram">
+            <input matInput placeholder="Telegram ChatID" [(ngModel)]="user.idTelegram" type="text" name="idTelegram" required>
           </mat-form-field>
           <button mat-raised-button color="primary" type="submit" class="btnCad">Cadastrar</button>
         </form>

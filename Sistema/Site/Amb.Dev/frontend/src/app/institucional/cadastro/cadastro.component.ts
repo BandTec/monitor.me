@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
+import { EmailValidator } from '@angular/forms';
 
 @Component({
   selector: 'app-cadastro',
@@ -15,7 +16,7 @@ export class CadastroComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = {
-      name: '',
+      name: '' ,
       email: '',
       cellphone: '',
       password: '',
@@ -29,6 +30,10 @@ export class CadastroComponent implements OnInit {
   }
 
   async signup(form) {
+
+    if(!form.valid){
+      return this.userService.show(`Cadastro Falhou, campos vazios (*)!`);
+    }
 
     try {
       console.log(`${JSON.stringify(form.value)}`)
@@ -62,7 +67,7 @@ export class CadastroComponent implements OnInit {
       console.log('Error:', err)
     }
 
-    return this.userService.show(`Login Inválido!`);
+    return this.userService.show(`Cadastro Inválido!`);
   }
 
 }
