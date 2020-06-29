@@ -17,9 +17,10 @@ import java.util.Date;
  * @author Pichau
  */
 public class Logger {
-   
+
     private String caminho;
-    private String[] tipos = {"info", "error"};
+    private String extensao;
+//    private String[] tipos = {"info", "error"};
     private Date date;
     private final DateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy");
     private final DateFormat horaFormatada = new SimpleDateFormat("HH:mm:ss");
@@ -27,7 +28,8 @@ public class Logger {
     public Logger() {
         String os = System.getProperty("os.name").toLowerCase();
 
-        this.caminho = os.contains("win") ? "C:/Logfy/" : "/var/log/";
+        this.caminho = os.contains("win") ? "C:/MonitorMeLog/" : "/var/log/";
+        this.extensao = "Log.txt";
     }
 
     public void criarDiretorio() {
@@ -36,41 +38,41 @@ public class Logger {
                 Files.createDirectory(Paths.get(caminho));
             }
         } catch (Exception e) {
-            System.out.println("Erro apresentado ao criar diretório.");
+            String msgErroDir = String.format("Erro apresentado ao criar diretório em %s.", caminho);
+            System.out.println(msgErroDir);
         }
     }
 
-    public void criaLog() {
+    public void criarLog() {
         try {
-            for (String extensao : tipos) {
-                extensao += ".txt";
-                if (!Files.exists(Paths.get(caminho + extensao))) {
-                    Files.createFile(Paths.get(caminho + extensao));
-                    Files.write(Paths.get(caminho + extensao),
-                            ("data;hora;local;info\n").getBytes(),
-                            StandardOpenOption.APPEND);
-                }
+            if (!Files.exists(Paths.get(caminho + extensao))) {
+                Files.createFile(Paths.get(caminho + extensao));
+                Files.write(Paths.get(caminho + extensao),
+                        ("Data             Hora            Tipo      Descrição\r\n").getBytes(),
+                        StandardOpenOption.APPEND);
             }
+
         } catch (Exception e) {
-            System.out.println("Erro ao criar arquivos.");
+            String msgCriarLog = String.format("Erro apresentado ao criar arquivo Log em %s.", caminho + extensao);
+            System.out.println(msgCriarLog);
         }
     }
 
-    public void editarLog(String local, String tipoDeLog, String informacao) {
+    public void inserirLog(String tipoLog, String descricao) {
         try {
             date = new Date();
             String data = dataFormatada.format(date);
             String hora = horaFormatada.format(date);
+            System.lineSeparator();
+            String infoLog = String.format("%s       %s        %s      %s\r\n", data, hora, tipoLog, descricao);
 
-            tipoDeLog += ".txt";
-            String infoLog = String.format("%s;%s;%s;%s\n", data, hora, local, informacao);
-
-            Files.write(Paths.get(caminho + tipoDeLog),
+            Files.write(Paths.get(caminho + extensao),
                     (infoLog).getBytes(), StandardOpenOption.APPEND);
+
         } catch (Exception e) {
-            System.out.println("Erro ao escrever log.");
+            String msgInserirLog = String.format("Erro apresentado ao inserir informações no log em %s.", caminho + extensao);
+            System.out.println(msgInserirLog);
         }
     }
 
-    
 }

@@ -30,6 +30,11 @@ public class MainTeste {
         DadosGpu gpu = new DadosGpu();
         Memoria memo = new Memoria();
         
+        //logs teste
+        Logger l = new Logger();
+        l.criarDiretorio();
+        l.criarLog();
+        
 //        System.out.println("memo.getDadosMemoriaRam()  " + memo.getDadosMemoriaRam());
 //        JSONArray xt = new JSONArray(memo.getDadosMemoriaRam());
 //        JSONObject y = xt.getJSONObject(0);

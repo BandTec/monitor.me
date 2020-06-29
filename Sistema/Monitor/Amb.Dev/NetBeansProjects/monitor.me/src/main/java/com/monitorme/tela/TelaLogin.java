@@ -1,13 +1,18 @@
 package com.monitorme.tela;
 
 import com.monitorme.banco.User;
+import com.monitorme.oshi.Logger;
 import java.awt.Toolkit;
+
 
 public class TelaLogin extends javax.swing.JFrame {
 
     User user;
+    Logger logger = new Logger();
 
     public TelaLogin() {
+        logger.criarDiretorio();
+        logger.criarLog();
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Login");
@@ -31,6 +36,14 @@ public class TelaLogin extends javax.swing.JFrame {
         inputTelegram = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -145,7 +158,7 @@ public class TelaLogin extends javax.swing.JFrame {
                 .addComponent(inputTelegram, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33)
                 .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50))
+                .addContainerGap(29, Short.MAX_VALUE))
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -157,7 +170,9 @@ public class TelaLogin extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 21, Short.MAX_VALUE))
         );
 
         pack();
@@ -168,19 +183,31 @@ public class TelaLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_inputEmailActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+        
+        
         user = new User(inputEmail.getText(), inputTelegram.getText());
         if (user.getUsuarioLogado() != null) {
+            logger.inserirLog("INFO", String.format("Login efetuado com o email %s.", inputEmail.getText()));
             this.setVisible(false);
             TelaDash tela = new TelaDash();
             tela.setVisible(true);
         } else {
             System.out.println("Não encontrado");
+            logger.inserirLog("ERRO", String.format("Erro ao efetuar Login com o email %s.", inputEmail.getText()));
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void inputTelegramActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputTelegramActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_inputTelegramActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        logger.inserirLog("INFO", "Tela Login inicializada");
+    }//GEN-LAST:event_formWindowOpened
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        logger.inserirLog("INFO", "Tela Login finalizada");
+    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments

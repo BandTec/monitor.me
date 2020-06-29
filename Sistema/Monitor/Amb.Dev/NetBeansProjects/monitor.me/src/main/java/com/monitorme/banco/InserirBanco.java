@@ -20,7 +20,7 @@ public class InserirBanco {
         
         
         public void InserirBanco(){
-        jdbcTemplate.update("insert into tbl_HardHistories(UserId, OshiStatus, GPUStatus, createdAt, updatedAt, CpuStatus) values (?,?,?,?,?,?)",
-                     User.idUser,memo.saveDadosMemoria(),"gpu.saveDadosGpu()",LocalDateTime.now(),LocalDateTime.now(), cpu.saveDadosCpu());
+//        jdbcTemplate.update("insert into tbl_HardHistories(UserId, OshiStatus, GPUStatus, createdAt, updatedAt, CpuStatus) values (?,?,?,?,?,?)",
+//                     User.idUser,memo.saveDadosMemoria(),"gpu.saveDadosGpu()",LocalDateTime.now(),LocalDateTime.now(), cpu.saveDadosCpu());
 }
 }
