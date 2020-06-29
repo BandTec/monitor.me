@@ -32,17 +32,19 @@
   margin: 15px;
 }
 .small-card{
-  display: flex;
+  /* display: flex; */
   float: left;
   width: 46%;
   height: 80px;
   margin: 3px;
-  justify-content: space-between;
+  justify-content:flex-start;
   background-color: rgb(109, 109, 109);
 }
 
 .pcStatus{
+  width: 100%;
   display: flex;
-  /* width: 100%;
-  justify-content: flex-start; */
+  float: left;
+  text-align: left;
+  /* justify-content: flex-start; */
 }

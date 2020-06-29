@@ -1,21 +1,24 @@
 <div class="grid-container">
   <mat-card class="contentAlert mat-elevation-z6">
     <mat-card-content>
-      
+      <mat-card-title>
+          Maquinas em Alerta          
+      </mat-card-title>
       <mat-card class="small-card v-middle " *ngFor="let data of sttsHardware">
-        <mat-card-title style="font-size: small;">
-          
-          
-        </mat-card-title>
+        
         <mat-card-subtitle>
           
         </mat-card-subtitle>
-        <div class="pcStatus v-top">
-          <h1 style="color: lightblue;font-size: small;">{{data.gpu.nomeGpu}}</h1>
-          <h3 style="color: lightblue;font-size: small;">{{data.cpu.getNomeProc}}</h3>
-          <span style="color: #df8f8f;">Temperatura {{data.cpu.getTemperatura | number}}</span>
-          <span style="color: #df8f8f;">Data: <p style="font-size: medium; font-weight: 400;">{{data.data}}</p></span>
+        <div class="pcStatus v-middle">
+          <span style="color: lightblue;font-size: small;float: left;">{{data.gpu.nomeGpu}}</span><br>
+          
+          
+          <!-- <span style="color: #df8f8f;">Data: <p style="font-size: medium; font-weight: 400;">{{data.data}}</p></span> -->
         </div>
+        <div class="pcStatus v-middle">
+          <span style="color: lightblue;font-size: small;float: left;">{{data.cpu.getNomeProc}}</span>
+        </div>
+        <span style="color: #df8f8f;float: right;">Temperatura: {{data.cpu.getTemperatura | number}}</span>
       </mat-card>
     </mat-card-content>
   </mat-card>
