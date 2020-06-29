@@ -90,7 +90,7 @@ public class TelaDash extends javax.swing.JFrame {
                     System.out.println(gpu1.saveDadosGpu());
                     //CPU
                     lblCpuUso.setText("Uso: " + String.format(" %.2f", cpu1.getUso()) + "%");
-
+                    pgbCpu.setValue((int) cpu1.getUso());
                     // <! -----------------Abaixo valida os alertas------------------>
                     if (memoria1.getPorcentagemRam() > 90) {
                         alertMemoria.adicionarEvento(Double.valueOf(memoria1.getPorcentagemRam()));

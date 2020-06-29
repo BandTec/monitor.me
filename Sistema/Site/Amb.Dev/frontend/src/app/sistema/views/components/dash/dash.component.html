@@ -13,9 +13,8 @@
         <div class="pcStatus v-top">
           <h1 style="color: lightblue;font-size: small;">{{data.gpu.nomeGpu}}</h1>
           <h3 style="color: lightblue;font-size: small;">{{data.cpu.getNomeProc}}</h3>
-          <span style="color: #df8f8f;">Temperatura <p style="font-size: medium; font-weight: 400;">{{data.cpu.getTemperatura}}</p></span>
+          <span style="color: #df8f8f;">Temperatura {{data.cpu.getTemperatura | number}}</span>
           <span style="color: #df8f8f;">Data: <p style="font-size: medium; font-weight: 400;">{{data.data}}</p></span>
-          
         </div>
       </mat-card>
     </mat-card-content>
