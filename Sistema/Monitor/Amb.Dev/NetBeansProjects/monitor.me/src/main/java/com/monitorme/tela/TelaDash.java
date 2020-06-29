@@ -11,6 +11,7 @@ import com.monitorme.chart.ChartGpu;
 import com.monitorme.jsensor.DadosGpu;
 import com.monitorme.oshi.Alerta;
 import com.monitorme.oshi.Cpu;
+import com.monitorme.oshi.Logger;
 import com.monitorme.oshi.Memoria;
 import com.monitorme.oshi.Processos;
 import com.monitorme.telegram.MonitorMe;
@@ -49,6 +50,7 @@ public class TelaDash extends javax.swing.JFrame {
     SystemInfo si = new SystemInfo();
     HardwareAbstractionLayer hal = si.getHardware();
     InserirBanco inserir = new InserirBanco();
+    Logger logger = new Logger();
 
     public TelaDash() {
         initComponents();
@@ -59,17 +61,22 @@ public class TelaDash extends javax.swing.JFrame {
 
         //Abaixo coloque tudo que for estático e precisa ser setado 1 unica vez, como por exemplo, nome dos Hardwares.
 //        lblMemoRam.setText(memoria1.getDiscosRigidos().toString());
-//        
-        //GPU
-        lblModel.setText(gpu1.getNomeGpu().toString());
+        try {
 
-        //Memoria
+            //GPU
+            lblModel.setText(gpu1.getNomeGpu().toString());
+
+            //Memoria
 //        lblDisco.setText(memoria1.getDiscosRigidos().toString());
 //        lblDisco.setText(String.format(" %s livre de %s ",memoria1.getHdDisponivel(),memoria1.getHdTotal()));
-        lblDisco.setText(String.format("Espaço livre: %s ", memoria1.getHdDisponivel()));
-        lblDisco1.setText(String.format("Capacidade Total: %s ", memoria1.getHdTotal()));
-        //Cpu
-        lblCpu.setText(cpu1.printProcessor());
+            lblDisco.setText(String.format("Espaço livre: %s ", memoria1.getHdDisponivel()));
+            lblDisco1.setText(String.format("Capacidade Total: %s ", memoria1.getHdTotal()));
+            //Cpu
+            lblCpu.setText(cpu1.printProcessor());
+
+        } catch (Exception e) {
+            logger.inserirLog("ERRO", "Erro ao iniciar a tela Dash. Não foi possível recuperar algumas informações do sistema." + e.getMessage());
+        }
 
         final long time = 1500;
 
@@ -91,75 +98,82 @@ public class TelaDash extends javax.swing.JFrame {
                     //CPU
                     lblCpuUso.setText("Uso: " + String.format(" %.2f", cpu1.getUso()) + "%");
                     pgbCpu.setValue((int) cpu1.getUso());
-                    // <! -----------------Abaixo valida os alertas------------------>
-                    if (memoria1.getPorcentagemRam() > 90) {
-                        alertMemoria.adicionarEvento(Double.valueOf(memoria1.getPorcentagemRam()));
-                        if (alertMemoria.getContadorDeEventos().size() > 30) {
-                            inserir.InserirBanco();
-                            alertMemoria.enviarAlerta("memoria", "Critico", ("Sua memoria está em média de uso de: " + String.format(" %.2f", alertMemoria.mediaEvento())));
-                            alertMemoria.limparEventos();
-                        }
-                    }
-
-                    if (cpu1.getUso() < 8) {
-                        alertCpu.adicionarEvento(Double.valueOf(cpu1.getUso()));
-                        if (alertCpu.getContadorDeEventos().size() > 30) {
-                            inserir.InserirBanco();
-                            alertCpu.enviarAlerta("cpu", "Critico", ("Sua Cpu está sendo mal utilizada, verifique o uso em %: " + String.format(" %.2f", alertCpu.mediaEvento())));
-                            alertCpu.limparEventos();
-                        }
-                    }
-
-                    if (gpu1.getMediaTemperatura() > 75 || gpu1.getFanRpm() == 0) {
-                        alertGpu.adicionarEvento(gpu1.getMediaTemperatura());
-                        if (alertGpu.getContadorDeEventos().size() > 15) {
-                            inserir.InserirBanco();
-                            alertGpu.enviarAlerta("gpu", "Alerta", "seu trabalho está em risco, sua gpu está com " + String.format(" %.2f", alertGpu.mediaEvento()));
-                            alertGpu.limparEventos();
-                        }
-                    }else if(gpu1.getMediaTemperatura() > 90){
-                        alertGpu.adicionarEvento(gpu1.getMediaTemperatura());
-                        if (alertGpu.getContadorDeEventos().size() > 15) {
-                            inserir.InserirBanco();
-                            alertGpu.enviarAlerta("gpu", "Critico", "seu trabalho está em risco, sua gpu está com " + String.format(" %.2f", alertGpu.mediaEvento()));
-                            alertGpu.limparEventos();
-                        }
-                    }
-                    
-                    if (gpu1.getMemoryGpu() < 1) {
-                        alertGpu.adicionarEvento(gpu1.getMemoryGpu());
-                        if (alertGpu.getContadorDeEventos().size() > 15) {
-                            inserir.InserirBanco();
-                            alertGpu.enviarAlerta("gpu", "Critico", "seu trabalho está em risco, sua gpu está com " + String.format(" %.2f", alertGpu.mediaEvento()));
-                            alertGpu.limparEventos();
-                        }
-                    }
-
                 } catch (Exception e) {
+                    logger.inserirLog("ERRO", "Erro na tela Dash. Não foi possível recuperar algumas informações do sistema." + e.getMessage());
                     e.printStackTrace();
+                }
+                
+                
+                // <! -----------------Abaixo valida os alertas------------------>
+                if (memoria1.getPorcentagemRam() > 90) {
+                    alertMemoria.adicionarEvento(Double.valueOf(memoria1.getPorcentagemRam()));
+                    if (alertMemoria.getContadorDeEventos().size() > 30) {
+                        inserir.InserirBanco();
+                        alertMemoria.enviarAlerta("memoria", "Critico", ("Sua memoria está em média de uso de: " + String.format(" %.2f", alertMemoria.mediaEvento())));
+                        alertMemoria.limparEventos();
+                    }
+                }
+
+                if (cpu1.getUso() < 8) {
+                    alertCpu.adicionarEvento(Double.valueOf(cpu1.getUso()));
+                    if (alertCpu.getContadorDeEventos().size() > 30) {
+                        inserir.InserirBanco();
+                        alertCpu.enviarAlerta("cpu", "Critico", ("Sua Cpu está sendo mal utilizada, verifique o uso em %: " + String.format(" %.2f", alertCpu.mediaEvento())));
+                        alertCpu.limparEventos();
+                    }
+                }
+
+                if (gpu1.getMediaTemperatura() > 75 || gpu1.getFanRpm() == 0) {
+                    alertGpu.adicionarEvento(gpu1.getMediaTemperatura());
+                    if (alertGpu.getContadorDeEventos().size() > 15) {
+                        inserir.InserirBanco();
+                        alertGpu.enviarAlerta("gpu", "Alerta", "seu trabalho está em risco, sua gpu está com " + String.format(" %.2f", alertGpu.mediaEvento()));
+                        alertGpu.limparEventos();
+                    }
+                } else if (gpu1.getMediaTemperatura() > 90) {
+                    alertGpu.adicionarEvento(gpu1.getMediaTemperatura());
+                    if (alertGpu.getContadorDeEventos().size() > 15) {
+                        inserir.InserirBanco();
+                        alertGpu.enviarAlerta("gpu", "Critico", "seu trabalho está em risco, sua gpu está com " + String.format(" %.2f", alertGpu.mediaEvento()));
+                        alertGpu.limparEventos();
+                    }
+                }
+
+                if (gpu1.getMemoryGpu() < 1) {
+                    alertGpu.adicionarEvento(gpu1.getMemoryGpu());
+                    if (alertGpu.getContadorDeEventos().size() > 15) {
+                        inserir.InserirBanco();
+                        alertGpu.enviarAlerta("gpu", "Critico", "seu trabalho está em risco, sua gpu está com " + String.format(" %.2f", alertGpu.mediaEvento()));
+                        alertGpu.limparEventos();
+                    }
                 }
 
             }
         };
         timerColeta.scheduleAtFixedRate(timeTask, 0, time);
 
-        Chart grafMem = new Chart();
-        ChartGpu grafGpu = new ChartGpu();
+        try {
+            Chart grafMem = new Chart();
+            ChartGpu grafGpu = new ChartGpu();
 
-        grafMem.setVisible(true);
-        grafMem.start();
-        jInternalFrame2.setContentPane(grafMem);
-        jInternalFrame2.setEnabled(false);
+            grafMem.setVisible(true);
+            grafMem.start();
+            jInternalFrame2.setContentPane(grafMem);
+            jInternalFrame2.setEnabled(false);
 
-        grafGpu.setVisible(true);
-        grafGpu.start();
-        jInternalFrame1.setContentPane(grafGpu);
-        jInternalFrame1.setEnabled(false);
+            grafGpu.setVisible(true);
+            grafGpu.start();
+            jInternalFrame1.setContentPane(grafGpu);
+            jInternalFrame1.setEnabled(false);
 
-        BasicInternalFrameUI bi = (BasicInternalFrameUI) jInternalFrame2.getUI();
-        BasicInternalFrameUI bi2 = (BasicInternalFrameUI) jInternalFrame1.getUI();
-        bi2.setNorthPane(null);
-        bi.setNorthPane(null);
+            BasicInternalFrameUI bi = (BasicInternalFrameUI) jInternalFrame2.getUI();
+            BasicInternalFrameUI bi2 = (BasicInternalFrameUI) jInternalFrame1.getUI();
+            bi2.setNorthPane(null);
+            bi.setNorthPane(null);
+
+        } catch (Exception e) {
+            logger.inserirLog("ERRO", "Erro ao inserir gráficos na tela Dash" + e.getMessage());
+        }
 
     }
 
