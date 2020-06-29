@@ -17,15 +17,11 @@ export class DashComponent implements OnInit {
   dataFromApi: DataJson[];
   sttsHardware: any;
   hardResult: any;
-  nomeProcessador: any;
-  tempProcessador: any;
 
-  nomeGpu: string;
   public ArrayTempGpu: Array<number>;
   public ArrayMemoriaRam: Array<number>;
   public ArrayCpuUso: Array<number>;
   public ArrayData: Array<number>;
-  TempMediaGpu: number;
   
   @ViewChild('dashGPU', { static: false }) elemento: ElementRef;
 
@@ -45,7 +41,8 @@ export class DashComponent implements OnInit {
             oshi: x.oshiDados,
             data: x.ctDDados
           };
-          this.hardResult = dadosRecebidos;          
+          this.hardResult = dadosRecebidos;  
+          console.log(this.hardResult)        
           
           apiTempGpu.push(this.hardResult['gpu']['temperaturaMedia']);
           apiCpuUso.push(parseFloat(this.hardResult['cpu']['getUsoUser']))
@@ -57,16 +54,9 @@ export class DashComponent implements OnInit {
           this.ArrayMemoriaRam = apiMemRam;
           this.ArrayCpuUso = apiCpuUso;
 
-          console.log(this.ArrayMemoriaRam)
           return dadosRecebidos;
         });
 
-        //Setar abaixo as variaveis que irao aparecer no front
-        this.nomeProcessador = this.hardResult['cpu']['getNomeProc'];
-        this.tempProcessador = `${this.hardResult['cpu']['getTemperatura'].toFixed(2)}ºC`
-
-        this.nomeGpu = this.hardResult['gpu']['nomeGpu'];
-        
         new Chart(this.elemento.nativeElement, {
           type: 'line',
           data: {

@@ -35,13 +35,14 @@
   display: flex;
   float: left;
   width: 46%;
-  height: 50px;
+  height: 80px;
   margin: 3px;
+  justify-content: space-between;
   background-color: rgb(109, 109, 109);
 }
 
 .pcStatus{
   display: flex;
   width: 100%;
-  justify-content: space-between;
+  justify-content: flex-start;
 }

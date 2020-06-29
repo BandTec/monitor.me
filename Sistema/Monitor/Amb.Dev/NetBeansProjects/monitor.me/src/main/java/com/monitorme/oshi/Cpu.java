@@ -86,7 +86,7 @@ public class Cpu {
 
         try {
             dadosCpuToJson.put("getUsoUser", String.format(" %.2f", getUso()));
-            dadosCpuToJson.put("getTemperatura", getTemperature());
+            dadosCpuToJson.put("getTemperatura", String.format(" %.2f", getTemperature()));
             dadosCpuToJson.put("getNomeProc", printProcessor());
         } catch (Exception e) {
             System.out.println("Error: " + e);
