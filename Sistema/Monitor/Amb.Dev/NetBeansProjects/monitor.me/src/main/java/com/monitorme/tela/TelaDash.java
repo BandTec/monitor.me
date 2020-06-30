@@ -57,7 +57,7 @@ public class TelaDash extends javax.swing.JFrame {
         setIcon();
         setLocationRelativeTo(null);
         setTitle("Monitor Me");
-       // setResizable(false);
+        // setResizable(false);
 
         //Abaixo coloque tudo que for estático e precisa ser setado 1 unica vez, como por exemplo, nome dos Hardwares.
 //        lblMemoRam.setText(memoria1.getDiscosRigidos().toString());
@@ -73,7 +73,7 @@ public class TelaDash extends javax.swing.JFrame {
             lblDisco1.setText(String.format("Capacidade Total: %s ", memoria1.getHdTotal()));
             //Cpu
             lblCpu.setText(cpu1.printProcessor());
-
+            logger.inserirLog("INFO", "Especificações do sistema capturadas.");
         } catch (Exception e) {
             logger.inserirLog("ERRO", "Erro ao iniciar a tela Dash. Não foi possível recuperar algumas informações do sistema." + e.getMessage());
         }
@@ -97,55 +97,76 @@ public class TelaDash extends javax.swing.JFrame {
                     System.out.println(gpu1.saveDadosGpu());
                     //CPU
                     lblCpuUso.setText("Uso: " + String.format(" %.2f", cpu1.getUso()) + "%");
-               //     pgbCpu.setValue((int) cpu1.getUso());
+                    pgbCpu.setValue((int) cpu1.getUso());
                 } catch (Exception e) {
                     logger.inserirLog("ERRO", "Erro na tela Dash. Não foi possível recuperar algumas informações do sistema." + e.getMessage());
                     e.printStackTrace();
                 }
-                
-                
+
                 // <! -----------------Abaixo valida os alertas------------------>
-                if (memoria1.getPorcentagemRam() > 90) {
-                    alertMemoria.adicionarEvento(Double.valueOf(memoria1.getPorcentagemRam()));
-                    if (alertMemoria.getContadorDeEventos().size() > 30) {
-                        inserir.InserirBanco();
-                        alertMemoria.enviarAlerta("memoria", "Critico", ("Sua memoria está em média de uso de: " + String.format(" %.2f", alertMemoria.mediaEvento())));
-                        alertMemoria.limparEventos();
+                try {
+                    if (memoria1.getPorcentagemRam() > 1) {
+                        alertMemoria.adicionarEvento(Double.valueOf(memoria1.getPorcentagemRam()));
+                        if (alertMemoria.getContadorDeEventos().size() > 30) {
+                            inserir.InserirBanco();
+                            alertMemoria.enviarAlerta("memoria", "Critico", ("Sua memoria está em média de uso de: " + String.format(" %.2f", alertMemoria.mediaEvento())));
+                            alertMemoria.limparEventos();
+                        }
                     }
+                } catch (Exception e) {
+                    logger.inserirLog("ERRO", "Erro ao enviar alerta de Memória Ram" + e.getMessage());
                 }
 
-                if (cpu1.getUso() < 8) {
-                    alertCpu.adicionarEvento(Double.valueOf(cpu1.getUso()));
-                    if (alertCpu.getContadorDeEventos().size() > 30) {
-                        inserir.InserirBanco();
-                        alertCpu.enviarAlerta("cpu", "Critico", ("Sua Cpu está sendo mal utilizada, verifique o uso em %: " + String.format(" %.2f", alertCpu.mediaEvento())));
-                        alertCpu.limparEventos();
+                try {
+                    if (cpu1.getUso() < 8) {
+                        alertCpu.adicionarEvento(Double.valueOf(cpu1.getUso()));
+                        if (alertCpu.getContadorDeEventos().size() > 30) {
+                            inserir.InserirBanco();
+                            alertCpu.enviarAlerta("cpu", "Critico", ("Sua Cpu está sendo mal utilizada, verifique o uso em %: " + String.format(" %.2f", alertCpu.mediaEvento())));
+                            alertCpu.limparEventos();
+                        }
                     }
+                } catch (Exception e) {
+                    logger.inserirLog("ERRO", "Erro ao enviar alerta de Uso Cpu" + e.getMessage());
                 }
 
-                if (gpu1.getMediaTemperatura() > 75 || gpu1.getFanRpm() == 0) {
-                    alertGpu.adicionarEvento(gpu1.getMediaTemperatura());
-                    if (alertGpu.getContadorDeEventos().size() > 15) {
-                        inserir.InserirBanco();
-                        alertGpu.enviarAlerta("gpu", "Alerta", "seu trabalho está em risco, sua gpu está com " + String.format(" %.2f", alertGpu.mediaEvento()));
-                        alertGpu.limparEventos();
+                try {
+                    if (gpu1.getMediaTemperatura() > 75 || gpu1.getFanRpm() == 0) {
+                        alertGpu.adicionarEvento(gpu1.getMediaTemperatura());
+                        if (alertGpu.getContadorDeEventos().size() > 15) {
+                            inserir.InserirBanco();
+                            alertGpu.enviarAlerta("gpu", "Alerta", "seu trabalho está em risco, sua gpu está com " + String.format(" %.2f", alertGpu.mediaEvento()));
+                            alertGpu.limparEventos();
+                        }
                     }
-                } else if (gpu1.getMediaTemperatura() > 90) {
-                    alertGpu.adicionarEvento(gpu1.getMediaTemperatura());
-                    if (alertGpu.getContadorDeEventos().size() > 15) {
-                        inserir.InserirBanco();
-                        alertGpu.enviarAlerta("gpu", "Critico", "seu trabalho está em risco, sua gpu está com " + String.format(" %.2f", alertGpu.mediaEvento()));
-                        alertGpu.limparEventos();
-                    }
+                } catch (Exception e) {
+                    logger.inserirLog("ERRO", "Erro ao enviar alerta de Fan inativo" + e.getMessage());
                 }
 
-                if (gpu1.getMemoryGpu() < 1) {
-                    alertGpu.adicionarEvento(gpu1.getMemoryGpu());
-                    if (alertGpu.getContadorDeEventos().size() > 15) {
-                        inserir.InserirBanco();
-                        alertGpu.enviarAlerta("gpu", "Critico", "seu trabalho está em risco, sua gpu está com " + String.format(" %.2f", alertGpu.mediaEvento()));
-                        alertGpu.limparEventos();
+                try {
+                    if (gpu1.getMediaTemperatura() > 90) {
+                        alertGpu.adicionarEvento(gpu1.getMediaTemperatura());
+                        if (alertGpu.getContadorDeEventos().size() > 15) {
+                            inserir.InserirBanco();
+                            alertGpu.enviarAlerta("gpu", "Critico", "seu trabalho está em risco, sua gpu está com " + String.format(" %.2f", alertGpu.mediaEvento()));
+                            alertGpu.limparEventos();
+                        }
                     }
+                } catch (Exception e) {
+                    logger.inserirLog("ERRO", "Erro ao enviar alerta de Temperatura elevada" + e.getMessage());
+                }
+
+                try {
+                    if (gpu1.getMemoryGpu() < 1) {
+                        alertGpu.adicionarEvento(gpu1.getMemoryGpu());
+                        if (alertGpu.getContadorDeEventos().size() > 15) {
+                            inserir.InserirBanco();
+                            alertGpu.enviarAlerta("gpu", "Critico", "seu trabalho está em risco, sua gpu está com " + String.format(" %.2f", alertGpu.mediaEvento()));
+                            alertGpu.limparEventos();
+                        }
+                    }
+                } catch (Exception e) {
+                    logger.inserirLog("ERRO", "Erro ao enviar alerta de uso Vram" + e.getMessage());
                 }
 
             }
@@ -170,6 +191,7 @@ public class TelaDash extends javax.swing.JFrame {
             BasicInternalFrameUI bi2 = (BasicInternalFrameUI) jInternalFrame1.getUI();
             bi2.setNorthPane(null);
             bi.setNorthPane(null);
+            logger.inserirLog("INFO", "Inserção dos gráficos na tela dash.");
 
         } catch (Exception e) {
             logger.inserirLog("ERRO", "Erro ao inserir gráficos na tela Dash" + e.getMessage());
@@ -406,6 +428,14 @@ public class TelaDash extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(153, 153, 153));
         jPanel1.setPreferredSize(new java.awt.Dimension(1400, 685));
@@ -425,7 +455,7 @@ public class TelaDash extends javax.swing.JFrame {
                 .addComponent(jLabel14)
                 .addGap(233, 233, 233)
                 .addComponent(jLabel13)
-                .addContainerGap(553, Short.MAX_VALUE))
+                .addContainerGap(438, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -872,8 +902,9 @@ public class TelaDash extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1304, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(19, 19, 19)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1285, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -882,6 +913,15 @@ public class TelaDash extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        logger.inserirLog("INFO", "Encerrando sessão.");        
+        logger.inserirLog("INFO", "Tela Dash finalizada.");
+    }//GEN-LAST:event_formWindowClosing
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        logger.inserirLog("INFO", "Tela Dash inicializada.");
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments

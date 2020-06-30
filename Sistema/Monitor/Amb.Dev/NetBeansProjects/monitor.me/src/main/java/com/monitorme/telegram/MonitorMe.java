@@ -1,5 +1,6 @@
 package com.monitorme.telegram;
 
+import com.monitorme.oshi.Logger;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -8,6 +9,7 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 public class MonitorMe extends TelegramLongPollingBot {
 
     SendMessage message = new SendMessage();  //Objeto para envio de mensagem 
+    Logger logger = new Logger();
 
     //Metodo herdado, validação do token do bot
     @Override
@@ -38,8 +40,9 @@ public class MonitorMe extends TelegramLongPollingBot {
         message.setText(mensagem);
         try {
             execute(message);
+            logger.inserirLog("INFO", "Mensagem enviada com sucesso no Telegram. ");
         } catch (TelegramApiException e) {
-            e.printStackTrace();
+            logger.inserirLog("ERRO", "Erro ao enviar mensagem no Telegram. " + e.getMessage());
         }
     }
 }

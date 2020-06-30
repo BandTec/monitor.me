@@ -21,11 +21,13 @@ public class InserirBanco {
     Logger logger = new Logger();
 
     public void InserirBanco() {
-        try {
+        logger.inserirLog("INFO","Conectando ao Banco de Dados...");
+        try {            
             jdbcTemplate.update("insert into tbl_HardHistories(UserId, OshiStatus, GPUStatus, createdAt, updatedAt, CpuStatus) values (?,?,?,?,?,?)",
-                    User.idUser, memo.saveDadosMemoria(), "gpu.saveDadosGpu()", LocalDateTime.now(), LocalDateTime.now(), cpu.saveDadosCpu());
+                    User.idUser, memo.saveDadosMemoria(), gpu.saveDadosGpu(), LocalDateTime.now(), LocalDateTime.now(), cpu.saveDadosCpu());
+                    logger.inserirLog("INFO", "Nova inserçao no banco de dados.");
         } catch (Exception e) {
-            logger.inserirLog("ERRO", "Não foi possível inserir as informações no banco de dados" + e.getMessage());
+            logger.inserirLog("ERRO", "Não foi possível inserir as informações no banco de dados. " + e.getMessage());
         }
 
     }
