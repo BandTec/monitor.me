@@ -23,7 +23,7 @@ public class TelaDetalhamento extends javax.swing.JFrame {
     public Timer timerProcessos = new Timer();
     Object pidTask;
     Logger logger = new Logger();
-    
+
     /**
      * Creates new form TelaDetalhamento
      */
@@ -31,7 +31,6 @@ public class TelaDetalhamento extends javax.swing.JFrame {
         initComponents();
         final DefaultTableModel dtmProcessos = (DefaultTableModel) tblProc.getModel();
         final long time = 5000;
-        
 
         TimerTask timerTask = new TimerTask() {
             Processos processos = new Processos();
@@ -75,6 +74,7 @@ public class TelaDetalhamento extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jButton10 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblProc = new javax.swing.JTable();
         txtfFinProc = new javax.swing.JTextField();
@@ -110,6 +110,16 @@ public class TelaDetalhamento extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Detalhes Processos");
 
+        jButton10.setBackground(new java.awt.Color(190, 190, 190));
+        jButton10.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButton10.setText("Dashboard");
+        jButton10.setBorderPainted(false);
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -123,7 +133,9 @@ public class TelaDetalhamento extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
-                .addGap(247, 247, 247))
+                .addGap(85, 85, 85)
+                .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,8 +144,10 @@ public class TelaDetalhamento extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addGap(26, 26, 26))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24))
         );
 
         tblProc.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -315,7 +329,7 @@ public class TelaDetalhamento extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtfFinProc, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, 550));
@@ -341,52 +355,52 @@ public class TelaDetalhamento extends javax.swing.JFrame {
     }//GEN-LAST:event_btnFinProcActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        pidTask = tblProc.getModel().getValueAt(0,0);
+        pidTask = tblProc.getModel().getValueAt(0, 0);
         txtfFinProc.setText(String.format("%s", pidTask));
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        pidTask = tblProc.getModel().getValueAt(1,0);
+        pidTask = tblProc.getModel().getValueAt(1, 0);
         txtfFinProc.setText(String.format("%s", pidTask));
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        pidTask = tblProc.getModel().getValueAt(2,0);
+        pidTask = tblProc.getModel().getValueAt(2, 0);
         txtfFinProc.setText(String.format("%s", pidTask));
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        pidTask = tblProc.getModel().getValueAt(3,0);
+        pidTask = tblProc.getModel().getValueAt(3, 0);
         txtfFinProc.setText(String.format("%s", pidTask));
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        pidTask = tblProc.getModel().getValueAt(4,0);
+        pidTask = tblProc.getModel().getValueAt(4, 0);
         txtfFinProc.setText(String.format("%s", pidTask));
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        pidTask = tblProc.getModel().getValueAt(5,0);
+        pidTask = tblProc.getModel().getValueAt(5, 0);
         txtfFinProc.setText(String.format("%s", pidTask));
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        pidTask = tblProc.getModel().getValueAt(6,0);
+        pidTask = tblProc.getModel().getValueAt(6, 0);
         txtfFinProc.setText(String.format("%s", pidTask));
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        pidTask = tblProc.getModel().getValueAt(7,0);
+        pidTask = tblProc.getModel().getValueAt(7, 0);
         txtfFinProc.setText(String.format("%s", pidTask));
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        pidTask = tblProc.getModel().getValueAt(8,0);
+        pidTask = tblProc.getModel().getValueAt(8, 0);
         txtfFinProc.setText(String.format("%s", pidTask));
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-        pidTask = tblProc.getModel().getValueAt(9,0);
+        pidTask = tblProc.getModel().getValueAt(9, 0);
         txtfFinProc.setText(String.format("%s", pidTask));
     }//GEN-LAST:event_jButton11ActionPerformed
 
@@ -397,6 +411,13 @@ public class TelaDetalhamento extends javax.swing.JFrame {
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         logger.inserirLog("INFO", "Tela Detalhamento finalizada. ");
     }//GEN-LAST:event_formWindowClosing
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        logger.inserirLog("INFO", "Retornando para a Tela Dashboard");
+        this.setVisible(false);
+        TelaDash tela = new TelaDash();
+        tela.setVisible(true);
+    }//GEN-LAST:event_jButton10ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -436,6 +457,7 @@ public class TelaDetalhamento extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFinProc;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;

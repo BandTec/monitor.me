@@ -105,7 +105,7 @@ public class TelaDash extends javax.swing.JFrame {
 
                 // <! -----------------Abaixo valida os alertas------------------>
                 try {
-                    if (memoria1.getPorcentagemRam() > 1) {
+                    if (memoria1.getPorcentagemRam() > 90) {
                         alertMemoria.adicionarEvento(Double.valueOf(memoria1.getPorcentagemRam()));
                         if (alertMemoria.getContadorDeEventos().size() > 30) {
                             inserir.InserirBanco();
@@ -228,6 +228,7 @@ public class TelaDash extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
+        btnTelaProcessos = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jInternalFrame1 = new javax.swing.JInternalFrame();
         jInternalFrame2 = new javax.swing.JInternalFrame();
@@ -446,6 +447,16 @@ public class TelaDash extends javax.swing.JFrame {
         jLabel13.setForeground(new java.awt.Color(204, 204, 204));
         jLabel13.setText("Dashboard MonitorMe");
 
+        btnTelaProcessos.setBackground(new java.awt.Color(190, 190, 190));
+        btnTelaProcessos.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnTelaProcessos.setText(" Processos");
+        btnTelaProcessos.setBorderPainted(false);
+        btnTelaProcessos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTelaProcessosActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -455,17 +466,21 @@ public class TelaDash extends javax.swing.JFrame {
                 .addComponent(jLabel14)
                 .addGap(233, 233, 233)
                 .addComponent(jLabel13)
-                .addContainerGap(438, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 184, Short.MAX_VALUE)
+                .addComponent(btnTelaProcessos, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jLabel13)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jLabel14)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnTelaProcessos, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel13))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new java.awt.Color(51, 51, 51));
@@ -915,13 +930,20 @@ public class TelaDash extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        logger.inserirLog("INFO", "Encerrando sessão.");        
+        logger.inserirLog("INFO", "Encerrando sessão.");
         logger.inserirLog("INFO", "Tela Dash finalizada.");
     }//GEN-LAST:event_formWindowClosing
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         logger.inserirLog("INFO", "Tela Dash inicializada.");
     }//GEN-LAST:event_formWindowOpened
+
+    private void btnTelaProcessosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTelaProcessosActionPerformed
+        
+        this.setVisible(false);
+        TelaDetalhamento telaProcessos = new TelaDetalhamento();
+        telaProcessos.setVisible(true);
+    }//GEN-LAST:event_btnTelaProcessosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -962,6 +984,7 @@ public class TelaDash extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnTelaProcessos;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JInternalFrame jInternalFrame2;
     private javax.swing.JLabel jLabel1;
