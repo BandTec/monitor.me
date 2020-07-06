@@ -29,6 +29,8 @@ public class TelaDetalhamento extends javax.swing.JFrame {
      */
     public TelaDetalhamento() {
         initComponents();
+        setLocationRelativeTo(null);
+        setTitle("Processos");
         final DefaultTableModel dtmProcessos = (DefaultTableModel) tblProc.getModel();
         final long time = 5000;
 
